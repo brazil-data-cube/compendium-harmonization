@@ -11,16 +11,17 @@ To replicate this article `docker` is required.
 
 You can build the docker images (harmonization/environment/docker-files directory) or import them (harmonization/environment/docker-images directory);
 
-### 1.1 Docker: Sen2cor Fmask
+### 1.1 Docker: Sen2cor
 Build the image by:
-`cd harmonization/environment/docker-files/sen2cor-Fmask`
-`docker build -t sen2cor-2.9.0_fmask-4.3 .`
+`cd harmonization/environment/docker-files/sen2cor`
+`docker build -t sen2cor-2.9.0 .`
 
 or import it:
-`docker load < sen2cor-2.9.0_fmask-4.3.tar.gz`
+`docker load < sen2cor-2.9.0.tar.gz`
+
 ### 1.2 Docker: LaSRC LEDAPS Fmask
 Build the image by:
-`cd /dados/Rennan/harmonization/environment/docker-files/LaSRC-LEDAPS-Fmask`
+`cd harmonization/environment/docker-files/LaSRC-LEDAPS-Fmask`
 `docker build -t lasrc_ledaps_fmask43 .`
 
 or import it:
@@ -34,18 +35,11 @@ Build the image by:
 
 or import it:
 `docker load < l8angs.tar.gz`
-### 1.4 Docker: Sentinel-2 Angle Bands
+
+### 1.4 Docker: NBAR
 Build the image by:
 
-`cd harmonization/environment/docker-files/sentinel2-angle-bands-docker`
-`docker build -t s2angs .`
-
-or import it:
-`docker load < s2angs.tar.gz`
-### 1.5 Docker: NBAR
-Build the image by:
-
-`cd /dados/Rennan/harmonization/environment/docker-files/NBAR`
+`cd harmonization/environment/docker-files/NBAR`
 `docker build -t nbar .`
 
 or import it:
@@ -68,10 +62,11 @@ done`
 done`
 
 
-## 3. Process Surface Reflectance Data and Cloud Mask
+## 3. Process Surface Reflectance Data
 
 The obtained Landsat-8 images are already surface reflectance products.
 So let's process Sentinel-2 images.
+
 ### 3.1 Processing Sentinel-2 through Sen2cor 2.9.0 and Fmask 4.3
 run `process-sr_s2_sen2cor.py` to obtain the running commands and execute them
 
