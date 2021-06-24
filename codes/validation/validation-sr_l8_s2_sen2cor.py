@@ -8,26 +8,32 @@ import validation_funcs
 import navigate
 
 # # Local
-# input_dir_l8 = '/home/marujo/Downloads/validation/l8_sr'
-# cloud_l8_dir = '/home/marujo/Downloads/validation/l8_sr'
-# input_dir_s2 = '/home/marujo/Downloads/validation/s2_sr_sen2cor'
-# cloud_s2_dir = '/home/marujo/Downloads/validation/s2_sr_sen2cor'
-# output_dir = '/tower/git_hub/marujore/c-factor-article/validation/l8-s2-sen2cor_sr/'
-# pairs = validation_funcs.search_pairs_l8_s2('/tower/git_hub/marujore/c-factor-article/input/l8-sceneids.txt', '/tower/git_hub/marujore/c-factor-article/input/s2-sceneids.txt', 1)
-# pairs = [('LC08_L2SP_222081_20200723_20200910_02_T1', 'S2B_MSIL1C_20200726T133229_N0209_R081_T22JBM_20200726T152123.SAFE')]
+input_dir_l8 = '/home/marujo/Downloads/validation/l8_sr'
+cloud_l8_dir = input_dir_l8
+input_dir_s2 = '/home/marujo/Downloads/validation/s2_sr_sen2cor'
+cloud_s2_dir = input_dir_s2
+output_dir = '/tower/git_hub/marujore/c-factor-article/validation/l8-s2-sen2cor_sr/'
+pairs = validation_funcs.search_pairs_l8_s2('/tower/git_hub/marujore/c-factor-article/input/l8-sceneids.txt', '/tower/git_hub/marujore/c-factor-article/input/s2-sceneids.txt', 1)
+pairs = [("LC08_L2SP_222081_20180224_20200902_02_T1", "S2A_MSIL1C_20180222T133221_N0206_R081_T22JBM_20180222T195454.SAFE")]
 
 # Datacube
-input_dir_l8 = '/dados/Rennan/harmonization/work/l8_sr/'
-cloud_l8_dir = input_dir_l8
-input_dir_s2 = '/dados/Rennan/harmonization/work/s2_sr_sen2cor'
-cloud_s2_dir = input_dir_s2
-output_dir = '/dados/Rennan/harmonization/validation/l8-s2-sen2cor_sr/'
-pairs = validation_funcs.search_pairs_l8_s2('/dados/Rennan/harmonization/input/l8-sceneids.txt', '/dados/Rennan/harmonization/input/s2-sceneids.txt', 5)
+# input_dir_l8 = '/dados/Rennan/harmonization/work/l8_sr/'
+# cloud_l8_dir = input_dir_l8
+# input_dir_s2 = '/dados/Rennan/harmonization/work/s2_sr_sen2cor'
+# cloud_s2_dir = input_dir_s2
+# output_dir = '/dados/Rennan/harmonization/validation/l8-s2-sen2cor_sr/'
+# pairs = validation_funcs.search_pairs_l8_s2('/dados/Rennan/harmonization/input/l8-sceneids.txt', '/dados/Rennan/harmonization/input/s2-sceneids.txt', 5)
 
 
-l8bands = ['B2',       'B3',       'B4',       'B5',       'B5',        'B6',        'B7']
-bands10m = ['B02', 'B03', 'B04', 'B08']
-bands20m = ['B8A', 'B11', 'B12']
+
+# l8bands = ['B2',       'B3',       'B4',       'B5',       'B5',        'B6',        'B7']
+# bands10m = ['B02', 'B03', 'B04', 'B08']
+# bands20m = ['B8A', 'B11', 'B12']
+
+l8bands=['B4']
+bands10m=['B04']
+bands20m=[]
+
 s2bands = bands10m+bands20m
 comparison_metrics = {}
 
@@ -69,8 +75,12 @@ for pair in pairs:
         raster1_arr[mask] = numpy.nan
         raster2_arr[mask] = numpy.nan
 
-        # Compare
+        # Rescale
         raster1_arr = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
+
+        raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
+
+        # Compare
         abs_dif = abs(raster1_arr - raster2_arr)
         abs_dif_mean = numpy.nanmean(abs_dif)
         abs_sum = abs(raster1_arr + raster2_arr)

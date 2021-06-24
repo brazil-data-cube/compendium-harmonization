@@ -14,7 +14,7 @@ import navigate
 # cloud_s2_dir = '/home/marujo/Downloads/validation/s2_sr_sen2cor'
 # output_dir = '/tower/git_hub/marujore/c-factor-article/validation/l8-s2-sen2cor_nbar/'
 # pairs = validation_funcs.search_pairs_l8_s2('/tower/git_hub/marujore/c-factor-article/input/l8-sceneids.txt', '/tower/git_hub/marujore/c-factor-article/input/s2-sceneids.txt', 1)
-# pairs = [('LC08_L2SP_222081_20200723_20200910_02_T1', 'S2B_MSIL1C_20200726T133229_N0209_R081_T22JBM_20200726T152123.SAFE')]
+# pairs = [("LC08_L2SP_222081_20180224_20200902_02_T1", "S2A_MSIL1C_20180222T133221_N0206_R081_T22JBM_20180222T195454.SAFE")]
 
 # Datacube
 input_dir_l8 = '/dados/Rennan/harmonization/work/l8_nbar/'
@@ -78,8 +78,9 @@ for pair in pairs:
         raster1_arr[mask] = numpy.nan
         raster2_arr[mask] = numpy.nan
 
+        raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
+
         # Compare
-        raster1_arr = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
         abs_dif = abs(raster1_arr - raster2_arr)
         abs_dif_mean = numpy.nanmean(abs_dif)
         abs_sum = abs(raster1_arr + raster2_arr)

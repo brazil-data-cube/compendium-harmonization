@@ -298,3 +298,13 @@ def calc_all_pairs(comparison_metrics, bands, pairs):
         comparison_metrics['all_pairs'][bands[b]]['relative_abs_perc_mean'] = numpy.nanmean(sum_relative_abs_perc)
     print(comparison_metrics['all_pairs'])
     return comparison_metrics
+
+
+def remove_negative_vals(raster1, raster2):
+    """Remove negative reflectance artifacts"""
+    raster2[raster1 < 0] = numpy.nan
+    raster1[raster1 < 0] = numpy.nan
+    raster1[raster2 < 0] = numpy.nan
+    raster2[raster2 < 0] = numpy.nan
+
+    return raster1, raster2

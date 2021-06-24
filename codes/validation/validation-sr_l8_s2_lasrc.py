@@ -69,14 +69,15 @@ for pair in pairs:
             raster1_arr[mask] = numpy.nan
             raster2_arr[mask] = numpy.nan
 
+            # Rescale
+            raster1_arr = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
+
+            raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
+
             # Compare
-            raster1_arr_scaled = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2) *10000
-
-            raster1_arr = None
-
-            abs_dif = abs(raster1_arr_scaled - raster2_arr)
+            abs_dif = abs(raster1_arr - raster2_arr)
             abs_dif_mean = numpy.nanmean(abs_dif)
-            abs_sum = abs(raster1_arr_scaled + raster2_arr)
+            abs_sum = abs(raster1_arr + raster2_arr)
             relative_abs_perc = numpy.divide((2*abs_dif), abs_sum, out=numpy.zeros_like(2*abs_dif), where=abs_sum!=0)
             relative_abs_perc_mean = numpy.nanmean(relative_abs_perc)*100
 
@@ -87,7 +88,7 @@ for pair in pairs:
 
             # time.sleep(5)
             #Clear Variables
-            raster2_arr, abs_dif, abs_sum, relative_abs_perc, raster1_arr_scaled = None, None, None, None, None
+            raster2_arr, abs_dif, abs_sum, relative_abs_perc, raster1_arr = None, None, None, None, None
     cloud1_ds.close()
     cloud2_ds.close()
     cloud1_arr, cloud2_arr, mask1, mask2, mask = None, None, None, None, None

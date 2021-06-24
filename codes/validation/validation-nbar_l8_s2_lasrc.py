@@ -65,8 +65,9 @@ for pair in pairs:
         raster1_arr[mask] = numpy.nan
         raster2_arr[mask] = numpy.nan
 
+        raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
+
         # Compare
-        raster1_arr = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
         abs_dif = abs(raster1_arr - raster2_arr)
         abs_dif_mean = numpy.nanmean(abs_dif)
         abs_sum = abs(raster1_arr + raster2_arr)

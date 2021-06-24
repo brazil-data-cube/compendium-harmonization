@@ -10,8 +10,7 @@ import navigate
 # Local
 # input_dir = '/home/marujo/Downloads/validation/l8_sr'
 # cloud_l8_dir = input_dir
-# output_dir = '/tower/git_hub/marujore/c-factor-article/validation/l8_sr/'
-# bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7']
+# output_dir = '/tower/git_hub/marujore/c-factor-article/validation-local/l8_sr/'
 # pairs = validation_funcs.search_pairs_l8('/tower/git_hub/marujore/c-factor-article/input/l8-sceneids.txt')
 # pairs = [("LC08_L2SP_222081_20200723_20200910_02_T1", "LC08_L2SP_223081_20200730_20200908_02_T1")]
 
@@ -19,10 +18,9 @@ import navigate
 input_dir = '/dados/Rennan/harmonization/work/l8_sr/'
 cloud_l8_dir = input_dir
 output_dir = '/dados/Rennan/harmonization/validation/l8_sr/'
-bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7']
 pairs = validation_funcs.search_pairs_l8('/dados/Rennan/harmonization/input/l8-sceneids.txt')
 
-
+bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7']
 comparison_metrics = {}
 
 for pair in pairs:
@@ -50,6 +48,12 @@ for pair in pairs:
         #Apply Cloud mask
         raster1_arr[mask] = numpy.nan
         raster2_arr[mask] = numpy.nan
+
+        # Rescale
+        raster1_arr = ((raster1_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
+        raster2_arr = ((raster2_arr * 0.275)-2000) #Rescale data to 0-10000 -> ((raster1_arr * 0.0000275)-0.2)
+
+        raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
 
         # Compare
         abs_dif = abs(raster1_arr - raster2_arr)
