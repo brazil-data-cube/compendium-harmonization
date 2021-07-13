@@ -10,4 +10,4 @@ input_dir = '/dados/Rennan/harmonization/work/l8_sr'
 output_dir = '/dados/Rennan/harmonization/work/l8_nbar'
 
 for sceneid in sceneids:
-    print(f'docker run --rm -v {os.path.join(input_dir, sceneid)}:/mnt/input-dir:rw -v {output_dir}:/mnt/output-dir:rw nbar {sceneid}')
+    print(f'docker run --rm -v {os.path.join(input_dir, sceneid)}:/mnt/input-dir:ro -v {output_dir}:/mnt/output-dir:rw nbar {sceneid}')

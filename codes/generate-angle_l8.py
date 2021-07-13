@@ -1,5 +1,8 @@
 sceneids = [] # define an empty list
-with open('input/l8-sceneids.txt', 'r') as filehandle: # open file and read the content in a list
+
+lc8_sceneids = '/harmonization/input/l8-sceneids.txt'
+
+with open(lc8_sceneids, 'r') as filehandle: # open file and read the content in a list
     for line in filehandle:
         currentPlace = line[:-1] # remove linebreak which is the last character of the string
         sceneids.append(currentPlace) # add item to the list

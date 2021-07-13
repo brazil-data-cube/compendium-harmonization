@@ -7,14 +7,15 @@ def copy_and_overwrite(from_path, to_path):
         shutil.rmtree(to_path)
     shutil.copytree(from_path, to_path)
 
+input_dir = '/harmonization/work/s2_sr_sen2cor'
+output_dir = '/harmonization/work/s2_sr_lasrc'
+s2_sceneids = '/harmonization/input/s2-sceneids.txt'
+
 sceneids = [] # define an empty list
-with open('/dados/Rennan/harmonization/input/s2-sceneids.txt', 'r') as filehandle: # open file and read the content in a list
+with open(s2_sceneids, 'r') as filehandle: # open file and read the content in a list
     for line in filehandle:
         currentPlace = line[:-1] # remove linebreak which is the last character of the string
         sceneids.append(currentPlace) # add item to the list
-
-input_dir = '/dados/Rennan/harmonization/work/s2_sr_sen2cor'
-output_dir = '/dados/Rennan/harmonization/work/s2_sr_lasrc'
 
 for sceneid in sceneids:
     print(sceneid)
