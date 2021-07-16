@@ -38,7 +38,7 @@ def lc8_generate_angles(input_dir: str, scene_ids: List[str]) -> List[str]:
         (
             docker[
                 "run", "--rm",
-                "-v", "{input_dir}:/mnt/input-dir:rw",
+                "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "l8angs:latest", scene_id
             ]
         )()
