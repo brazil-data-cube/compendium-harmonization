@@ -15,6 +15,16 @@ from shapely.geometry import box
 
 
 def reproject_img(src, ref):
+    """Reproject an image from a source dataset to a reference dataset.
+
+    Args:
+        src: Rasterio source dataset that will be reprojected into the reference projection.
+        ref: Rasterio reference dataset.
+
+    Returns:
+        Reprojected dataset.
+
+    """
     transform, width, height = calculate_default_transform(src.crs, ref.crs, src.width, src.height, *src.bounds, resolution=ref.transform[0])
     kwargs = src.meta.copy()
     kwargs.update({
@@ -48,6 +58,16 @@ def reproject_img(src, ref):
 
 
 def resample_raster(src, res):
+    """Resample an image from a source dataset to a reference dataset.
+
+    Args:
+        src: Rasterio Source dataset that will be resampled into the reference projection.
+        ref: Rasterio reference dataset.
+
+    Returns:
+        Resampled dataset.
+
+    """
     transform, width, height = calculate_default_transform(src.crs, src.crs, src.width, src.height, *src.bounds, resolution=res)
     kwargs = src.meta.copy()
     kwargs.update({
@@ -80,6 +100,17 @@ def resample_raster(src, res):
 
 
 def raster_intersection(raster1, raster2):
+    """Obtain the intersection between two rasters.
+
+    Args:
+        raster1: Rasterio dataset of the first raster.
+        raster2: Rasterio dataset of the second raster.
+
+    Returns:
+        arr_raster1 - numpy.array containing values from raster1 on the intersection area.
+        arr_raster2 - numpy.array containing values from raster2 on the intersection area.
+
+    """
     # Check if data on same crs, if different must reproject
     if raster1.crs != raster2.crs:
         raster2 = reproject_img(raster2, raster1)
@@ -124,10 +155,19 @@ def raster_intersection(raster1, raster2):
     arr_raster1 = raster1.read(1, window=Window(col1R1, row1R1, width1, height1))
     arr_raster2 = raster2.read(1, window=Window(col1R2, row1R2, width2, height2))
 
-    return arr_raster1, arr_raster2
+    return arr_raster1.astype(float), arr_raster2.astype(float)
 
 
 def load_file(file_path):
+    """Open and read all lines of a file.
+
+    Args:
+        file_path: File path to the archive that will be readed.
+
+    Returns:
+        List containing all lines of a file.
+
+    """
     elements = [] # define an empty list
     with open(file_path, 'r') as filehandle: # open file and read the content in a list
         for line in filehandle:
@@ -138,6 +178,15 @@ def load_file(file_path):
 
 
 def sort_l8_sceneids(sceneids):
+    """Sort Landsat-8 sceneids according to sensing date.
+
+    Args:
+        sceneids: List of Landsat-8 sceneids.
+
+    Returns:
+        A list of Landsat-8 sceneids ordered according to sensing date.
+
+    """
     l8_sceneids = []
     for sceneid in sceneids:
         splited_sceneid = sceneid.split('_')
@@ -151,6 +200,16 @@ def sort_l8_sceneids(sceneids):
 
 
 def search_pairs_l8(sceneids_file='input/l8-sceneids.txt', day_diff = 10):
+    """Search for Landsat-8 sceneid pairs with sensing date close in time according to day_diff.
+
+    Args:
+        sceneids_file: File path to archive containing Landsat-8 sceneids.
+        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+
+    Returns:
+        A list of pairs of Landsat-8 sceneids.
+
+    """
     sceneids = load_file(sceneids_file)
     l8_sceneids = sort_l8_sceneids(sceneids)
 
@@ -169,6 +228,15 @@ def search_pairs_l8(sceneids_file='input/l8-sceneids.txt', day_diff = 10):
 
 
 def sort_s2_sceneids(sceneids):
+    """Sort Sentinel-2 sceneids according to sensing date.
+
+    Args:
+        sceneids: List of Sentinel-2 sceneids.
+
+    Returns:
+        A list of Sentinel-2 sceneids ordered according to sensing date.
+
+    """
     s2_sceneids = []
     for sceneid in sceneids:
         splited_sceneid = sceneid.split('_')
@@ -183,6 +251,16 @@ def sort_s2_sceneids(sceneids):
 
 
 def search_pairs_s2(sceneids_file='input/s2-sceneids.txt', day_diff = 5):
+    """Search for Sentinel-2 sceneid pairs with sensing date close in time according to day_diff.
+
+    Args:
+        sceneids_file: File path to archive containing Sentinel-2 sceneids.
+        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+
+    Returns:
+        A list of pairs of Sentinel-2 sceneids.
+
+    """
     sceneids = load_file(sceneids_file)
     s2_sceneids = sort_s2_sceneids(sceneids)
 
@@ -201,6 +279,17 @@ def search_pairs_s2(sceneids_file='input/s2-sceneids.txt', day_diff = 5):
 
 
 def search_pairs_l8_s2(l8_sceneids_file='input/l8-sceneids.txt', s2_sceneids_file='input/s2-sceneids.txt',day_diff = 5):
+    """Search for Landsat-8 and Sentinel-2 sceneid pairs with sensing date close in time according to day_diff.
+
+    Args:
+        l8_sceneids_file: File path to archive containing Landsat-8 sceneids.
+        s2_sceneids_file: File path to archive containing Sentinel-2 sceneids.
+        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+
+    Returns:
+        A list of Landsat-8 and Sentinel-2 sceneid pairs.
+
+    """
     sceneids = load_file(l8_sceneids_file)
     l8_sceneids = sort_l8_sceneids(sceneids)
 
@@ -212,14 +301,23 @@ def search_pairs_l8_s2(l8_sceneids_file='input/l8-sceneids.txt', s2_sceneids_fil
         for j in range(0, len(s2_sceneids)-1):
             # Select with day difference
             if abs((l8_sceneids[i][1] - s2_sceneids[j][1]).days) < day_diff:
-#                 print(l8_sceneids[i], s2_sceneids[j])
-#                 print()
                 pairs.append((l8_sceneids[i][0], s2_sceneids[j][0]))
 
     return pairs
 
 
-def mask_pixel_bitwise(mask, flags_list=None, nodata=None): #TODO check fi collection 1
+def mask_pixel_bitwise(mask, flags_list=None, nodata=None): #TODO check if collection 1
+    """Apply Landsat bitwise mask according to flags_list, if no flags_list is provided mask using default configuration.
+
+    Args:
+        mask: numpy.array containing cloud mask.
+        flags_list (optional): Dict containing bitwise mapping.
+        nodata (optional): mask parameter nodata value.
+
+    Returns:
+        numpy.array (bool) where True should be masked and False contains clear observations.
+
+    """
     if flags_list is None:
         L8_flag = {
             'fill': 1<<0,
@@ -250,8 +348,17 @@ def mask_pixel_bitwise(mask, flags_list=None, nodata=None): #TODO check fi colle
     return final_mask.astype(bool)
 
 
-
 def mask_pixel_scl(mask, flags_list=None):
+    """Apply Scene Classificaton Layer (SCL) mask according to flags_list, if no flags_list is provided mask using default configuration.
+
+    Args:
+        mask: numpy.array containing cloud mask.
+        flags_list (optional): Dict containing bitwise mapping.
+
+    Returns:
+        numpy.array (bool) where True should be masked and False contains clear observations.
+
+    """
     if flags_list is None:
         scl_flag = {
             'nodata': 0,
@@ -280,12 +387,33 @@ def mask_pixel_scl(mask, flags_list=None):
 
 
 def write_dict(dict, file_path):
+    """Write a dictionary into a file.
+
+    Args:
+        dict: Dictionary of values to be saved in a file.
+        file_path: File path in which the dictionary will be written.
+
+    Returns:
+        None
+
+    """
     with open(file_path, 'w') as file:
         file.write(json.dumps(dict))
     return
 
 
 def calc_all_pairs(comparison_metrics, bands, pairs):
+    """Calculate absolute difference mean (abs_dif_mean) and relative absolute percentage mean (relative_abs_perc_mean) of a dictionary containing abs_dif_mean and relative_abs_perc_mean of several comparisons.
+
+    Args:
+        comparison_metrics: Dictionary of abs_dif_mean and relative_abs_perc_mean values organized by band.
+        bands: Band name.
+        pairs: Tuple of sceneid pairs.
+
+    Returns:
+        Dictionary containing the mean value of abs_dif_mean and relative_abs_perc_mean organized by band.
+
+    """
     comparison_metrics['all_pairs'] = {}
     for b in range(len(bands)):
         comparison_metrics['all_pairs'][bands[b]] = {}
@@ -300,11 +428,21 @@ def calc_all_pairs(comparison_metrics, bands, pairs):
     return comparison_metrics
 
 
-def remove_negative_vals(raster1, raster2):
-    """Remove negative reflectance artifacts"""
-    raster2[raster1 < 0] = numpy.nan
-    raster1[raster1 < 0] = numpy.nan
-    raster1[raster2 < 0] = numpy.nan
-    raster2[raster2 < 0] = numpy.nan
+def remove_negative_vals(arr_raster1, arr_raster2):
+    """Remove negative reflectance artifacts.
 
-    return raster1, raster2
+    Args:
+        arr_raster1: numpy.array of the first raster.
+        arr_raster2: numpy.array of the second raster.
+
+    Returns:
+        arr_raster1 - numpy.array containing values from arr_raster1 only on the positions where arr_raster1 and arr_raster2 where not negative.
+        arr_raster2 - numpy.array containing values from arr_raster2 only on the positions where arr_raster1 and arr_raster2 where not negative.
+
+    """
+    arr_raster2[arr_raster1 < 0] = numpy.nan
+    arr_raster1[arr_raster1 < 0] = numpy.nan
+    arr_raster1[arr_raster2 < 0] = numpy.nan
+    arr_raster2[arr_raster2 < 0] = numpy.nan
+
+    return arr_raster1, arr_raster2
