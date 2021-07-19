@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  dagster-cfactor:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: dagster-cfactor:0.1
+    container_name: dagster-cfactor-app
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ./analysis/data/
+        target: /data
+    ports:
+      - "3000:3000"
+    restart: on-failure
