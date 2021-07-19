@@ -107,8 +107,8 @@ def raster_intersection(raster1, raster2):
         raster2: Rasterio dataset of the second raster.
 
     Returns:
-        arr_raster1 - numpy.array containing values from raster1 on the intersection area.
-        arr_raster2 - numpy.array containing values from raster2 on the intersection area.
+        raster1_arr - numpy.array containing values from raster1 on the intersection area.
+        raster2_arr - numpy.array containing values from raster2 on the intersection area.
 
     """
     # Check if data on same crs, if different must reproject
@@ -152,10 +152,10 @@ def raster_intersection(raster1, raster2):
     height1 = row2R1 - row1R1 + 1
     height2 = row2R2 - row1R2 + 1
 
-    arr_raster1 = raster1.read(1, window=Window(col1R1, row1R1, width1, height1))
-    arr_raster2 = raster2.read(1, window=Window(col1R2, row1R2, width2, height2))
+    raster1_arr = raster1.read(1, window=Window(col1R1, row1R1, width1, height1))
+    raster2_arr = raster2.read(1, window=Window(col1R2, row1R2, width2, height2))
 
-    return arr_raster1.astype(float), arr_raster2.astype(float)
+    return raster1_arr.astype(float), raster2_arr.astype(float)
 
 
 def load_file(file_path):
@@ -393,13 +393,9 @@ def write_dict(dict, file_path):
         dict: Dictionary of values to be saved in a file.
         file_path: File path in which the dictionary will be written.
 
-    Returns:
-        None
-
     """
     with open(file_path, 'w') as file:
         file.write(json.dumps(dict))
-    return
 
 
 def calc_all_pairs(comparison_metrics, bands, pairs):
@@ -428,21 +424,21 @@ def calc_all_pairs(comparison_metrics, bands, pairs):
     return comparison_metrics
 
 
-def remove_negative_vals(arr_raster1, arr_raster2):
+def remove_negative_vals(raster1_arr, raster2_arr):
     """Remove negative reflectance artifacts.
 
     Args:
-        arr_raster1: numpy.array of the first raster.
-        arr_raster2: numpy.array of the second raster.
+        raster1_arr: numpy.array of the first raster.
+        raster2_arr: numpy.array of the second raster.
 
     Returns:
-        arr_raster1 - numpy.array containing values from arr_raster1 only on the positions where arr_raster1 and arr_raster2 where not negative.
-        arr_raster2 - numpy.array containing values from arr_raster2 only on the positions where arr_raster1 and arr_raster2 where not negative.
+        raster1_arr - numpy.array containing values from raster1_arr only on the positions where raster1_arr and raster2_arr where not negative.
+        raster2_arr - numpy.array containing values from raster2_arr only on the positions where raster1_arr and raster2_arr where not negative.
 
     """
-    arr_raster2[arr_raster1 < 0] = numpy.nan
-    arr_raster1[arr_raster1 < 0] = numpy.nan
-    arr_raster1[arr_raster2 < 0] = numpy.nan
-    arr_raster2[arr_raster2 < 0] = numpy.nan
+    raster2_arr[raster1_arr < 0] = numpy.nan
+    raster1_arr[raster1_arr < 0] = numpy.nan
+    raster1_arr[raster2_arr < 0] = numpy.nan
+    raster2_arr[raster2_arr < 0] = numpy.nan
 
-    return arr_raster1, arr_raster2
+    return raster1_arr, raster2_arr

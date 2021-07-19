@@ -16,7 +16,16 @@ from cfactor.validation import navigate, validation_funcs
 
 
 def validation(raster1_arr, raster2_arr):
-    """
+    """Calculate absolute difference mean (abs_dif_mean) and relative absolute percentage mean (relative_abs_perc_mean) from two arrays.
+
+    Args:
+        raster1_arr: First numpy.array.
+        raster2_arr: Second numpy.array.
+
+    Returns:
+        abs_dif_mean - Absolute difference mean (abs_dif_mean).
+        relative_abs_perc_mean - Relative absolute percentage mean (relative_abs_perc_mean).
+
     """
 
     raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
@@ -33,15 +42,31 @@ def validation(raster1_arr, raster2_arr):
 
 
 def add_comparison(obj, name, band, **kwargs):
+    """Store values into a dict, or create a new one if it doesn't exist, organized by name and bands, to store values in it.
+
+    Args:
+        obj: Dictionary object that will store the values.
+        name: key name.
+        band: key band.
+        **kwargs: values.
+
+    """
     if not obj.get(name):
         obj[name] = {}
-    obj[name][band]= kwargs
+    obj[name][band] = kwargs
 
 
-def validation_nbar_l8(input_dir, cloud_dir, output_dir, bands, pairs):
+def validation_nbar_l8(input_dir, cloud_dir, output_dir, pairs, bands):
+    """Performs validation on Landsat-8 NBAR data.
+
+    Args:
+        input_dir: Directory containing Landsat-8 NBAR folders.
+        cloud_dir: Directory containing Landsat-8 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands: name of the bands that will be evaluated.
+
     """
-    """
-
     comparison_metrics = {}
 
     for pair in pairs:
@@ -79,7 +104,17 @@ def validation_nbar_l8(input_dir, cloud_dir, output_dir, bands, pairs):
 
 
 def validation_nbar_s2_sen2cor(input_dir: str, cloud_dir, output_dir, pairs, bands10m, bands20m):
-    """"""
+    """Performs validation on Sentinel-2 (Sen2cor) NBAR data.
+
+    Args:
+        input_dir: Directory containing Sentinel-2 (Sen2cor) NBAR folders.
+        cloud_dir: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands10m: name of the 10 meter bands that will be evaluated.
+        bands20m: name of the 20 meter bands that will be evaluated.
+
+    """
 
     bands = bands10m + bands20m
     comparison_metrics = {}
@@ -128,6 +163,16 @@ def validation_nbar_s2_sen2cor(input_dir: str, cloud_dir, output_dir, pairs, ban
 
 
 def validation_nbar_s2_lasrc(input_dir, cloud_dir, output_dir, pairs, bands):
+    """Performs validation on Sentinel-2 (LaSRC) NBAR data.
+
+    Args:
+        input_dir: Directory containing Sentinel-2 (LaSRC) NBAR folders.
+        cloud_dir: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands: name of the bands that will be evaluated.
+
+    """
     comparison_metrics = {}
 
     for pair in pairs:
@@ -172,7 +217,19 @@ def validation_nbar_s2_lasrc(input_dir, cloud_dir, output_dir, pairs, bands):
 
 def validation_sr_l8_s2_sen2cor(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_dir_s2, output_dir, pairs, bands_l8,
                                 bands_s2):
-    """"""
+    """Performs validation on both Landsat-8 and Sentinel-2 (Sen2cor) surface reflectance data.
+
+    Args:
+        input_dir_l8: Directory containing Landsat-8 surface reflectance folders.
+        cloud_dir_l8: Directory containing Landsat-8 folders that contains cloud masks.
+        input_dir_s2: Directory containing Sentinel-2 (Sen2cor) surface reflectance folders.
+        cloud_dir_s2: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands_l8: Landsat-8 bands that will be evaluated.
+        bands_s2: Sentinel-2 bands that will be evaluated (Sen2cor syntax).
+
+    """
 
     comparison_metrics = {}
 
@@ -230,7 +287,19 @@ def validation_sr_l8_s2_sen2cor(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_
 
 def validation_sr_l8_s2_lasrc(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_dir_s2, output_dir, pairs, bands_l8,
                               bands_s2):
-    """"""
+    """Performs validation on both Landsat-8 and Sentinel-2 (LaSRC) surface reflectance data.
+
+    Args:
+        input_dir_l8: Directory containing Landsat-8 surface reflectance folders.
+        cloud_dir_l8: Directory containing Landsat-8 folders that contains cloud masks.
+        input_dir_s2: Directory containing Sentinel-2 (LaSRC) surface reflectance folders.
+        cloud_dir_s2: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands_l8: Landsat-8 bands that will be evaluated.
+        bands_s2: Sentinel-2 bands that will be evaluated (LaSRC syntax).
+
+    """
 
     comparison_metrics = {}
 
@@ -293,7 +362,19 @@ def validation_sr_l8_s2_lasrc(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_di
 
 def validation_nbar_l8_s2_sen2cor(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_dir_s2, output_dir, pairs, bands_l8,
                                   bands_s2):
-    """"""
+    """Performs validation on both Landsat-8 and Sentinel-2 (Sen2cor) NBAR data.
+
+    Args:
+        input_dir_l8: Directory containing Landsat-8 NBAR folders.
+        cloud_dir_l8: Directory containing Landsat-8 folders that contains cloud masks.
+        input_dir_s2: Directory containing Sentinel-2 (Sen2cor) NBAR folders.
+        cloud_dir_s2: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands_l8: Landsat-8 bands that will be evaluated.
+        bands_s2: Sentinel-2 bands that will be evaluated (Sen2cor syntax).
+
+    """
 
     comparison_metrics = {}
 
@@ -358,7 +439,19 @@ def validation_nbar_l8_s2_sen2cor(input_dir_l8, cloud_dir_l8, input_dir_s2, clou
 
 def validation_nbar_l8_s2_lasrc(input_dir_l8, cloud_dir_l8, input_dir_s2, cloud_dir_s2, output_dir, pairs, bands_l8,
                                 bands_s2):
-    """"""
+    """Performs validation on both Landsat-8 and Sentinel-2 (LaSRC) NBAR data.
+
+    Args:
+        input_dir_l8: Directory containing Landsat-8 NBAR folders.
+        cloud_dir_l8: Directory containing Landsat-8 folders that contains cloud masks.
+        input_dir_s2: Directory containing Sentinel-2 (LaSRC) NBAR folders.
+        cloud_dir_s2: Directory containing Sentinel-2 folders that contains cloud masks.
+        output_dir: Directory in which the validation values will be written.
+        pairs: Tuple containing a pair of sceneids that will be evaluated.
+        bands_l8: Landsat-8 bands that will be evaluated.
+        bands_s2: Sentinel-2 bands that will be evaluated (LaSRC syntax).
+
+    """
 
     comparison_metrics = {}
 
