@@ -1,9 +1,10 @@
-
 import os
+
 from setuptools import find_packages, setup
 
 install_requires = [
     'pendulum>=2.1.2',
+    'plumbum>=1.7.0'
 ]
 
 packages = find_packages()
