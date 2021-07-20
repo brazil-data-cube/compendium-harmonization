@@ -12,17 +12,18 @@ from rasterio.transform import Affine
 from rasterio.warp import reproject, calculate_default_transform
 from rasterio.windows import Window
 from shapely.geometry import box
+from typing import Dict, List, Optional, Tuple
 
 
-def reproject_img(src, ref):
+def reproject_img(src: rasterio.io.DatasetReader, ref: rasterio.io.DatasetReader) -> rasterio.io.MemoryFile:
     """Reproject an image from a source dataset to a reference dataset.
 
     Args:
-        src: Rasterio source dataset that will be reprojected into the reference projection.
-        ref: Rasterio reference dataset.
+        src (rasterio.io.DatasetReader): Rasterio source dataset that will be reprojected into the reference projection.
+        ref (rasterio.io.DatasetReader): Rasterio reference dataset.
 
     Returns:
-        Reprojected dataset.
+        rasterio.io.MemoryFile: Reprojected dataset.
 
     """
     transform, width, height = calculate_default_transform(src.crs, ref.crs, src.width, src.height, *src.bounds, resolution=ref.transform[0])
@@ -57,15 +58,15 @@ def reproject_img(src, ref):
     return intermed_dataset
 
 
-def resample_raster(src, res):
+def resample_raster(src: rasterio.io.DatasetReader, res: int) -> rasterio.io.MemoryFile:
     """Resample an image from a source dataset to a reference dataset.
 
     Args:
-        src: Rasterio Source dataset that will be resampled into the reference projection.
-        ref: Rasterio reference dataset.
+        src (rasterio.io.DatasetReader): Rasterio Source dataset that will be resampled into the reference projection.
+        res (int): Rasterio reference dataset.
 
     Returns:
-        Resampled dataset.
+        rasterio.io.MemoryFile: Resampled dataset.
 
     """
     transform, width, height = calculate_default_transform(src.crs, src.crs, src.width, src.height, *src.bounds, resolution=res)
@@ -99,16 +100,16 @@ def resample_raster(src, res):
     return intermed_dataset
 
 
-def raster_intersection(raster1, raster2):
+def raster_intersection(raster1: rasterio.io.DatasetReader, raster2: rasterio.io.DatasetReader) -> Tuple[numpy.ndarray, numpy.ndarray]:
     """Obtain the intersection between two rasters.
 
     Args:
-        raster1: Rasterio dataset of the first raster.
-        raster2: Rasterio dataset of the second raster.
+        raster1 (rasterio.io.DatasetReader): Rasterio dataset of the first raster.
+        raster2 (rasterio.io.DatasetReader): Rasterio dataset of the second raster.
 
     Returns:
-        raster1_arr - numpy.array containing values from raster1 on the intersection area.
-        raster2_arr - numpy.array containing values from raster2 on the intersection area.
+        raster1_arr (numpy.ndarray) - numpy.array containing values from raster1 on the intersection area.
+        raster2_arr (numpy.ndarray) - numpy.array containing values from raster2 on the intersection area.
 
     """
     # Check if data on same crs, if different must reproject
@@ -158,14 +159,14 @@ def raster_intersection(raster1, raster2):
     return raster1_arr.astype(float), raster2_arr.astype(float)
 
 
-def load_file(file_path):
+def load_file(file_path: str) -> List[str]:
     """Open and read all lines of a file.
 
     Args:
-        file_path: File path to the archive that will be readed.
+        file_path (str): File path to the archive that will be readed.
 
     Returns:
-        List containing all lines of a file.
+        List[str]: List containing all lines of a file.
 
     """
     elements = [] # define an empty list
@@ -177,14 +178,14 @@ def load_file(file_path):
     return elements
 
 
-def sort_l8_sceneids(sceneids):
+def sort_l8_sceneids(sceneids: List[str]) -> List[str]:
     """Sort Landsat-8 sceneids according to sensing date.
 
     Args:
-        sceneids: List of Landsat-8 sceneids.
+        sceneids (List[str]): List of Landsat-8 sceneids.
 
     Returns:
-        A list of Landsat-8 sceneids ordered according to sensing date.
+        List[str]: List of Landsat-8 sceneids ordered according to sensing date.
 
     """
     l8_sceneids = []
@@ -199,15 +200,15 @@ def sort_l8_sceneids(sceneids):
     return l8_sceneids
 
 
-def search_pairs_l8(sceneids_file='input/l8-sceneids.txt', day_diff = 10):
+def search_pairs_l8(sceneids_file: str, day_diff: int = 10) -> List[Tuple[str, str]]:
     """Search for Landsat-8 sceneid pairs with sensing date close in time according to day_diff.
 
     Args:
-        sceneids_file: File path to archive containing Landsat-8 sceneids.
-        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+        sceneids_file (str): File path to archive containing Landsat-8 sceneids.
+        day_diff (int): Difference of sensing date, in days, to consider two sceneids a pair.
 
     Returns:
-        A list of pairs of Landsat-8 sceneids.
+        List[Tuple[str, str]]: List of pairs of Landsat-8 sceneids.
 
     """
     sceneids = load_file(sceneids_file)
@@ -227,14 +228,14 @@ def search_pairs_l8(sceneids_file='input/l8-sceneids.txt', day_diff = 10):
     return pairs
 
 
-def sort_s2_sceneids(sceneids):
+def sort_s2_sceneids(sceneids: List[str]) -> List[str]:
     """Sort Sentinel-2 sceneids according to sensing date.
 
     Args:
-        sceneids: List of Sentinel-2 sceneids.
+        sceneids (List[str]): List of Sentinel-2 sceneids.
 
     Returns:
-        A list of Sentinel-2 sceneids ordered according to sensing date.
+        List[str]: List of Sentinel-2 sceneids ordered according to sensing date.
 
     """
     s2_sceneids = []
@@ -250,15 +251,15 @@ def sort_s2_sceneids(sceneids):
     return s2_sceneids
 
 
-def search_pairs_s2(sceneids_file='input/s2-sceneids.txt', day_diff = 5):
+def search_pairs_s2(sceneids_file: str, day_diff: int  = 5) -> List[Tuple[str, str]]:
     """Search for Sentinel-2 sceneid pairs with sensing date close in time according to day_diff.
 
     Args:
-        sceneids_file: File path to archive containing Sentinel-2 sceneids.
-        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+        sceneids_file (str): File path to archive containing Sentinel-2 sceneids.
+        day_diff (int): Difference of sensing date, in days, to consider two sceneids a pair.
 
     Returns:
-        A list of pairs of Sentinel-2 sceneids.
+        List[Tuple[str, str]]: List of pairs of Sentinel-2 sceneids.
 
     """
     sceneids = load_file(sceneids_file)
@@ -278,16 +279,16 @@ def search_pairs_s2(sceneids_file='input/s2-sceneids.txt', day_diff = 5):
     return pairs
 
 
-def search_pairs_l8_s2(l8_sceneids_file='input/l8-sceneids.txt', s2_sceneids_file='input/s2-sceneids.txt',day_diff = 5):
+def search_pairs_l8_s2(l8_sceneids_file: str, s2_sceneids_file: str,day_diff: int = 5) -> List[Tuple[str, str]]:
     """Search for Landsat-8 and Sentinel-2 sceneid pairs with sensing date close in time according to day_diff.
 
     Args:
-        l8_sceneids_file: File path to archive containing Landsat-8 sceneids.
-        s2_sceneids_file: File path to archive containing Sentinel-2 sceneids.
-        day_diff: Difference of sensing date, in days, to consider two sceneids a pair.
+        l8_sceneids_file (str): File path to archive containing Landsat-8 sceneids.
+        s2_sceneids_file (str): File path to archive containing Sentinel-2 sceneids.
+        day_diff (int): Difference of sensing date, in days, to consider two sceneids a pair.
 
     Returns:
-        A list of Landsat-8 and Sentinel-2 sceneid pairs.
+        List[Tuple[str, str]]: List of Landsat-8 and Sentinel-2 sceneid pairs.
 
     """
     sceneids = load_file(l8_sceneids_file)
@@ -306,16 +307,16 @@ def search_pairs_l8_s2(l8_sceneids_file='input/l8-sceneids.txt', s2_sceneids_fil
     return pairs
 
 
-def mask_pixel_bitwise(mask, flags_list=None, nodata=None): #TODO check if collection 1
+def mask_pixel_bitwise(mask: numpy.ndarray, flags_list: Optional[Dict] = None, nodata: Optional[int] = None) -> numpy.ndarray[bool]:
     """Apply Landsat bitwise mask according to flags_list, if no flags_list is provided mask using default configuration.
 
     Args:
-        mask: numpy.array containing cloud mask.
-        flags_list (optional): Dict containing bitwise mapping.
-        nodata (optional): mask parameter nodata value.
+        mask (numpy.ndarray): numpy ndarray containing cloud mask.
+        flags_list (Dict) (optional): Dict containing bitwise mapping.
+        nodata (int) (optional): mask parameter nodata value.
 
     Returns:
-        numpy.array (bool) where True should be masked and False contains clear observations.
+        numpy.array (bool): Boolean numpy ndarray in which True should be masked and False contains clear observations.
 
     """
     if flags_list is None:
@@ -348,15 +349,15 @@ def mask_pixel_bitwise(mask, flags_list=None, nodata=None): #TODO check if colle
     return final_mask.astype(bool)
 
 
-def mask_pixel_scl(mask, flags_list=None):
+def mask_pixel_scl(mask: numpy.ndarray, flags_list: Optional[Dict] = None) -> numpy.ndarray[bool]:
     """Apply Scene Classificaton Layer (SCL) mask according to flags_list, if no flags_list is provided mask using default configuration.
 
     Args:
-        mask: numpy.array containing cloud mask.
-        flags_list (optional): Dict containing bitwise mapping.
+        mask (numpy.ndarray): numpy.array containing cloud mask.
+        flags_list (Dict) (optional): Dict containing bitwise mapping.
 
     Returns:
-        numpy.array (bool) where True should be masked and False contains clear observations.
+        numpy.array (bool): Boolean numpy ndarray in which True should be masked and False contains clear observations.
 
     """
     if flags_list is None:
@@ -386,7 +387,7 @@ def mask_pixel_scl(mask, flags_list=None):
     return final_mask.astype(bool)
 
 
-def write_dict(dict, file_path):
+def write_dict(dict: Dict, file_path: str):
     """Write a dictionary into a file.
 
     Args:
@@ -398,16 +399,16 @@ def write_dict(dict, file_path):
         file.write(json.dumps(dict))
 
 
-def calc_all_pairs(comparison_metrics, bands, pairs):
+def calc_all_pairs(comparison_metrics: Dict, bands: List[str], pairs: Tuple[str, str]) -> Dict:
     """Calculate absolute difference mean (abs_dif_mean) and relative absolute percentage mean (relative_abs_perc_mean) of a dictionary containing abs_dif_mean and relative_abs_perc_mean of several comparisons.
 
     Args:
-        comparison_metrics: Dictionary of abs_dif_mean and relative_abs_perc_mean values organized by band.
-        bands: Band name.
-        pairs: Tuple of sceneid pairs.
+        comparison_metrics (Dict): Dictionary of abs_dif_mean and relative_abs_perc_mean values organized by band.
+        bands (List[str]): Band name.
+        pairs (Tuple[str, str]): Tuple of sceneid pairs.
 
     Returns:
-        Dictionary containing the mean value of abs_dif_mean and relative_abs_perc_mean organized by band.
+        Dict: Dictionary containing the mean value of abs_dif_mean and relative_abs_perc_mean organized by band.
 
     """
     comparison_metrics['all_pairs'] = {}
@@ -424,16 +425,16 @@ def calc_all_pairs(comparison_metrics, bands, pairs):
     return comparison_metrics
 
 
-def remove_negative_vals(raster1_arr, raster2_arr):
+def remove_negative_vals(raster1_arr: numpy.ndarray, raster2_arr: numpy.ndarray) -> Tuple[numpy.ndarray, numpy.ndarray]:
     """Remove negative reflectance artifacts.
 
     Args:
-        raster1_arr: numpy.array of the first raster.
-        raster2_arr: numpy.array of the second raster.
+        raster1_arr (numpy.ndarray): numpy.array of the first raster.
+        raster2_arr (numpy.ndarray): numpy.array of the second raster.
 
     Returns:
-        raster1_arr - numpy.array containing values from raster1_arr only on the positions where raster1_arr and raster2_arr where not negative.
-        raster2_arr - numpy.array containing values from raster2_arr only on the positions where raster1_arr and raster2_arr where not negative.
+        raster1_arr (numpy.ndarray): numpy ndarray containing values from raster1_arr only on the positions where raster1_arr and raster2_arr where not negative.
+        raster2_arr (numpy.ndarray): numpy ndarray containing values from raster2_arr only on the positions where raster1_arr and raster2_arr where not negative.
 
     """
     raster2_arr[raster1_arr < 0] = numpy.nan
