@@ -99,7 +99,7 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Li
         (
             docker[
                 "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:ro",
+                "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
                 "nbar:fix-2",
                 scene_id
@@ -131,10 +131,10 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List
         (
             docker[
                 "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:ro",
+                "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
                 "nbar:fix-2",
-                scene_id[:-5]
+                scene_id
             ]
         )()
 
