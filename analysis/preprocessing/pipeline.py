@@ -210,17 +210,7 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):
     return output_dir, s2_lasrc_nbar_scene_ids
 
 
-@pipeline(
-    mode_defs=[
-        ModeDefinition(
-            resource_defs={
-                "io_manager": fs_io_manager.configured({
-                    "base_dir": "/media/felipe/DATA1/c_factor_article_local/03_tests-pipelines/fs_io_storage"
-                })
-            }
-        )
-    ]
-)
+@pipeline
 def cfactor_pipeline():
     #
     # Load and validate the input config
