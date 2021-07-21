@@ -4,6 +4,7 @@ EXPOSE 3000
 
 ENV DAGSTER_APP=/opt/dagster/app/
 ENV DAGSTER_HOME=/opt/dagster/dagster_home/
+ENV DAGSTER_LOCAL_STORAGE=/opt/dagster/storage/
 
 #
 # Create base directories
@@ -34,6 +35,7 @@ RUN pip install --upgrade \
         dagster==0.12.2 \
         rasterio==1.2.6 \
         matplotlib==3.4.2 \
+        shapely==1.7.1 \
     && cd /opt/article/ \
     && python3 setup.py install
 

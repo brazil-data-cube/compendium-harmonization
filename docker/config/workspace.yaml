@@ -1,4 +1,4 @@
 load_from:
   - python_file:
-      relative_path: repository.py
+      relative_path: pipelines.py
       working_directory: /opt/dagster/app/
