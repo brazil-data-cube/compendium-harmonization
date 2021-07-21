@@ -79,7 +79,7 @@ def path_to_s2nbarlasrc_band(input_dir: str, sceneid: str, band:str) -> str:
         str: The file path to a single band Sentinel-2 (LaSRC) NBAR image.
 
     """
-    return os.path.join(input_dir, sceneid.replace('.SAFE','')+'_NBAR', sceneid.replace('.SAFE','')+'_'+band+'.tif')
+    return os.path.join(input_dir, sceneid.replace('.SAFE','')+'_NBAR', sceneid.replace('.SAFE','')+'_'+band+'_NBAR.tif')
 
 
 def path_to_s2nbarsen2cor_band(input_dir: str, sceneid: str, band: str) -> str:
@@ -100,7 +100,7 @@ def path_to_s2nbarsen2cor_band(input_dir: str, sceneid: str, band: str) -> str:
         res = 20
     elif band in bands10m:
         res = 10
-    raster_file = '_'.join([sceneid.split('_')[5], sceneid.split('_')[2], band, str(res)+'m.tif'])
+    raster_file = '_'.join([sceneid.split('_')[5], sceneid.split('_')[2], band, str(res)+'m_NBAR.tif'])
     l2aname = sceneid.replace('L1C','L2A')
     l2aname = l2aname.replace(l2aname.split('_')[3], 'N9999')
     pattern = '_'.join(l2aname.split('_')[:-1])

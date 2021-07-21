@@ -307,7 +307,7 @@ def search_pairs_l8_s2(l8_sceneids_file: str, s2_sceneids_file: str,day_diff: in
     return pairs
 
 
-def mask_pixel_bitwise(mask: numpy.ndarray, flags_list: Optional[Dict] = None, nodata: Optional[int] = None) -> numpy.ndarray[bool]:
+def mask_pixel_bitwise(mask: numpy.ndarray, flags_list: Optional[Dict] = None, nodata: Optional[int] = None) -> numpy.ndarray:
     """Apply Landsat bitwise mask according to flags_list, if no flags_list is provided mask using default configuration.
 
     Args:
@@ -349,7 +349,7 @@ def mask_pixel_bitwise(mask: numpy.ndarray, flags_list: Optional[Dict] = None, n
     return final_mask.astype(bool)
 
 
-def mask_pixel_scl(mask: numpy.ndarray, flags_list: Optional[Dict] = None) -> numpy.ndarray[bool]:
+def mask_pixel_scl(mask: numpy.ndarray, flags_list: Optional[Dict] = None) -> numpy.ndarray:
     """Apply Scene Classificaton Layer (SCL) mask according to flags_list, if no flags_list is provided mask using default configuration.
 
     Args:
@@ -418,9 +418,9 @@ def calc_all_pairs(comparison_metrics: Dict, bands: List[str], pairs: Tuple[str,
         sum_relative_abs_perc = []
         for pair in pairs:
             sum_abs_dif.append(comparison_metrics[pair[0]+'_x_'+pair[1]][bands[b]]['abs_dif_mean'])
-            sum_relative_abs_perc.append(comparison_metrics[pair[0]+'_x_'+pair[1]][bands[b]]['relative_abs_perc_mean'])
+            sum_relative_abs_perc.append(comparison_metrics[pair[0]+'_x_'+pair[1]][bands[b]]['rel_abs_perc_mean'])
         comparison_metrics['all_pairs'][bands[b]]['abs_dif_mean'] = numpy.nanmean(sum_abs_dif)
-        comparison_metrics['all_pairs'][bands[b]]['relative_abs_perc_mean'] = numpy.nanmean(sum_relative_abs_perc)
+        comparison_metrics['all_pairs'][bands[b]]['rel_abs_perc_mean'] = numpy.nanmean(sum_relative_abs_perc)
     print(comparison_metrics['all_pairs'])
     return comparison_metrics
 
