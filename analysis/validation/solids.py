@@ -18,7 +18,7 @@ from . import pipeline_utils
 @solid(
     config_schema={
         "bands10m": Field(list, default_value=[
-            "B2", "B03", "B04", "B08"
+            "B02", "B03", "B04", "B08"
         ]),
         "bands20m": Field(list, default_value=[
             "B8A", "B11", "B12"
