@@ -66,6 +66,8 @@ def cfactor_pipeline():
     #
 
     # Landsat-8 NBAR
+    validation_sr_l8(lc8_inputs, lc8_inputs, lc8_outputs, lc8_scenes)
+
     validation_nbar_l8(lc8_nbar_dir, lc8_inputs, lc8_outputs, lc8_scenes)
 
     # Sentinel-2/MSI (Sen2Cor)
