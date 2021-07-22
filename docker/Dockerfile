@@ -1,3 +1,4 @@
+#
 FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837dadb
 
 EXPOSE 3000
@@ -37,7 +38,10 @@ RUN pip install --upgrade \
         matplotlib==3.4.2 \
         shapely==1.7.1 \
     && cd /opt/article/ \
-    && python3 setup.py install
+    && python3 setup.py install \
+    && apt update -y \
+    && apt install curl -y \
+    && curl -fsSL https://get.docker.com | sh
 
 WORKDIR $DAGSTER_APP
 
