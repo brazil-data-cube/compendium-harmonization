@@ -7,8 +7,8 @@
 #
 
 import os
-
 from typing import List
+
 from plumbum.cmd import docker
 
 
@@ -34,19 +34,19 @@ def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
         (
             docker[
                 "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw", 
-                "-v", f"{output_dir}:/mnt/output-dir:rw", 
-                "sen2cor-fmask-2.9.0", 
+                "-v", f"{input_dir}:/mnt/input-dir:rw",
+                "-v", f"{output_dir}:/mnt/output-dir:rw",
+                "marujore/sen2cor@sha256:17c5932046d996fa72ec300aa531fd32b82325baf55ca3c7f389fb03b9f4b68c",
                 scene_id
             ]
         )()
-        
+
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes
 
 
-def lasrc(input_dir: str, output_dir: str, scene_ids: List[str], 
-              aux_data_dir: str) -> List:
+def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
+          aux_data_dir: str) -> List:
     """ToDo: Add description
     
     Args:
@@ -79,13 +79,13 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
         (
             docker[
                 "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw", 
-                "-v", f"{output_dir}:/mnt/output-dir:rw", 
-                "-v", f"{aux_data_dir}:/mnt/lasrc-aux:ro", 
-                "-t", "lasrc_ledaps_fmask43:latest", 
+                "-v", f"{input_dir}:/mnt/input-dir:rw",
+                "-v", f"{output_dir}:/mnt/output-dir:rw",
+                "-v", f"{aux_data_dir}:/mnt/lasrc-aux:ro",
+                "-t", "marujore/lasrc@sha256:718554a7bb7ec15a4fa5404242bf27d38e8c1b774558efcfe91ef32befebfb77",
                 scene_id
             ]
         )()
-        
+
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes

@@ -38,7 +38,7 @@ def lc8_generate_angles(input_dir: str, scene_ids: List[str]) -> List[str]:
             docker[
                 "run", "--rm",
                 "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "l8angs:latest", scene_id
+                "marujore/l8angs@sha256:940d6bcbd765acdb20a69ec140029d7e14bfaa8e668344fb674447b439cc36db", scene_id
             ]
         )()
 
@@ -69,7 +69,7 @@ def lc8_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]
                 "run", "--rm",
                 "-v", f"{os.path.join(input_dir, scene_id)}:/mnt/input-dir:ro",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "nbar:fix",
+                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
                 scene_id
             ]
         )()
@@ -101,7 +101,7 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Li
                 "run", "--rm",
                 "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "nbar:fix-2",
+                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
                 scene_id
             ]
         )()
@@ -133,7 +133,7 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List
                 "run", "--rm",
                 "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "nbar:fix-2",
+                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
                 scene_id
             ]
         )()
