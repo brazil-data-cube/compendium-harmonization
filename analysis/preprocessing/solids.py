@@ -77,8 +77,8 @@ def config_gatter(context) -> Tuple[Any, List[str], Any, List[str], str, str]:
 
 @solid(
     output_defs=[
-        OutputDefinition(name="sen2cor_sceneid"),
         OutputDefinition(name="sen2cor_scene_path"),
+        OutputDefinition(name="sen2cor_sceneid"),
     ]
 )
 def apply_sen2cor(input_dir: str, output_dir: str,
@@ -101,8 +101,8 @@ def apply_sen2cor(input_dir: str, output_dir: str,
 @solid(config_schema={
     "auxiliary_data": str,
 }, output_defs=[
-    OutputDefinition(name="lasrc_sceneid"),
     OutputDefinition(name="lasrc_scene_path"),
+    OutputDefinition(name="lasrc_sceneid")
 ])
 def apply_lasrc(context, input_dir: str, output_dir: str,
                 scene_ids: List) -> Tuple[str, List[str]]:
@@ -140,8 +140,8 @@ def lc8_nbar_angles(input_dir: str, scene_ids: List[str]) -> List[str]:
 
 @solid(
     output_defs=[
-        OutputDefinition(name="lc8_nbar_sceneid"),
         OutputDefinition(name="lc8_nbar_scene_path"),
+        OutputDefinition(name="lc8_nbar_sceneid")
     ])
 def lc8_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Tuple[str, List[str]]:
     """
@@ -164,8 +164,8 @@ def lc8_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Tuple[str
 
 @solid(
     output_defs=[
-        OutputDefinition(name="s2_sen2cor_nbar_sceneid"),
         OutputDefinition(name="s2_sen2cor_nbar_scene_path"),
+        OutputDefinition(name="s2_sen2cor_nbar_sceneid")
     ]
 )
 def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):
@@ -188,8 +188,8 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):
 
 @solid(
     output_defs=[
-        OutputDefinition(name="s2_lasrc_nbar_sceneid"),
         OutputDefinition(name="s2_lasrc_nbar_scene_path"),
+        OutputDefinition(name="s2_lasrc_nbar_sceneid")
     ]
 )
 def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):

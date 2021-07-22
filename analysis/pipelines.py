@@ -69,7 +69,25 @@ def cfactor_pipeline():
     validation_nbar_l8(lc8_nbar_dir, lc8_inputs, lc8_outputs, lc8_scenes)
 
     # Sentinel-2/MSI (Sen2Cor)
-    validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_dir, s2_outputs, s2_sen2cor_nbar_sceneids)
+    validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_dir, s2_outputs, s2_scenes)
+
+    validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_dir, s2_outputs, s2_scenes)
 
     # Sentinel-2/MSI (LaSRC)
-    validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_dir, s2_outputs, s2_lasrc_nbar_sceneids)
+    validation_sr_s2_lasrc(lasrc_dir, sen2cor_dir, s2_outputs, s2_scenes)
+
+    validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_dir, s2_outputs, s2_scenes)
+
+    # Compare Sen2Cor SR (Landsat-8 and Sentinel-2)
+    validation_sr_l8_s2_sen2cor(lc8_inputs, lc8_inputs, sen2cor_dir, sen2cor_dir, s2_outputs, lc8_scenes, s2_scenes)
+
+    # Compare LaSRC SR (Landsat-8 and Sentinel-2)
+    validation_sr_l8_s2_lasrc(lc8_inputs, lc8_inputs, lasrc_dir, sen2cor_dir, s2_outputs, lc8_scenes, s2_scenes)
+
+    # Compare Sen2Cor NBAR (Landsat-8 and Sentinel-2)
+    validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, lc8_inputs, s2_sen2cor_nbar_dir, sen2cor_dir, s2_outputs, lc8_scenes,
+                                  s2_scenes)
+
+    # Compare LaSRC NBAR (Landsat-8 and Sentinel-2)
+    validation_nbar_l8_s2_lasrc(lc8_nbar_dir, lc8_inputs, s2_lasrc_nbar_dir, sen2cor_dir, s2_outputs, lc8_scenes,
+                                s2_scenes)
