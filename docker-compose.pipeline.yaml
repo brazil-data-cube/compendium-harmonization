@@ -1,0 +1,30 @@
+#
+# This file is part of c-factor library
+# Copyright (C) 2021 INPE.
+#
+# c-factor is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+version: '3.2'
+
+services:
+  cfactor-pipeline:
+    build:
+      context: .
+      dockerfile: docker/pipeline/Dockerfile
+    image: cfactor-dagster:0.1
+    container_name: cfactor-pipeline
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ${PWD}/analysis/data/raw_data/ReferenceFiles_L8-S2/l8-sceneids.txt
+        target: /opt/cfactor/reference-files/l8-sceneids.txt
+      - type: bind
+        source: ${PWD}/analysis/data/raw_data/ReferenceFiles_L8-S2/s2-sceneids.txt
+        target: /opt/cfactor/reference-files/s2-sceneids.txt
+    ports:
+      - "3000:3000"
+    restart: on-failure

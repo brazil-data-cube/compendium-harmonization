@@ -1,0 +1,21 @@
+#
+# This file is part of c-factor library
+# Copyright (C) 2021 INPE.
+#
+# c-factor is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+version: '3.2'
+
+services:
+  cfactor-example-build-environment:
+    build:
+      context: .
+      dockerfile: docker/example/Dockerfile
+    image: cfactor_download-utility:0.1
+    container_name: cfactor-example-build-environment
+    volumes:
+      - type: bind
+        source: ${PWD}/analysis/data/raw_data
+        target: /opt/cfactor_article/data
