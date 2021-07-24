@@ -1,4 +1,11 @@
 #
+# This file is part of c-factor library
+# Copyright (C) 2021 INPE.
+#
+# c-factor is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
 FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837dadb
 
 EXPOSE 3000
@@ -15,13 +22,10 @@ RUN mkdir -p $DAGSTER_APP $DAGSTER_HOME
 #
 # Copy the article analysis files.
 #
-COPY analysis $DAGSTER_APP
+COPY analysis/pipeline $DAGSTER_APP
 
 COPY cfactor /opt/article/cfactor
 COPY setup.py /opt/article/setup.py
-
-COPY docker/config/dagster.yaml $DAGSTER_HOME/dagster.yaml
-COPY docker/config/workspace.yaml $DAGSTER_APP/workspace.yaml
 
 #
 # Install dependencies
@@ -43,6 +47,11 @@ RUN pip install --upgrade \
     && apt install curl -y \
     && curl -fsSL https://get.docker.com | sh
 
-WORKDIR $DAGSTER_APP
+#
+# Copy Dagster configuration files
+#
+COPY docker/pipeline/config/dagster.yaml $DAGSTER_HOME/dagster.yaml
+COPY docker/pipeline/config/workspace.yaml $DAGSTER_APP/workspace.yaml
 
+WORKDIR $DAGSTER_APP
 ENTRYPOINT ["dagit", "-h", "0.0.0.0", "-p", "3000"]
