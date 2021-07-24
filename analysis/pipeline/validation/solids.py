@@ -9,8 +9,8 @@
 from typing import List
 
 from dagster import solid, Field
-from preprocessing.pipeline_utils import prepare_output_directory
 
+from cfactor.toolbox import prepare_output_directory
 from cfactor.validation import validation_funcs
 from . import pipeline_utils
 

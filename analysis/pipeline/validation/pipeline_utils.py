@@ -180,10 +180,15 @@ def validation_sr_s2_sen2cor(input_dir: str, cloud_dir: str, output_dir: str, pa
 
     Args:
         input_dir (str): Directory containing Sentinel-2 (Sen2cor) Surface Reflectance folders.
+
         cloud_dir (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands10m (List[str]): name of the 10 meter bands that will be evaluated.
+
         bands20m (List[str]): name of the 20 meter bands that will be evaluated.
 
     """
@@ -241,10 +246,15 @@ def validation_nbar_s2_sen2cor(input_dir: str, cloud_dir: str, output_dir: str, 
 
     Args:
         input_dir (str): Directory containing Sentinel-2 (Sen2cor) NBAR folders.
+
         cloud_dir (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands10m (List[str]): name of the 10 meter bands that will be evaluated.
+
         bands20m (List[str]): name of the 20 meter bands that will be evaluated.
 
     """
@@ -302,9 +312,13 @@ def validation_sr_s2_lasrc(input_dir: str, cloud_dir: str, output_dir: str, pair
 
     Args:
         input_dir (str): Directory containing Sentinel-2 (LaSRC) Surface Reflectance folders.
+
         cloud_dir (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands (List[str]): name of the bands that will be evaluated.
 
     """
@@ -357,9 +371,13 @@ def validation_nbar_s2_lasrc(input_dir: str, cloud_dir: str, output_dir: str, pa
 
     Args:
         input_dir (str): Directory containing Sentinel-2 (LaSRC) NBAR folders.
+
         cloud_dir (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands (List[str]): name of the bands that will be evaluated.
 
     """
@@ -413,12 +431,19 @@ def validation_sr_l8_s2_sen2cor(input_dir_l8: str, cloud_dir_l8: str, input_dir_
 
     Args:
         input_dir_l8 (str): Directory containing Landsat-8 surface reflectance folders.
+
         cloud_dir_l8 (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         input_dir_s2 (str): Directory containing Sentinel-2 (Sen2cor) surface reflectance folders.
+
         cloud_dir_s2 (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands_l8 (List[str]): Landsat-8 bands that will be evaluated.
+
         bands_s2 (List[str]): Sentinel-2 bands that will be evaluated (Sen2cor syntax).
 
     """
@@ -485,12 +510,19 @@ def validation_sr_l8_s2_lasrc(input_dir_l8: str, cloud_dir_l8: str, input_dir_s2
 
     Args:
         input_dir_l8 (str): Directory containing Landsat-8 surface reflectance folders.
+
         cloud_dir_l8 (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         input_dir_s2 (str): Directory containing Sentinel-2 (LaSRC) surface reflectance folders.
+
         cloud_dir_s2 (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands_l8 (List[str]): Landsat-8 bands that will be evaluated.
+
         bands_s2 (List[str]): Sentinel-2 bands that will be evaluated (LaSRC syntax).
 
     """
@@ -562,12 +594,19 @@ def validation_nbar_l8_s2_sen2cor(input_dir_l8: str, cloud_dir_l8: str, input_di
 
     Args:
         input_dir_l8 (str): Directory containing Landsat-8 NBAR folders.
+
         cloud_dir_l8 (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         input_dir_s2 (str): Directory containing Sentinel-2 (Sen2cor) NBAR folders.
+
         cloud_dir_s2 (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands_l8 (List[str]): Landsat-8 bands that will be evaluated.
+
         bands_s2 (List[str]): Sentinel-2 bands that will be evaluated (Sen2cor syntax).
 
     """
@@ -641,12 +680,19 @@ def validation_nbar_l8_s2_lasrc(input_dir_l8: str, cloud_dir_l8: str, input_dir_
 
     Args:
         input_dir_l8 (str): Directory containing Landsat-8 NBAR folders.
+
         cloud_dir_l8 (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         input_dir_s2 (str): Directory containing Sentinel-2 (LaSRC) NBAR folders.
+
         cloud_dir_s2 (str): Directory containing Sentinel-2 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands_l8 (List[str]): Landsat-8 bands that will be evaluated.
+
         bands_s2 (List[str]): Sentinel-2 bands that will be evaluated (LaSRC syntax).
 
     """

@@ -9,18 +9,22 @@
 import os
 from typing import Any, List, Tuple
 
-from dagster import solid, OutputDefinition
+from dagster import solid, Field, OutputDefinition
 
-from . import pipeline_utils
+from cfactor import toolbox
 
 
 @solid(
     config_schema={
         "landsat8_input_dir": str,
-        "landsat8_sceneid_list": str,
+        "landsat8_sceneid_list": Field(
+            str, default_value="/opt/cfactor/reference-files/l8-sceneids.txt"
+        ),
 
         "sentinel2_input_dir": str,
-        "sentinel2_sceneid_list": str,
+        "sentinel2_sceneid_list": Field(
+            str, default_value="/opt/cfactor/reference-files/s2-sceneids.txt"
+        ),
 
         "derived_data_dir": str
     }, output_defs=[
@@ -44,18 +48,14 @@ def config_gatter(context) -> Tuple[Any, List[str], Any, List[str], str, str]:
     #
     with open(context.solid_config["sentinel2_sceneid_list"]) as file:
         scene_list = file.readlines()
-        sentinel2_sceneids = pipeline_utils.standardize_filename(scene_list)
+        sentinel2_sceneids = toolbox.standardize_filename(scene_list)
 
     #
     # Load Landsat-8 scenes
     #
     with open(context.solid_config["landsat8_sceneid_list"]) as file:
         scene_list = file.readlines()
-        landsat8_sceneids = pipeline_utils.standardize_filename(scene_list)
-
-    if len(landsat8_sceneids) != len(sentinel2_sceneids):
-        raise RuntimeError("It is necessary to have the same amount of "
-                           "landsat-8 and sentinel-2 scenes")
+        landsat8_sceneids = toolbox.standardize_filename(scene_list)
 
     # create base output directories (for each sensor)
     base_out_dir = context.solid_config["derived_data_dir"]
@@ -88,12 +88,12 @@ def apply_sen2cor(input_dir: str, output_dir: str,
     #
     # Prepare output directory
     #
-    output_dir = pipeline_utils.prepare_output_directory(
+    output_dir = toolbox.prepare_output_directory(
         output_dir, "sen2cor_sr"
     )
 
     sen2cor(input_dir, output_dir, scene_ids)
-    sen2cor_scene_ids = pipeline_utils.filename(os.listdir(output_dir))
+    sen2cor_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, sen2cor_scene_ids
 
@@ -113,7 +113,7 @@ def apply_lasrc(context, input_dir: str, output_dir: str,
     #
     # Prepare output directory
     #
-    output_dir = pipeline_utils.prepare_output_directory(
+    output_dir = toolbox.prepare_output_directory(
         output_dir, "lasrc_sr"
     )
 
@@ -121,7 +121,7 @@ def apply_lasrc(context, input_dir: str, output_dir: str,
     auxiliary_data = context.solid_config["auxiliary_data"]
 
     lasrc(input_dir, output_dir, scene_ids, auxiliary_data)
-    lasrc_scene_ids = pipeline_utils.filename(os.listdir(output_dir))
+    lasrc_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, lasrc_scene_ids
 
@@ -152,12 +152,12 @@ def lc8_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Tuple[str
     #
     # Prepare output directory
     #
-    output_dir = pipeline_utils.prepare_output_directory(
+    output_dir = toolbox.prepare_output_directory(
         output_dir, "lc8_nbar"
     )
 
     lc8_nbar(input_dir, output_dir, scene_ids)
-    lc8_nbar_scene_ids = pipeline_utils.filename(os.listdir(output_dir))
+    lc8_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, lc8_nbar_scene_ids
 
@@ -176,12 +176,12 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):
     #
     # Prepare output directory
     #
-    output_dir = pipeline_utils.prepare_output_directory(
+    output_dir = toolbox.prepare_output_directory(
         output_dir, "s2_sen2cor_nbar"
     )
 
     s2_sen2cor_nbar(input_dir, output_dir, scene_ids)
-    s2_sen2cor_nbar_scene_ids = pipeline_utils.filename(os.listdir(output_dir))
+    s2_sen2cor_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, s2_sen2cor_nbar_scene_ids
 
@@ -200,11 +200,11 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]):
     #
     # Prepare output directory
     #
-    output_dir = pipeline_utils.prepare_output_directory(
+    output_dir = toolbox.prepare_output_directory(
         output_dir, "s2_lasrc_nbar"
     )
 
     s2_lasrc_nbar(input_dir, output_dir, scene_ids)
-    s2_lasrc_nbar_scene_ids = pipeline_utils.filename(os.listdir(output_dir))
+    s2_lasrc_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, s2_lasrc_nbar_scene_ids
