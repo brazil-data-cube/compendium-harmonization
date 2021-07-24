@@ -28,7 +28,6 @@ def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
     Returns:
         List: List with full path to each output scene.
     """
-
     processed_scenes = []
     for scene_id in scene_ids:
         (
@@ -73,7 +72,6 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
         the `L8` directory (https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/) 
         provided by the USGS.
     """
-
     processed_scenes = []
     for scene_id in scene_ids:
         (
@@ -81,7 +79,7 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
                 "run", "--rm",
                 "-v", f"{input_dir}:/mnt/input-dir:rw",
                 "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "-v", f"{aux_data_dir}:/mnt/lasrc-aux:ro",
+                "-v", f"{aux_data_dir}:/mnt/atmcor_aux/lasrc/L8/LADS:ro",
                 "-t", "marujore/lasrc@sha256:718554a7bb7ec15a4fa5404242bf27d38e8c1b774558efcfe91ef32befebfb77",
                 scene_id
             ]
