@@ -9,12 +9,13 @@
 version: '3.2'
 
 services:
-  cfactor-pipeline:
+  cfactor-notebook:
+    user: ${UID}:${GID}
     build:
       context: .
-      dockerfile: docker/pipeline/Dockerfile
-    image: cfactor-dagster:0.1
-    container_name: cfactor-pipeline
+      dockerfile: docker/notebook/Dockerfile
+    image: cfactor-notebook:0.1
+    container_name: cfactor-notebook
     environment:
       - CFACTOR_DATA_DIRECTORY=${PWD}/analysis/data
     volumes:
@@ -22,8 +23,13 @@ services:
         source: /var/run/docker.sock
         target: /var/run/docker.sock
       - type: bind
+        source: ${PWD}/analysis/
+        target: /home/jovyan/cfactor-analysis
+      - type: bind
         source: ${PWD}/analysis/data
         target: ${PWD}/analysis/data
     ports:
-      - "3000:3000"
+      - "8888:8888"
+    env_file:
+      - .env
     restart: on-failure

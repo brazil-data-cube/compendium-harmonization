@@ -6,6 +6,8 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
+# Image: python:3.8-slim-buster
+# DockerHub: https://hub.docker.com/layers/python/library/python/3.8-slim-buster/images/sha256-5498332eee6c73a465a253fe1d00c6dc6f79562e3ea23d105129d00e6ce8736b?context=explore
 FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837dadb
 
 EXPOSE 3000
