@@ -6,4 +6,4 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""c-factor analysis processing module."""
+"""c-factor analysis general module."""
