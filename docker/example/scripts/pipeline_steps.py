@@ -17,8 +17,31 @@ from loguru import logger
 from toolbox import multihash_checksum_sha256, download_file, extract_packed_files
 
 
-def download_example_files(output_directory: str, example_files_reference: str) -> List:
-    """
+def download_example_files(output_directory: str, example_files_reference: str) -> List[str]:
+    """Download the example data for running the processing flow presented in the article.
+
+    Args:
+        output_directory (str): Directory where the downloaded files will be saved.
+
+        example_files_reference (str): JSON file with the reference to example files. This JSON
+        must be contains the following structure:
+            {
+              "repositoryTag": "...",
+              "repositoryTagCommitChecksum": "...",
+              "exampleFiles": [
+                "...",
+              ],
+              "checksum": "..."
+            }
+
+        where:
+            - `repositoryTag`: Is the github tag where files is saved
+            - `repositoryTagCommitChecksum`: Github tag commit checksum
+            - `exampleFiles`: Github tag asset files that will be downloaded
+            - `checksum`:  Github tag asset file that contains the checksum of other assets files
+
+    Returns:
+        list: list with path of the downloaded files.
     """
     # load example files reference
     with open(example_files_reference, "r") as ifile:
@@ -45,7 +68,7 @@ def download_example_files(output_directory: str, example_files_reference: str) 
                 f"Checksum not found for {filename}! Please, check if you are using the right repository.")
 
         if not os.path.exists(file_output):
-            logger.info(f"Downloading {filename}")
+            logger.info(f"Downloading {filename} (Sometimes the progress bar may not appear. Please, be patient.)")
 
             # download files
             download_file(file_reference, file_output)
@@ -109,3 +132,21 @@ def extract_cfactor_example_data(downloaded_files: List) -> None:
 
         # removing .zip files
         [os.remove(x) for x in files_to_extract]
+
+
+def change_files_permission_recursive(root_path: str, permission: int):
+    """Change files permission recursively.
+
+    Args:
+        root_path (str): Base path where the recursively change permission starts.
+
+        permission (int): Permission applied to all files/directories below `root_path`.
+
+    Returns:
+        None: Files permission will be applied in files.
+    """
+    for obj in os.listdir(root_path):
+        obj_path = os.path.join(root_path, obj)
+        if os.path.isdir(obj_path):
+            change_files_permission_recursive(obj_path, permission)
+        os.chmod(obj_path, permission)

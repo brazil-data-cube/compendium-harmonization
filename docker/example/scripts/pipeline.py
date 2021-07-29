@@ -8,7 +8,7 @@
 
 import os
 
-from pipeline_steps import download_example_files, extract_cfactor_example_data
+from pipeline_steps import download_example_files, extract_cfactor_example_data, change_files_permission_recursive
 
 if __name__ == "__main__":
     # get output directory and example files reference from env file
@@ -25,3 +25,6 @@ if __name__ == "__main__":
 
     # step 2. Extract downloaded files (in case of landsat-8 and sentinel-2 compressed scenes)
     extract_cfactor_example_data(downloaded_files)
+
+    # step 3. Change files permission.
+    change_files_permission_recursive(output_directory, 0o0777)
