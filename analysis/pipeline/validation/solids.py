@@ -333,7 +333,7 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2)",
             default_value=[
-                "B2", "B3", "B4", "B5", "B6", "B7"
+                "B2", "B3", "B4", "B5", "B5", "B6", "B7"
             ],
         ),
         "bands_s2": Field(
@@ -342,7 +342,7 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
                         "validation. These names should be equivalent to the standard ESA Sentinel-2 .SAFE file "
                         "band naming pattern (e.g. B01, B02, B8A)",
             default_value=[
-                "B03", "B03", "B04", "B08", "B8A", "B11", "B12"
+                "B02", "B03", "B04", "B08", "B8A", "B11", "B12"
             ]
         )
     },
@@ -400,7 +400,7 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2).",
             default_value=[
-                "B2", "B3", "B4", "B5", "B6", "B7"
+                "B2", "B3", "B4", "B5", "B5", "B6", "B7"
             ]
         ),
         "bands_s2": Field(
@@ -471,7 +471,7 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2).",
             default_value=[
-                "B2", "B3", "B4", "B5", "B6", "B7"
+                "B2", "B3", "B4", "B5", "B5", "B6", "B7"
             ]
         ),
         "bands_s2": Field(
@@ -480,7 +480,7 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
                         "validation. These names should be equivalent to the standard ESA Sentinel-2 .SAFE file "
                         "band naming pattern (e.g. B01, B02, B8A)",
             default_value=[
-                "B03", "B03", "B04", "B08", "B8A", "B11", "B12"
+                "B02", "B03", "B04", "B08", "B8A", "B11", "B12"
             ]
         )
     },
@@ -544,7 +544,7 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2).",
             default_value=[
-                "B2", "B3", "B4", "B5", "B6", "B7"
+                "B2", "B3", "B4", "B5", "B5", "B6", "B7"
             ]
         ),
         "bands_s2": Field(

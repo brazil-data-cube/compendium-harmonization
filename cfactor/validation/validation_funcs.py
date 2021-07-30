@@ -308,8 +308,8 @@ def search_pairs_l8_s2(l8_sceneids_file: str, s2_sceneids_file: str, day_diff: i
     s2_sceneids = sort_s2_sceneids(sceneids)
 
     pairs = []
-    for i in range(0, len(l8_sceneids) - 1):
-        for j in range(0, len(s2_sceneids) - 1):
+    for i in range(0, len(l8_sceneids)):
+        for j in range(0, len(s2_sceneids)):
             # Select with day difference
             if abs((l8_sceneids[i][1] - s2_sceneids[j][1]).days) < day_diff:
                 pairs.append((l8_sceneids[i][0], s2_sceneids[j][0]))
