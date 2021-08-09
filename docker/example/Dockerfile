@@ -13,6 +13,7 @@ FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837d
 #
 # Define directory for output
 #
+ENV CFACTOR_PIPELINE_DIR /opt/cfactor_article/pipeline
 ENV CFACTOR_REPO_DOWNLOAD_OUTPUT /opt/cfactor_article/data
 ENV CFACTOR_EXAMPLE_FILES_REFERENCE_FILE /opt/cfactor_article/exampleFiles.json
 
@@ -32,7 +33,8 @@ RUN apt update -y \
         loguru==0.5.3 \
         py-multihash==2.0.1 \
         requests==2.26.0 \
-        tqdm==4.61.2
+        tqdm==4.61.2 \
+        PyYAML==5.4.1
 
 #
 # Copy download script and example files reference

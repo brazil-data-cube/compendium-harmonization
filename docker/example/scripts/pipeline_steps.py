@@ -12,6 +12,7 @@ import shutil
 from typing import List
 
 import requests
+import yaml
 from loguru import logger
 
 from toolbox import multihash_checksum_sha256, download_file, extract_packed_files
@@ -150,3 +151,63 @@ def change_files_permission_recursive(root_path: str, permission: int):
         if os.path.isdir(obj_path):
             change_files_permission_recursive(obj_path, permission)
         os.chmod(obj_path, permission)
+
+
+def create_dagit_yaml_file(raw_data_dir: str, derived_data_dir: str, output_file: str):
+    """Create a Dagster configuration file based on specified data directories.
+
+    Args:
+        raw_data_dir (str): Directory where the raw data is stored.
+
+        derived_data_dir (str): Directory where the processing results will be saved.
+
+        output_file (str): File where the Dagster YAML configuration content will be saved.
+
+    Returns:
+        None: The configuration content will be saved on the `output_file`.
+    """
+    #
+    # Resources
+    #
+
+    # LADS
+    lands_auxiliary_data_dir = os.path.join(raw_data_dir, "LADS_AuxiliaryData")
+
+    # Repository
+    landsat8_input_dir = os.path.join(raw_data_dir, "Landsat8Data")
+    sentinel2_input_dir = os.path.join(raw_data_dir, "Sentinel2Data")
+
+    # solids
+
+    # Load and standardize the scene ids
+    landsat8_sceneid_list = os.path.join(raw_data_dir, "ReferenceFiles_L8-S2", "l8-sceneids.txt")
+    sentinel2_sceneid_list = os.path.join(raw_data_dir, "ReferenceFiles_L8-S2", "s2-sceneids.txt")
+
+    # Write the configuration
+    pipeline_config = {
+        "resources": {
+            "cfactor_lads_data": {
+                "config": {
+                    "lands_auxiliary_data_dir": lands_auxiliary_data_dir
+                }
+            },
+            "cfactor_repository": {
+                "config": {
+                    "derived_data_dir": derived_data_dir,
+                    "landsat8_input_dir": landsat8_input_dir,
+                    "sentinel2_input_dir": sentinel2_input_dir
+                }
+            }
+        },
+        "solids": {
+            "load_and_standardize_sceneids_input": {
+                "config": {
+                    "landsat8_sceneid_list": landsat8_sceneid_list,
+                    "sentinel2_sceneid_list": sentinel2_sceneid_list
+                }
+            }
+        }
+    }
+
+    with open(output_file, "w") as ofile:
+        yaml.dump(pipeline_config, ofile)
