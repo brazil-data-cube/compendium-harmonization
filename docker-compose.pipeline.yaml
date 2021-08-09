@@ -27,3 +27,9 @@ services:
     ports:
       - "3000:3000"
     restart: on-failure
+    networks:
+      - cfactor_network
+
+networks:
+  cfactor_network:
+    external: true

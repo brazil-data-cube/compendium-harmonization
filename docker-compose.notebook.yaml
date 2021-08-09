@@ -33,3 +33,9 @@ services:
     env_file:
       - .env
     restart: on-failure
+    networks:
+      - cfactor_network
+
+networks:
+  cfactor_network:
+    external: true
