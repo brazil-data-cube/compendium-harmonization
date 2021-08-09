@@ -39,15 +39,16 @@ def cfactor_resource_repository(_init_context) -> Dict:
     """Data Access Resource.
 
     Returns:
-        Dict: Dictionary with the input keys and also the `outdir_landsat8` and `outdir_sentinel2` keys. The extra keys
-              added, represent the base directory where the result of processing each of the sensors will be saved. The
-              output looks like:
+        Dict: Dictionary with the input keys and also the `outdir_landsat8`, `outdir_sentinel2`, `outdir_validation`
+              keys. The extra keys added, represent the base directory where the result of processing each of the
+              sensors will be saved. The output looks like:
                 {
                     "landsat8_input_dir": "...",
                     "sentinel2_input_dir": "...",
                     "derived_data_dir": "...",
                     "outdir_landsat8": "...",
-                    "outdir_sentinel2": "..."
+                    "outdir_sentinel2": "...",
+                    "outdir_validation": "..."
                 }
     """
     # validate the defined resources
@@ -61,12 +62,14 @@ def cfactor_resource_repository(_init_context) -> Dict:
 
     s2_outputs = os.path.join(base_out_dir, "s2")
     lc8_outputs = os.path.join(base_out_dir, "lc8")
+    validation_outputs = os.path.join(base_out_dir, "validation")
 
     return {
         **_init_context.resource_config,
         **{
             "outdir_landsat8": lc8_outputs,
-            "outdir_sentinel2": s2_outputs
+            "outdir_sentinel2": s2_outputs,
+            "outdir_validation": validation_outputs
         }
     }
 

@@ -28,6 +28,7 @@ def reproject_img(src: rasterio.io.DatasetReader, ref: rasterio.io.DatasetReader
 
     Args:
         src (rasterio.io.DatasetReader): Rasterio source dataset that will be reprojected into the reference projection.
+
         ref (rasterio.io.DatasetReader): Rasterio reference dataset.
 
     Returns:
@@ -72,6 +73,7 @@ def resample_raster(src: rasterio.io.DatasetReader, res: int) -> rasterio.io.Mem
 
     Args:
         src (rasterio.io.DatasetReader): Rasterio Source dataset that will be resampled into the reference projection.
+
         res (int): Rasterio reference dataset.
 
     Returns:
@@ -116,10 +118,12 @@ def raster_intersection(raster1: rasterio.io.DatasetReader, raster2: rasterio.io
 
     Args:
         raster1 (rasterio.io.DatasetReader): Rasterio dataset of the first raster.
+
         raster2 (rasterio.io.DatasetReader): Rasterio dataset of the second raster.
 
     Returns:
         raster1_arr (numpy.ndarray) - numpy.array containing values from raster1 on the intersection area.
+
         raster2_arr (numpy.ndarray) - numpy.array containing values from raster2 on the intersection area.
 
     """
@@ -215,6 +219,7 @@ def search_pairs_l8(sceneids_file: str, day_diff: int = 10) -> List[Tuple[str, s
 
     Args:
         sceneids_file (str): File path to archive containing Landsat-8 sceneids.
+
         day_diff (int): Difference of sensing date, in days, to consider two sceneids a pair.
 
     Returns:
@@ -294,7 +299,9 @@ def search_pairs_l8_s2(l8_sceneids_file: str, s2_sceneids_file: str, day_diff: i
 
     Args:
         l8_sceneids_file (str): File path to archive containing Landsat-8 sceneids.
+
         s2_sceneids_file (str): File path to archive containing Sentinel-2 sceneids.
+
         day_diff (int): Difference of sensing date, in days, to consider two sceneids a pair.
 
     Returns:
@@ -323,7 +330,9 @@ def mask_pixel_bitwise(mask: numpy.ndarray, flags_list: Optional[Dict] = None,
 
     Args:
         mask (numpy.ndarray): numpy ndarray containing cloud mask.
+
         flags_list (Dict) (optional): Dict containing bitwise mapping.
+
         nodata (int) (optional): mask parameter nodata value.
 
     Returns:
@@ -365,6 +374,7 @@ def mask_pixel_scl(mask: numpy.ndarray, flags_list: Optional[Dict] = None) -> nu
 
     Args:
         mask (numpy.ndarray): numpy.array containing cloud mask.
+
         flags_list (Dict) (optional): Dict containing bitwise mapping.
 
     Returns:
@@ -403,6 +413,7 @@ def write_dict(dict: Dict, file_path: str):
 
     Args:
         dict: Dictionary of values to be saved in a file.
+
         file_path: File path in which the dictionary will be written.
 
     """
@@ -415,7 +426,9 @@ def calc_all_pairs(comparison_metrics: Dict, bands: List[str], pairs: Tuple[str,
 
     Args:
         comparison_metrics (Dict): Dictionary of abs_dif_mean and relative_abs_perc_mean values organized by band.
+
         bands (List[str]): Band name.
+
         pairs (Tuple[str, str]): Tuple of sceneid pairs.
 
     Returns:
@@ -441,10 +454,12 @@ def remove_negative_vals(raster1_arr: numpy.ndarray, raster2_arr: numpy.ndarray)
 
     Args:
         raster1_arr (numpy.ndarray): numpy.array of the first raster.
+
         raster2_arr (numpy.ndarray): numpy.array of the second raster.
 
     Returns:
         raster1_arr (numpy.ndarray): numpy ndarray containing values from raster1_arr only on the positions where raster1_arr and raster2_arr where not negative.
+
         raster2_arr (numpy.ndarray): numpy ndarray containing values from raster2_arr only on the positions where raster1_arr and raster2_arr where not negative.
 
     """

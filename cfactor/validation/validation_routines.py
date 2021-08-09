@@ -19,7 +19,13 @@ from cfactor.validation import navigate, validation_funcs
 
 
 def create_a_temporary_file_with_lines(lines: List[str]) -> str:
-    """
+    """Create a temporary text file.
+
+    Args:
+        lines (List[str]): Text lines that will be added on the file.
+
+    Returns:
+        str: Path to the temporary file.
     """
 
     file = mktemp()
@@ -37,12 +43,13 @@ def validation(raster1_arr: numpy.ndarray, raster2_arr: numpy.ndarray) -> Tuple[
 
     Args:
         raster1_arr (numpy.ndarray): First numpy.array.
+
         raster2_arr (numpy.ndarray): Second numpy.array.
 
     Returns:
         abs_dif_mean (float): Absolute difference mean (abs_dif_mean).
-        relative_abs_perc_mean (float): Relative absolute percentage mean (relative_abs_perc_mean).
 
+        relative_abs_perc_mean (float): Relative absolute percentage mean (relative_abs_perc_mean).
     """
 
     raster1_arr, raster2_arr = validation_funcs.remove_negative_vals(raster1_arr, raster2_arr)
@@ -59,14 +66,20 @@ def validation(raster1_arr: numpy.ndarray, raster2_arr: numpy.ndarray) -> Tuple[
 
 
 def add_comparison(obj: Dict, name: str, band: str, **kwargs: Dict) -> None:
-    """Store values into a dict organized by name and bands, or create a new one if it doesn't exist, and store values in it.
+    """Store values into a dict organized by name and bands, or create a new one if it doesn't
+    exist, and store values in it.
 
     Args:
         obj (Dict): Dictionary object that will store the values.
-        name (str): key name.
-        band (str): key band.
-        **kwargs (Dict): values.
 
+        name (str): key name.
+
+        band (str): key band.
+
+        **kwargs (Dict): values that will be stored.
+
+    Returns:
+        None: The values will be stored in-place on the `obj` dictionary.
     """
     if not obj.get(name):
         obj[name] = {}
@@ -78,9 +91,13 @@ def validation_sr_l8(input_dir: str, cloud_dir: str, output_dir: str, pairs: Tup
 
     Args:
         input_dir (str): Directory containing Landsat-8 Surface Reflectance folders.
+
         cloud_dir (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands (List[str]): name of the bands that will be evaluated.
 
     """
@@ -131,9 +148,13 @@ def validation_nbar_l8(input_dir: str, cloud_dir: str, output_dir: str, pairs: T
 
     Args:
         input_dir (str): Directory containing Landsat-8 NBAR folders.
+
         cloud_dir (str): Directory containing Landsat-8 folders that contains cloud masks.
+
         output_dir (str): Directory in which the validation values will be written.
+
         pairs (Tuple[str,str]): Tuple containing a pair of sceneids that will be evaluated.
+
         bands (List[str]): name of the bands that will be evaluated.
 
     """

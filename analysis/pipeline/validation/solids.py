@@ -11,7 +11,7 @@ from dagster import solid, InputDefinition
 
 from cfactor import toolbox
 from cfactor.validation import validation_funcs
-from . import pipeline_utils
+from cfactor.validation import validation_routines
 
 
 @solid(
@@ -56,18 +56,19 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_s2_sen2cor")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_cloud_dir, output_dir, pairs, **context.solid_config)
+    validation_routines.validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_cloud_dir, output_dir, pairs,
+                                                 **context.solid_config)
 
 
 @solid(
@@ -103,18 +104,18 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_s2_lasrc")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_sr_s2_lasrc(lasrc_dir, sen2cor_cloud_dir, output_dir, pairs, **context.solid_config)
+    validation_routines.validation_sr_s2_lasrc(lasrc_dir, sen2cor_cloud_dir, output_dir, pairs, **context.solid_config)
 
 
 @solid(
@@ -141,20 +142,20 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare input/output directory.
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_landsat8"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_l8")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_sr_l8(landsat8_dir, landsat8_dir, output_dir, pairs, context.solid_config["bands"])
+    validation_routines.validation_sr_l8(landsat8_dir, landsat8_dir, output_dir, pairs, context.solid_config["bands"])
 
 
 @solid(
@@ -184,20 +185,20 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare input/output directory.
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_landsat8"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_l8")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_nbar_l8(lc8_nbar_dir, landsat8_dir, output_dir, pairs, context.solid_config["bands"])
+    validation_routines.validation_nbar_l8(lc8_nbar_dir, landsat8_dir, output_dir, pairs, context.solid_config["bands"])
 
 
 @solid(
@@ -244,19 +245,19 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_s2_sen2cor")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
-                                              **context.solid_config)
+    validation_routines.validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
+                                                   **context.solid_config)
 
 
 @solid(
@@ -293,19 +294,19 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     #
     # Search for pairs.
     #
-    pairs = validation_funcs.search_pairs_s2(pipeline_utils.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_s2_lasrc")
 
     #
     # Validate the results.
     #
-    pipeline_utils.validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
-                                            context.solid_config["bands"])
+    validation_routines.validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
+                                                 context.solid_config["bands"])
 
 
 @solid(
@@ -356,8 +357,8 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_l8),
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_s2)
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
     )
 
     #
@@ -365,14 +366,15 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_sr_l8_s2_sen2cor")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_sr_l8_s2_sen2cor(landsat8_dir, landsat8_dir, sen2cor_dir, sen2cor_cloud_dir, output_dir,
-                                               pairs, **context.solid_config)
+    validation_routines.validation_sr_l8_s2_sen2cor(landsat8_dir, landsat8_dir, sen2cor_dir, sen2cor_cloud_dir,
+                                                    output_dir,
+                                                    pairs, **context.solid_config)
 
 
 @solid(
@@ -423,8 +425,8 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     # Search for pairs.
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_l8),
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_s2)
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
     )
 
     #
@@ -432,14 +434,14 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_sr_l8_s2_lasrc")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_sr_l8_s2_lasrc(landsat8_dir, landsat8_dir, lasrc_dir, sen2cor_cloud_dir, output_dir,
-                                             pairs, **context.solid_config)
+    validation_routines.validation_sr_l8_s2_lasrc(landsat8_dir, landsat8_dir, lasrc_dir, sen2cor_cloud_dir, output_dir,
+                                                  pairs, **context.solid_config)
 
 
 @solid(
@@ -496,8 +498,8 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_l8),
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_s2)
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
     )
 
     #
@@ -505,14 +507,15 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_nbar_l8_s2_sen2cor")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, landsat8_dir, s2_sen2cor_nbar_dir, sen2cor_cloud_dir,
-                                                 output_dir, pairs, **context.solid_config)
+    validation_routines.validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, landsat8_dir, s2_sen2cor_nbar_dir,
+                                                      sen2cor_cloud_dir,
+                                                      output_dir, pairs, **context.solid_config)
 
 
 @solid(
@@ -568,8 +571,8 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_l8),
-        pipeline_utils.create_a_temporary_file_with_lines(scene_ids_s2)
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
     )
 
     #
@@ -577,11 +580,11 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     #
     landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_nbar_l8_s2_lasrc")
 
     #
     # Validate the results
     #
-    pipeline_utils.validation_nbar_l8_s2_lasrc(lc8_nbar_dir, landsat8_dir, s2_lasrc_nbar_dir, sen2cor_cloud_dir,
-                                               output_dir, pairs, **context.solid_config)
+    validation_routines.validation_nbar_l8_s2_lasrc(lc8_nbar_dir, landsat8_dir, s2_lasrc_nbar_dir, sen2cor_cloud_dir,
+                                                    output_dir, pairs, **context.solid_config)
