@@ -9,7 +9,8 @@
 import os
 from typing import List
 
-from plumbum.cmd import docker
+from .config import EnvironmentConfig
+from .environment import ContainerManager
 
 
 def lc8_generate_angles(input_dir: str, scene_ids: List[str]) -> List[str]:
@@ -34,13 +35,17 @@ def lc8_generate_angles(input_dir: str, scene_ids: List[str]) -> List[str]:
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "marujore/l8angs@sha256:940d6bcbd765acdb20a69ec140029d7e14bfaa8e668344fb674447b439cc36db", scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.LANDSAT8_ANGLES_IMAGE,
+            auto_remove=True,
+            volumes={
+                input_dir: {
+                    "bind": "/mnt/input-dir",
+                    "mode": "rw"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(scene_id)
     return processed_scenes
@@ -64,15 +69,21 @@ def lc8_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{os.path.join(input_dir, scene_id)}:/mnt/input-dir:ro",
-                "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
-                scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.NBAR_IMAGE,
+            auto_remove=True,
+            volumes={
+                os.path.join(input_dir, scene_id): {
+                    "bind": "/mnt/input-dir",
+                    "mode": "ro"
+                },
+                output_dir: {
+                    "bind": "/mnt/output-dir",
+                    "mode": "rw"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes
@@ -96,15 +107,21 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Li
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
-                scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.NBAR_IMAGE,
+            auto_remove=True,
+            volumes={
+                input_dir: {
+                    "bind": "/mnt/input-dir",
+                    "mode": "rw"
+                },
+                output_dir: {
+                    "bind": "/mnt/output-dir",
+                    "mode": "rw"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes
@@ -128,15 +145,21 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "marujore/nbar@sha256:154d96558ee7131664eba78ad07f730765127393e6ea459a4c3bcb8b51a5c662",
-                scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.NBAR_IMAGE,
+            auto_remove=True,
+            volumes={
+                input_dir: {
+                    "bind": "/mnt/input-dir",
+                    "mode": "rw"
+                },
+                output_dir: {
+                    "bind": "/mnt/output-dir",
+                    "mode": "rw"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes

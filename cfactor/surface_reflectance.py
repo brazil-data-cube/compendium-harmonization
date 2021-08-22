@@ -9,7 +9,8 @@
 import os
 from typing import List
 
-from plumbum.cmd import docker
+from .config import EnvironmentConfig
+from .environment import ContainerManager
 
 
 def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
@@ -30,15 +31,21 @@ def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "marujore/sen2cor@sha256:17c5932046d996fa72ec300aa531fd32b82325baf55ca3c7f389fb03b9f4b68c",
-                scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.SEN2COR_IMAGE,
+            auto_remove=True,
+            volumes={
+                input_dir: {
+                    "bind": "/mnt/input-dir",
+                    "mode": "rw"
+                },
+                output_dir: {
+                    "bind": "/mnt/output-dir",
+                    "mode": "rw"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes
@@ -74,16 +81,25 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
     """
     processed_scenes = []
     for scene_id in scene_ids:
-        (
-            docker[
-                "run", "--rm",
-                "-v", f"{input_dir}:/mnt/input-dir:rw",
-                "-v", f"{output_dir}:/mnt/output-dir:rw",
-                "-v", f"{aux_data_dir}:/mnt/atmcor_aux/lasrc/L8/LADS:ro",
-                "-t", "marujore/lasrc@sha256:718554a7bb7ec15a4fa5404242bf27d38e8c1b774558efcfe91ef32befebfb77",
-                scene_id
-            ]
-        )()
+        ContainerManager.run_container(
+            image=EnvironmentConfig.LASRC_IMAGE,
+            auto_remove=True,
+            volumes={
+                input_dir: {
+                    "bind": "/mnt/input-dir",
+                    "mode": "rw"
+                },
+                output_dir: {
+                    "bind": "/mnt/output-dir",
+                    "mode": "rw"
+                },
+                aux_data_dir: {
+                    "bind": "/mnt/atmcor_aux/lasrc/L8/LADS",
+                    "mode": "ro"
+                }
+            },
+            command=scene_id
+        )
 
         processed_scenes.append(os.path.join(output_dir, scene_id))
     return processed_scenes
