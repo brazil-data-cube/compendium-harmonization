@@ -61,7 +61,7 @@ def cfactor_resource_repository(_init_context) -> Dict:
     base_out_dir = _init_context.resource_config["derived_data_dir"]
 
     s2_outputs = os.path.join(base_out_dir, "s2")
-    lc8_outputs = os.path.join(base_out_dir, "lc8")
+    lc8_outputs = os.path.join(base_out_dir, "l8")
     validation_outputs = os.path.join(base_out_dir, "validation")
 
     return {
