@@ -27,7 +27,7 @@ example_base_notebook:
 	echo "UID=`id -u ${USER}`" > .env
 	echo "GID=`cut -d: -f3 < <(getent group docker)`" >> .env
 	
-	# docker-compose -f docker-compose.notebook.yaml up --build
+	docker-compose -f docker-compose.notebook.yaml up --build
 
 example_base_pipeline:
 	docker-compose -f docker-compose.pipeline.yaml up --build
