@@ -43,6 +43,7 @@ RUN pip install --upgrade \
         rasterio==1.2.6 \
         matplotlib==3.4.2 \
         shapely==1.7.1 \
+        docker==5.0.0 \
     && cd /opt/article/ \
     && python3 setup.py install \
     && apt update -y \
