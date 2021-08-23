@@ -46,6 +46,11 @@ from cfactor.validation import validation_routines
             default_value=[
                 "B8A", "B11", "B12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -56,7 +61,9 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -94,6 +101,11 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
             default_value=[
                 "sr_band2", "sr_band3", "sr_band4", "sr_band8", "sr_band8a", "sr_band11", "sr_band12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -104,7 +116,9 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -132,6 +146,11 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2)",
             default_value=["B2", "B3", "B4", "B5", "B6", "B7"]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=10,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -142,7 +161,9 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -175,6 +196,11 @@ def validation_sr_l8(context, scene_ids: List) -> None:
             description="Name of the spectral bands that will be used in the validation. These names should be "
                         "equivalent to the standard USGS Landsat-8 file band naming pattern (e.g. B1, B2)",
             default_value=["B2", "B3", "B4", "B5", "B6", "B7"]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=10,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -185,7 +211,9 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -234,6 +262,11 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
             default_value=[
                 "B8A", "B11", "B12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -245,7 +278,9 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -284,6 +319,11 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
             default_value=[
                 "sr_band2", "sr_band3", "sr_band4", "sr_band8", "sr_band8a", "sr_band11", "sr_band12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -294,7 +334,9 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     #
     # Search for pairs.
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids))
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+                                             day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -345,6 +387,11 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
             default_value=[
                 "B02", "B03", "B04", "B08", "B8A", "B11", "B12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -358,8 +405,9 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     #
     pairs = validation_funcs.search_pairs_l8_s2(
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
-    )
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -413,6 +461,11 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
             default_value=[
                 "sr_band2", "sr_band3", "sr_band4", "sr_band8", "sr_band8a", "sr_band11", "sr_band12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -426,8 +479,9 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     #
     pairs = validation_funcs.search_pairs_l8_s2(
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
-    )
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -484,6 +538,11 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
             default_value=[
                 "B02", "B03", "B04", "B08", "B8A", "B11", "B12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -499,8 +558,9 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     #
     pairs = validation_funcs.search_pairs_l8_s2(
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
-    )
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -558,6 +618,11 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
             default_value=[
                 "sr_band2", "sr_band3", "sr_band4", "sr_band8", "sr_band8a", "sr_band11", "sr_band12"
             ]
+        ),
+        "day_difference": Field(
+            config=int,
+            description="Difference of sensing date, in days, to consider two sceneids a pair.",
+            default_value=5,
         )
     },
     required_resource_keys={"cfactor_repository"},
@@ -572,8 +637,9 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     #
     pairs = validation_funcs.search_pairs_l8_s2(
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2)
-    )
+        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        day_diff=context.solid_config["day_difference"])
+    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
