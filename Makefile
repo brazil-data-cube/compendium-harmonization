@@ -3,17 +3,20 @@ SHELL := /bin/bash
 # 
 # Documentation
 # 
-documentation:
+documentation_build:
 	cd docs \
 		&& ./_build.sh
+
+documentation_rstudio:
+	docker-compose -f docker-compose.documentation.yaml up
 
 # 
 # Minimal example
 # 
 example_download_data:
-	if [ ! -d analysis/data/Landsat8Data ] & \
-	[ ! -d analysis/data/Sentinel2Data ] & \
-	[ ! -d analysis/data/LADS_AuxiliaryData ]; then \
+	if [ ! -d analysis/data/raw_data/Landsat8Data ] & \
+	[ ! -d analysis/data/raw_data/Sentinel2Data ] & \
+	[ ! -d analysis/data/raw_data/LADS_AuxiliaryData ]; then \
 		echo "Downloading the minimum example files."; sleep 5; \
 		docker-compose -f docker-compose.example.yaml up --build; \
 	else \
