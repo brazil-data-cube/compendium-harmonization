@@ -18,9 +18,11 @@ ipython_config.py
 ### Python ###
 
 # c-factor example data
+analysis/data/raw_data/*.zip
 analysis/data/raw_data/Landsat8Data
 analysis/data/raw_data/LADS_AuxiliaryData
 analysis/data/raw_data/ReferenceFiles_L8-S2
+analysis/data/raw_data/Sentinel2Data
 
 # PyCharm IDE
 .idea
