@@ -24,7 +24,7 @@ def _connect_to_docker_daemon() -> docker.DockerClient:
         For more information about DockerClient and the information used to connect to the Docker Daemon, please
         refer to the Docker SDK for Python documentation: https://docker-py.readthedocs.io/en/stable/client.html
     """
-    return docker.from_env()
+    return docker.from_env(timeout=None)
 
 
 class ContainerManager:
