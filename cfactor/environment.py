@@ -61,6 +61,8 @@ class ContainerManager:
             Docker SDK for Python documentation: https://docker-py.readthedocs.io/en/stable/containers.html
         """
         client = _connect_to_docker_daemon()
+
+        client.images.pull(kwargs["image"])
         container = client.containers.create(**kwargs)
 
         try:
