@@ -63,7 +63,6 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     #
     pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -75,7 +74,10 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     # Validate the results
     #
     validation_routines.validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_cloud_dir, output_dir, pairs,
-                                                 **context.solid_config)
+                                                 **{
+                                                     "bands10m": context.solid_config["bands10m"],
+                                                     "bands20m": context.solid_config["bands20m"]
+                                                 })
 
 
 @solid(
@@ -118,7 +120,6 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -129,7 +130,8 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     # Validate the results
     #
-    validation_routines.validation_sr_s2_lasrc(lasrc_dir, sen2cor_cloud_dir, output_dir, pairs, **context.solid_config)
+    validation_routines.validation_sr_s2_lasrc(lasrc_dir, sen2cor_cloud_dir, output_dir, pairs,
+                                               context.solid_config["bands"])
 
 
 @solid(
@@ -163,7 +165,6 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     #
     pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -213,7 +214,6 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     #
     pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -280,7 +280,6 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     #
     pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -292,7 +291,10 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     # Validate the results
     #
     validation_routines.validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
-                                                   **context.solid_config)
+                                                   **{
+                                                       "bands10m": context.solid_config["bands10m"],
+                                                       "bands20m": context.solid_config["bands20m"]
+                                                   })
 
 
 @solid(
@@ -336,7 +338,6 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     #
     pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
                                              day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare output directory.
@@ -407,7 +408,6 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
         validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
         day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -422,7 +422,11 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     #
     validation_routines.validation_sr_l8_s2_sen2cor(landsat8_dir, landsat8_dir, sen2cor_dir, sen2cor_cloud_dir,
                                                     output_dir,
-                                                    pairs, **context.solid_config)
+                                                    pairs, **
+                                                    {
+                                                        "bands_l8": context.solid_config["bands_l8"],
+                                                        "bands_s2": context.solid_config["bands_s2"]
+                                                    })
 
 
 @solid(
@@ -481,7 +485,6 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
         validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
         day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -495,7 +498,11 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     # Validate the results
     #
     validation_routines.validation_sr_l8_s2_lasrc(landsat8_dir, landsat8_dir, lasrc_dir, sen2cor_cloud_dir, output_dir,
-                                                  pairs, **context.solid_config)
+                                                  pairs, **
+                                                  {
+                                                      "bands_l8": context.solid_config["bands_l8"],
+                                                      "bands_s2": context.solid_config["bands_s2"]
+                                                  })
 
 
 @solid(
@@ -560,7 +567,6 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
         validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
         day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -575,7 +581,11 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     #
     validation_routines.validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, landsat8_dir, s2_sen2cor_nbar_dir,
                                                       sen2cor_cloud_dir,
-                                                      output_dir, pairs, **context.solid_config)
+                                                      output_dir, pairs, **
+                                                      {
+                                                          "bands_l8": context.solid_config["bands_l8"],
+                                                          "bands_s2": context.solid_config["bands_s2"]
+                                                      })
 
 
 @solid(
@@ -639,7 +649,6 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
         validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
         validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
         day_diff=context.solid_config["day_difference"])
-    del context.solid_config["day_difference"]
 
     #
     # Prepare input/output directory.
@@ -653,4 +662,8 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     # Validate the results
     #
     validation_routines.validation_nbar_l8_s2_lasrc(lc8_nbar_dir, landsat8_dir, s2_lasrc_nbar_dir, sen2cor_cloud_dir,
-                                                    output_dir, pairs, **context.solid_config)
+                                                    output_dir, pairs,
+                                                    **{
+                                                        "bands_l8": context.solid_config["bands_l8"],
+                                                        "bands_s2": context.solid_config["bands_s2"]
+                                                    })
