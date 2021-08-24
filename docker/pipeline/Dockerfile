@@ -44,6 +44,7 @@ RUN pip install --upgrade \
         matplotlib==3.4.2 \
         shapely==1.7.1 \
         docker==5.0.0 \
+        graphql-ws==0.3.1 \
     && cd /opt/article/ \
     && python3 setup.py install \
     && apt update -y \
