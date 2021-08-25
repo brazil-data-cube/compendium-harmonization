@@ -1,19 +1,19 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""c-factor analysis processing solids."""
+"""research-processing analysis processing solids."""
 
 import os
 
 from dagster import List, Tuple, String
 from dagster import solid, OutputDefinition, InputDefinition
 
-from cfactor import toolbox
+from research_processing import toolbox
 
 
 @solid(
@@ -34,19 +34,19 @@ from cfactor import toolbox
                                      "were saved (Usually, you have the id of each of the scenes as the name of the "
                                      "directories)."),
     ],
-    required_resource_keys={"cfactor_repository"},
+    required_resource_keys={"repository"},
     description="Apply atmospheric correction using the Sen2Cor algorithm. The solid input indicates which scenes are "
                 "to be processed from the Sentinel-2 data repository."
 )
 def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Sen2Cor (Sentinel-2) Atmosphere correction."""
-    from cfactor.surface_reflectance import sen2cor
+    from research_processing.surface_reflectance import sen2cor
 
     #
     # Prepare input/output directory.
     #
-    input_dir = context.resources.cfactor_repository["sentinel2_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    input_dir = context.resources.repository["sentinel2_input_dir"]
+    output_dir = context.resources.repository["outdir_sentinel2"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "sen2cor_sr")
 
@@ -78,26 +78,26 @@ def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String
                                      "directories)."
                          ),
     ],
-    required_resource_keys={"cfactor_lads_data", "cfactor_repository"},
+    required_resource_keys={"lads_data", "repository"},
     description="Apply atmospheric correction using the LaSRC algorithm. The solid input indicates which scenes are "
                 "to be processed from the Sentinel-2 data repository."
 )
 def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
     """LaSRC (Sentinel-2) Atmosphere correction."""
-    from cfactor.surface_reflectance import lasrc
+    from research_processing.surface_reflectance import lasrc
 
     #
     # Prepare input/output directory.
     #
-    input_dir = context.resources.cfactor_repository["sentinel2_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    input_dir = context.resources.repository["sentinel2_input_dir"]
+    output_dir = context.resources.repository["outdir_sentinel2"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "lasrc_sr")
 
     #
     # Defining the auxiliary data.
     #
-    auxiliary_data = context.resources.cfactor_lads_data["lads_auxiliary_directory"]
+    auxiliary_data = context.resources.lads_data["lads_auxiliary_directory"]
 
     #
     # Applying LaSRC.
@@ -121,18 +121,18 @@ def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]
                          dagster_type=List[String],
                          description="List with full path for each scene that had the angles generated."),
     ],
-    required_resource_keys={"cfactor_repository"},
+    required_resource_keys={"repository"},
     description="Generate the angles of the Landsat-8 scenes used for processing the NBAR products. The generated "
                 "angles are saved in the scene directory."
 )
 def lc8_nbar_angles(context, scene_ids: List[String]) -> List[String]:
     """Landsat-8 Angles for NBAR."""
-    from cfactor.nbar import lc8_generate_angles
+    from research_processing.nbar import lc8_generate_angles
 
     #
     # Prepare input/output directory.
     #
-    input_dir = context.resources.cfactor_repository["landsat8_input_dir"]
+    input_dir = context.resources.repository["landsat8_input_dir"]
 
     #
     # Generate Landsat-8 Angles for NBAR calculation.
@@ -158,18 +158,18 @@ def lc8_nbar_angles(context, scene_ids: List[String]) -> List[String]:
                                      "were saved."
                          ),
     ],
-    required_resource_keys={"cfactor_repository"},
+    required_resource_keys={"repository"},
     description="Generate the NBAR products using Landsat-8 scenes."
 )
 def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Landsat-8 NBAR."""
-    from cfactor.nbar import lc8_nbar
+    from research_processing.nbar import lc8_nbar
 
     #
     # Prepare input/output directory.
     #
-    input_dir = context.resources.cfactor_repository["landsat8_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_landsat8"]
+    input_dir = context.resources.repository["landsat8_input_dir"]
+    output_dir = context.resources.repository["outdir_landsat8"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "lc8_nbar")
 
@@ -206,17 +206,17 @@ def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
                                      "where each of the processed scenes were saved."
                          ),
     ],
-    required_resource_keys={"cfactor_repository"},
+    required_resource_keys={"repository"},
     description="Generate the NBAR products using Sentinel-2 scenes (with sen2cor atmosphere correction)."
 )
 def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Sentinel-2 (with sen2cor atmosphere correction) NBAR."""
-    from cfactor.nbar import s2_sen2cor_nbar
+    from research_processing.nbar import s2_sen2cor_nbar
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.repository["outdir_sentinel2"]
     output_dir = toolbox.prepare_output_directory(output_dir, "s2_sen2cor_nbar")
 
     #
@@ -252,17 +252,17 @@ def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tu
                                      "where each of the processed scenes were saved."
                          ),
     ],
-    required_resource_keys={"cfactor_repository"},
+    required_resource_keys={"repository"},
     description="Generate the NBAR products using Sentinel-2 scenes (with LaSRC atmosphere correction)."
 )
 def s2_lasrc_nbar(context, lasrc_dir: String, scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Sentinel-2 (with LaSRC atmosphere correction) NBAR."""
-    from cfactor.nbar import s2_lasrc_nbar
+    from research_processing.nbar import s2_lasrc_nbar
 
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_sentinel2"]
+    output_dir = context.resources.repository["outdir_sentinel2"]
     output_dir = toolbox.prepare_output_directory(output_dir, "s2_lasrc_nbar")
 
     #

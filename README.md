@@ -1,6 +1,6 @@
-# c-factor-article
+# Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable environment
 
-This repository contains the scripts used to process and compare surface reflectance derived from The article: "X".
+This repository is a Research Compendium of the article: "Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable environment".
 
 Input images: Lansat-8/OLI and Sentinel-2/MSI. Source: http://earthexplorer.usgs.gov/ and https://scihub.copernicus.eu/dhus/#/home.
 

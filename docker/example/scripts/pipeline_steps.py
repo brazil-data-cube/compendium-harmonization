@@ -1,8 +1,8 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
@@ -92,8 +92,8 @@ def download_example_files(output_directory: str, example_files_reference: str) 
     return downloaded_files
 
 
-def extract_cfactor_example_data(downloaded_files: List) -> None:
-    """Extracts data files needed for the minimum execution example of the c-factor article.
+def extract_example_data(downloaded_files: List) -> None:
+    """Extracts data files needed for the minimum execution example of the article.
 
     Args:
         downloaded_files (List[str]): List with paths to the directories that were generated
@@ -186,12 +186,12 @@ def create_dagit_yaml_file(raw_data_dir: str, derived_data_dir: str, output_file
     # Write the configuration
     pipeline_config = {
         "resources": {
-            "cfactor_lads_data": {
+            "lads_data": {
                 "config": {
                     "lands_auxiliary_data_dir": lands_auxiliary_data_dir
                 }
             },
-            "cfactor_repository": {
+            "repository": {
                 "config": {
                     "derived_data_dir": derived_data_dir,
                     "landsat8_input_dir": landsat8_input_dir,

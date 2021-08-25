@@ -6,4 +6,4 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""research-processing analysis preprocessing module."""
+__version__ = "0.1.0"

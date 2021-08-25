@@ -1,17 +1,17 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
 from dagster import Field, List, String
 from dagster import solid, InputDefinition
 
-from cfactor import toolbox
-from cfactor.validation import validation_funcs
-from cfactor.validation import validation_routines
+from research_processing import toolbox
+from research_processing.validation import validation_funcs
+from research_processing.validation import validation_routines
 
 
 @solid(
@@ -26,7 +26,7 @@ from cfactor.validation import validation_routines
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands10m": Field(
@@ -53,11 +53,11 @@ from cfactor.validation import validation_routines
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Sentinel-2 (with Se2Cor atmosphere correction) Surface Reflectance data."  # ToDo: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with Se2Cor atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: String, scene_ids: List[String]) -> None:
-    """Validate Sentinel-2 (with Sen2Cor atmosphere correction) Surface Reflectance data."""
+    """Validate (Compare) Sentinel-2 (with Se2Cor atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`"""
     #
     # Search for pairs
     #
@@ -67,7 +67,7 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    output_dir = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_s2_sen2cor")
 
     #
@@ -92,7 +92,7 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands": Field(
@@ -110,11 +110,11 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance data."  # ToDo: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String, scene_ids: List) -> None:
-    """Validate Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance data."""
+    """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -124,7 +124,7 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    output_dir = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_s2_lasrc")
 
     #
@@ -140,7 +140,7 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands": Field(
@@ -155,11 +155,11 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
             default_value=10,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Landsat-8 Surface Reflectance data."  # ToDo: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_sr_l8(context, scene_ids: List) -> None:
-    """Validate Landsat-8 Surface Reflectance data."""
+    """Validate (Compare) Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -169,8 +169,8 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
+    output_dir = context.resources.repository["outdir_validation"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_sr_l8")
 
@@ -189,7 +189,7 @@ def validation_sr_l8(context, scene_ids: List) -> None:
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands": Field(
@@ -204,11 +204,11 @@ def validation_sr_l8(context, scene_ids: List) -> None:
             default_value=10,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Landsat-8 NBAR data."  # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -> None:
-    """Validate Landsat-8 NBAR data."""
+    """Validate (Compare) Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -218,8 +218,8 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
+    output_dir = context.resources.repository["outdir_validation"]
 
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_l8")
 
@@ -242,7 +242,7 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands10m": Field(
@@ -269,12 +269,12 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Sentinel-2 (with Sen2Cor atmosphere correction) NBAR data."  # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_cloud_dir: String,
                                scene_ids: List[String]) -> None:
-    """Validate Sentinel-2 (with Sen2Cor atmosphere correction) NBAR data."""
+    """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -284,7 +284,7 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    output_dir = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_s2_sen2cor")
 
     #
@@ -310,7 +310,7 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands": Field(
@@ -328,11 +328,11 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Validate Sentinel-2 (with LaSRC atmosphere correction) NBAR data."  # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_dir: String, scene_ids: List) -> None:
-    """Validate Sentinel-2 (with LaSRC atmosphere correction) NBAR data."""
+    """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs.
     #
@@ -342,7 +342,7 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     #
     # Prepare output directory.
     #
-    output_dir = context.resources.cfactor_repository["outdir_validation"]
+    output_dir = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir, "validation_nbar_s2_lasrc")
 
     #
@@ -364,12 +364,12 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource."),
+                                    " defined in the `repository` resource."),
         InputDefinition(name="scene_ids_s2",
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands_l8": Field(
@@ -395,12 +395,12 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Compare Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 SR."  # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: String, scene_ids_l8: List[String],
                                 scene_ids_s2: List[String]) -> None:
-    """Compare Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 SR."""
+    """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -412,9 +412,9 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
+    output_dir_s2 = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_sr_l8_s2_sen2cor")
 
     #
@@ -441,12 +441,12 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource."),
+                                    " defined in the `repository` resource."),
         InputDefinition(name="scene_ids_s2",
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands_l8": Field(
@@ -472,12 +472,12 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Compare Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 SR."  # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String, scene_ids_l8: List[String],
                               scene_ids_s2: List[String]) -> None:
-    """Compare Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 SR."""
+    """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs.
     #
@@ -489,9 +489,9 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
+    output_dir_s2 = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_sr_l8_s2_lasrc")
 
     #
@@ -521,12 +521,12 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource."),
+                                    " defined in the `repository` resource."),
         InputDefinition(name="scene_ids_s2",
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands_l8": Field(
@@ -552,14 +552,13 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Compare NBAR Products of Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8."
-    # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar_dir: str,
                                   sen2cor_cloud_dir: String, scene_ids_l8: List[String],
                                   scene_ids_s2: List[String]) -> None:
-    """Compare NBAR Products of Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8."""
+    """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -571,9 +570,9 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
+    output_dir_s2 = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_nbar_l8_s2_sen2cor")
 
     #
@@ -604,12 +603,12 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8 scenes that should be used "
                                     "for the validation. These names are equivalent to the Landsat-8 scene directories"
-                                    " defined in the `cfactor_repository` resource."),
+                                    " defined in the `repository` resource."),
         InputDefinition(name="scene_ids_s2",
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
-                                    " defined in the `cfactor_repository` resource.")
+                                    " defined in the `repository` resource.")
     ],
     config_schema={
         "bands_l8": Field(
@@ -635,13 +634,12 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
             default_value=5,
         )
     },
-    required_resource_keys={"cfactor_repository"},
-    description="Compare NBAR Products of Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8."
-    # TODO: Update
+    required_resource_keys={"repository"},
+    description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir: String, sen2cor_cloud_dir: String,
                                 scene_ids_l8: List, scene_ids_s2: List) -> None:
-    """Compare NBAR Products of Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8."""
+    """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
@@ -653,9 +651,9 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     #
     # Prepare input/output directory.
     #
-    landsat8_dir = context.resources.cfactor_repository["landsat8_input_dir"]
+    landsat8_dir = context.resources.repository["landsat8_input_dir"]
 
-    output_dir_s2 = context.resources.cfactor_repository["outdir_validation"]
+    output_dir_s2 = context.resources.repository["outdir_validation"]
     output_dir = toolbox.prepare_output_directory(output_dir_s2, "validation_nbar_l8_s2_lasrc")
 
     #

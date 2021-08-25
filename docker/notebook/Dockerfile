@@ -1,8 +1,8 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
@@ -13,9 +13,9 @@ FROM jupyter/minimal-notebook:python-3.8.8@sha256:60f7a194793fc473b168497c6d52ff
 USER root
 
 #
-# Copy the cfactor article package files.
+# Copy the research-processing article package files.
 #
-COPY cfactor /opt/article/cfactor
+COPY research_processing /opt/article/research_processing
 COPY setup.py /opt/article/setup.py
 
 #

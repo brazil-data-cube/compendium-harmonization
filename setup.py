@@ -13,14 +13,14 @@ install_requires = [
 packages = find_packages()
 
 g = {}
-with open(os.path.join('cfactor', 'version.py'), 'rt') as fp:
+with open(os.path.join('research_processing', 'version.py'), 'rt') as fp:
     exec(fp.read(), g)
     version = g['__version__']
 
 setup(
-    name='cfactor',
+    name='research-processing',
     version=version,
-    description='ToDo',
+    description='This library contains the processing and validation methods used in the article: "Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable environment" to generate Surface Reflectance and NBAR data from Landsat-8 and Sentinel-2 images.',
     license='MIT',
     author='Brazil Data Cube Team',
     author_email='brazildatacube@dpi.inpe.br',

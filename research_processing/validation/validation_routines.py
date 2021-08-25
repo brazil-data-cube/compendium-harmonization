@@ -1,8 +1,8 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
@@ -15,7 +15,7 @@ from typing import Dict, List, Tuple
 
 from tempfile import mktemp
 
-from cfactor.validation import navigate, validation_funcs
+from research_processing.validation import navigate, validation_funcs
 
 
 def create_a_temporary_file_with_lines(lines: List[str]) -> str:

@@ -17,7 +17,7 @@ ipython_config.py
 
 ### Python ###
 
-# c-factor example data
+# research-processing example data
 analysis/data/raw_data/*.zip
 analysis/data/raw_data/Landsat8Data
 analysis/data/raw_data/LADS_AuxiliaryData

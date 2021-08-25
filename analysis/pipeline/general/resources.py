@@ -1,12 +1,12 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""c-factor resources."""
+"""research-processing resources."""
 
 import os
 
@@ -32,10 +32,10 @@ from dagster import resource
     )
 },
     description="Data Access Resource. Registers the directories to be used as input/output for the "
-                "cfactor processing stream. This ResourceDefinition returns a dictionary with the input keys and also "
+                "processing stream. This ResourceDefinition returns a dictionary with the input keys and also "
                 "the `outdir_landsat8` and `outdir_sentinel2` keys. The extra keys added, represent the base "
                 "directory where the result of processing each of the sensors will be saved.")
-def cfactor_resource_repository(_init_context) -> Dict:
+def resource_repository(_init_context) -> Dict:
     """Data Access Resource.
 
     Returns:
@@ -82,7 +82,7 @@ def cfactor_resource_repository(_init_context) -> Dict:
                     "data will be used for the application of LaSRC to the Sentinel-2 scenes."
     ),
 })
-def cfactor_resource_lads_auxiliary_data(_init_context) -> Dict:
+def resource_lads_auxiliary_data(_init_context) -> Dict:
     """LADS auxiliary files resource.
 
     Returns:

@@ -1,14 +1,14 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
 from dagster import pipeline, ModeDefinition, fs_io_manager
 
-from general.resources import cfactor_resource_repository, cfactor_resource_lads_auxiliary_data
+from general.resources import resource_repository, resource_lads_auxiliary_data
 from general.solids import *
 from preprocessing.solids import *
 from validation.solids import *
@@ -19,15 +19,15 @@ from validation.solids import *
         ModeDefinition(
             resource_defs={
                 "io_manager": fs_io_manager,
-                "cfactor_repository": cfactor_resource_repository,
-                "cfactor_lads_data": cfactor_resource_lads_auxiliary_data
+                "repository": resource_repository,
+                "lads_data": resource_lads_auxiliary_data
             }
         )
     ],
-    description="c-factor analysis pipeline."
+    description="analysis pipeline."
 )
-def cfactor_pipeline():
-    """c-factor analysis pipeline."""
+def research_pipeline():
+    """analysis pipeline."""
     #
     # Load and validate the input config
     #

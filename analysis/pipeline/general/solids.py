@@ -1,17 +1,17 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""c-factor analysis general use solids."""
+"""research-processing analysis general use solids."""
 
 from dagster import Field, String, Tuple, List
 from dagster import solid, OutputDefinition
 
-from cfactor import toolbox
+from research_processing import toolbox
 
 
 @solid(
@@ -38,7 +38,7 @@ from cfactor import toolbox
                          dagster_type=List[String],
                          description="List with the name of the Sentinel-2 scenes that should be used for processing.")
     ],
-    description="Load and standardize files with the scene ids that are to be used in the c-factor analysis pipeline. "
+    description="Load and standardize files with the scene ids that are to be used in the analysis pipeline. "
                 "The defined scenes will be retrieved from the Landsat-8 and Sentinel-2 data directories. Scenes "
                 "that do not have their scene ids mapped into the input files "
                 "(`landsat8_sceneid_list` and `sentinel2_sceneid_list`) will not be processed."

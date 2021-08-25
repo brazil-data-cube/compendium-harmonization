@@ -1,8 +1,8 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
@@ -13,9 +13,9 @@ FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837d
 #
 # Define directory for output
 #
-ENV CFACTOR_PIPELINE_DIR /opt/cfactor_article/pipeline
-ENV CFACTOR_REPO_DOWNLOAD_OUTPUT /opt/cfactor_article/data
-ENV CFACTOR_EXAMPLE_FILES_REFERENCE_FILE /opt/cfactor_article/exampleFiles.json
+ENV PIPELINE_DIR /opt/article/pipeline
+ENV REPO_DOWNLOAD_OUTPUT /opt/article/data
+ENV EXAMPLE_FILES_REFERENCE_FILE /opt/article/exampleFiles.json
 
 #
 # Install dependencies
@@ -39,15 +39,15 @@ RUN apt update -y \
 #
 # Copy download script and example files reference
 #
-RUN mkdir -p /opt/cfactor_article/data
+RUN mkdir -p /opt/article/data
 
-COPY docker/example/scripts /opt/cfactor_article/scripts
-COPY docker/example/config/exampleFiles.json /opt/cfactor_article/exampleFiles.json
+COPY docker/example/scripts /opt/article/scripts
+COPY docker/example/config/exampleFiles.json /opt/article/exampleFiles.json
 
 #
 # Add script to CMD for run when container starts
 #
-WORKDIR /opt/cfactor_article/scripts
+WORKDIR /opt/article/scripts
 
 CMD ["pipeline.py"]
 ENTRYPOINT ["python3"]

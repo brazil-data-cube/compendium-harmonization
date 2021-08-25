@@ -1,22 +1,22 @@
 #
-# This file is part of c-factor library
+# This file is part of research-processing library
 # Copyright (C) 2021 INPE.
 #
-# c-factor is free software; you can redistribute it and/or modify it
+# research-processing is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
 version: '3.2'
 
 services:
-  cfactor-pipeline:
+  research-processing-pipeline:
     build:
       context: .
       dockerfile: docker/pipeline/Dockerfile
-    image: cfactor-dagster:0.1
-    container_name: cfactor-pipeline
+    image: research-processing-dagster:0.1
+    container_name: research-processing-pipeline
     environment:
-      - CFACTOR_DATA_DIRECTORY=${PWD}/analysis/data
+      - DATA_DIRECTORY=${PWD}/analysis/data
     volumes:
       - type: bind
         source: /var/run/docker.sock
@@ -28,8 +28,8 @@ services:
       - "3000:3000"
     restart: on-failure
     networks:
-      - cfactor_network
+      - research-processing-network
 
 networks:
-  cfactor_network:
+  research-processing-network:
     external: true
