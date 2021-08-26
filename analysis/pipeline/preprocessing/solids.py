@@ -49,7 +49,7 @@ def apply_sen2cor(context, s2_scene_ids: List[String]) -> Tuple[String, List[Str
     input_dir = context.resources.repository["sentinel2_input_dir"]
     output_dir = context.resources.repository["outdir_sentinel2"]
 
-    output_dir = toolbox.prepare_output_directory(output_dir, "sen2cor_sr")
+    output_dir = toolbox.prepare_output_directory(output_dir, "s2_sen2cor_sr")
 
     #
     # Apply sen2cor.
@@ -93,7 +93,7 @@ def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[Strin
     input_dir = context.resources.repository["sentinel2_input_dir"]
     output_dir = context.resources.repository["outdir_sentinel2"]
 
-    output_dir = toolbox.prepare_output_directory(output_dir, "lasrc_sr")
+    output_dir = toolbox.prepare_output_directory(output_dir, "s2_lasrc_sr")
 
     #
     # Defining the auxiliary data.
