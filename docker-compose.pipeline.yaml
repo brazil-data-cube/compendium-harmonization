@@ -9,12 +9,12 @@
 version: '3.2'
 
 services:
-  research-processing-pipeline:
+  research-processing-dagster:
     build:
       context: .
       dockerfile: docker/pipeline/Dockerfile
-    image: research-processing-dagster:0.1
-    container_name: research-processing-pipeline
+    image: research-processing_dagster:0.1
+    container_name: research-processing_dagster
     environment:
       - DATA_DIRECTORY=${PWD}/analysis/data
     volumes:
@@ -28,8 +28,8 @@ services:
       - "3000:3000"
     restart: on-failure
     networks:
-      - research-processing-network
+      - research_processing_network
 
 networks:
-  research-processing-network:
+  research_processing_network:
     external: true

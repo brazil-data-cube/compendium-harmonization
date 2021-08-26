@@ -13,8 +13,8 @@ services:
     build:
       context: .
       dockerfile: docker/example/Dockerfile
-    image: download-utility:0.1
-    container_name: -example-build-environment
+    image: research-processing_download-example:0.1
+    container_name: research-processing_download-example
     environment:
       - RAW_DATA_DIR=${PWD}/analysis/data/raw_data
       - DERIVED_DATA_DIR=${PWD}/analysis/data/derived_data
@@ -26,8 +26,8 @@ services:
         source: ${PWD}/analysis/pipeline/
         target: /opt/article/pipeline
     networks:
-      - research-processing-network
+      - research_processing_network
 
 networks:
-  research-processing-network:
+  research_processing_network:
     external: true
