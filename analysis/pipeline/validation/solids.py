@@ -16,15 +16,15 @@ from research_processing.validation import validation_routines
 
 @solid(
     input_defs=[
-        InputDefinition(name="sen2cor_dir",
+        InputDefinition(name="s2_sen2cor_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
                                     " defined in the `repository` resource.")
     ],
@@ -56,12 +56,12 @@ from research_processing.validation import validation_routines
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with Se2Cor atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: String, scene_ids: List[String]) -> None:
+def validation_sr_s2_sen2cor(context, s2_sen2cor_dir: String, s2_sen2cor_cloud_dir: String, s2_scene_ids: List[String]) -> None:
     """Validate (Compare) Sentinel-2 (with Se2Cor atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`"""
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -73,7 +73,7 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     #
     # Validate the results
     #
-    validation_routines.validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_cloud_dir, output_dir, pairs,
+    validation_routines.validation_sr_s2_sen2cor(s2_sen2cor_dir, s2_sen2cor_cloud_dir, output_dir, pairs,
                                                  **{
                                                      "bands10m": context.solid_config["bands10m"],
                                                      "bands20m": context.solid_config["bands20m"]
@@ -82,16 +82,16 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
 
 @solid(
     input_defs=[
-        InputDefinition(name="lasrc_dir",
+        InputDefinition(name="s2_lasrc_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with lasrc were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the scenes processed with `LaSRC` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved"),
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -113,12 +113,12 @@ def validation_sr_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: St
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String, scene_ids: List) -> None:
+def validation_sr_s2_lasrc(context, s2_lasrc_dir: String, s2_sen2cor_cloud_dir: String, s2_scene_ids: List) -> None:
     """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -130,16 +130,16 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     #
     # Validate the results
     #
-    validation_routines.validation_sr_s2_lasrc(lasrc_dir, sen2cor_cloud_dir, output_dir, pairs,
+    validation_routines.validation_sr_s2_lasrc(s2_lasrc_dir, s2_sen2cor_cloud_dir, output_dir, pairs,
                                                context.solid_config["bands"])
 
 
 @solid(
     input_defs=[
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -158,12 +158,12 @@ def validation_sr_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String
     required_resource_keys={"repository"},
     description="Validate (Compare) Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_sr_l8(context, scene_ids: List) -> None:
+def validation_sr_l8(context, lc8_scene_ids: List) -> None:
     """Validate (Compare) Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -184,11 +184,11 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     input_defs=[
         InputDefinition(name="lc8_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the Landsat-8 NBAR products were saved."),
-        InputDefinition(name="scene_ids",
+                        description="Full path to the directory where the Landsat-8/OLI NBAR products were saved."),
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -207,12 +207,12 @@ def validation_sr_l8(context, scene_ids: List) -> None:
     required_resource_keys={"repository"},
     description="Validate (Compare) Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -> None:
+def validation_nbar_l8(context, lc8_nbar_dir: String, lc8_scene_ids: List[String]) -> None:
     """Validate (Compare) Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_l8(validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -233,15 +233,14 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     input_defs=[
         InputDefinition(name="s2_sen2cor_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the NBAR products, generated with Sen2Cor, "
-                                    "were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI NBAR products, generated with `sen2cor` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved."),
-        InputDefinition(name="scene_ids",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -272,13 +271,13 @@ def validation_nbar_l8(context, lc8_nbar_dir: String, scene_ids: List[String]) -
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_cloud_dir: String,
-                               scene_ids: List[String]) -> None:
+def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, s2_sen2cor_cloud_dir: String,
+                               s2_scene_ids: List[String]) -> None:
     """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -290,7 +289,7 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     #
     # Validate the results
     #
-    validation_routines.validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
+    validation_routines.validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, s2_sen2cor_cloud_dir, output_dir, pairs,
                                                    **{
                                                        "bands10m": context.solid_config["bands10m"],
                                                        "bands20m": context.solid_config["bands20m"]
@@ -301,15 +300,14 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     input_defs=[
         InputDefinition(name="s2_lasrc_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the NBAR products, generated with LaSRC,"
-                                    " were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI NBAR products, generated with `LaSRC` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved."),
-        InputDefinition(name="scene_ids",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -331,12 +329,12 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, sen2cor_clo
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_dir: String, scene_ids: List) -> None:
+def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, s2_sen2cor_cloud_dir: String, s2_scene_ids: List) -> None:
     """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs.
     #
-    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(scene_ids),
+    pairs = validation_funcs.search_pairs_s2(validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
                                              day_diff=context.solid_config["day_difference"])
 
     #
@@ -348,24 +346,24 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     #
     # Validate the results.
     #
-    validation_routines.validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_cloud_dir, output_dir, pairs,
+    validation_routines.validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, s2_sen2cor_cloud_dir, output_dir, pairs,
                                                  context.solid_config["bands"])
 
 
 @solid(
     input_defs=[
-        InputDefinition(name="sen2cor_dir",
+        InputDefinition(name="s2_sen2cor_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids_l8",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource."),
-        InputDefinition(name="scene_ids_s2",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
                         description="List with the name of the Sentinel-2 scenes that should be used "
                                     "for the validation. These names are equivalent to the Sentinel-2 scene directories"
@@ -398,15 +396,15 @@ def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, sen2cor_cloud_d
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir: String, scene_ids_l8: List[String],
-                                scene_ids_s2: List[String]) -> None:
+def validation_sr_l8_s2_sen2cor(context, s2_sen2cor_dir: String, s2_sen2cor_cloud_dir: String, lc8_scene_ids: List[String],
+                                s2_scene_ids: List[String]) -> None:
     """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
+        validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
         day_diff=context.solid_config["day_difference"])
 
     #
@@ -420,7 +418,7 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     #
     # Validate the results
     #
-    validation_routines.validation_sr_l8_s2_sen2cor(landsat8_dir, landsat8_dir, sen2cor_dir, sen2cor_cloud_dir,
+    validation_routines.validation_sr_l8_s2_sen2cor(landsat8_dir, landsat8_dir, s2_sen2cor_dir, s2_sen2cor_cloud_dir,
                                                     output_dir,
                                                     pairs, **
                                                     {
@@ -431,21 +429,21 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
 
 @solid(
     input_defs=[
-        InputDefinition(name="lasrc_dir",
+        InputDefinition(name="s2_lasrc_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with lasrc were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with LaSRC were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids_l8",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with sen2cor were saved."),
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource."),
-        InputDefinition(name="scene_ids_s2",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -475,15 +473,15 @@ def validation_sr_l8_s2_sen2cor(context, sen2cor_dir: String, sen2cor_cloud_dir:
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: String, scene_ids_l8: List[String],
-                              scene_ids_s2: List[String]) -> None:
+def validation_sr_l8_s2_lasrc(context, s2_lasrc_dir: String, s2_sen2cor_cloud_dir: String, lc8_scene_ids: List[String],
+                              s2_scene_ids: List[String]) -> None:
     """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 Surface Reflectance images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs.
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
+        validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
         day_diff=context.solid_config["day_difference"])
 
     #
@@ -497,7 +495,7 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     #
     # Validate the results
     #
-    validation_routines.validation_sr_l8_s2_lasrc(landsat8_dir, landsat8_dir, lasrc_dir, sen2cor_cloud_dir, output_dir,
+    validation_routines.validation_sr_l8_s2_lasrc(landsat8_dir, landsat8_dir, s2_lasrc_dir, s2_sen2cor_cloud_dir, output_dir,
                                                   pairs, **
                                                   {
                                                       "bands_l8": context.solid_config["bands_l8"],
@@ -509,23 +507,22 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     input_defs=[
         InputDefinition(name="lc8_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the Landsat-8 NBAR products were saved."),
+                        description="Full path to the directory where the Landsat-8/OLI NBAR products were saved."),
         InputDefinition(name="s2_sen2cor_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the NBAR products, generated with Sen2Cor, "
-                                    "were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI NBAR products, generated with sen2cor were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids_l8",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with sen2cor were saved"),
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource."),
-        InputDefinition(name="scene_ids_s2",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -556,15 +553,15 @@ def validation_sr_l8_s2_lasrc(context, lasrc_dir: String, sen2cor_cloud_dir: Str
     description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar_dir: str,
-                                  sen2cor_cloud_dir: String, scene_ids_l8: List[String],
-                                  scene_ids_s2: List[String]) -> None:
+                                  s2_sen2cor_cloud_dir: String, lc8_scene_ids: List[String],
+                                  s2_scene_ids: List[String]) -> None:
     """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
+        validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
         day_diff=context.solid_config["day_difference"])
 
     #
@@ -579,7 +576,7 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     # Validate the results
     #
     validation_routines.validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, landsat8_dir, s2_sen2cor_nbar_dir,
-                                                      sen2cor_cloud_dir,
+                                                      s2_sen2cor_cloud_dir,
                                                       output_dir, pairs, **
                                                       {
                                                           "bands_l8": context.solid_config["bands_l8"],
@@ -591,23 +588,22 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     input_defs=[
         InputDefinition(name="lc8_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the Landsat-8 NBAR products were saved."),
+                        description="Full path to the directory where the Landsat-8/OLI NBAR products were saved."),
         InputDefinition(name="s2_lasrc_nbar_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the NBAR products, generated with LaSRC, "
-                                    "were saved."),
-        InputDefinition(name="sen2cor_cloud_dir",
+                        description="Full path to the directory where the Sentinel-2/MSI NBAR products, generated with `LaSRC` were saved."),
+        InputDefinition(name="s2_sen2cor_cloud_dir",
                         dagster_type=String,
-                        description="Full path to the directory where the scenes processed with sen2cor were saved"),
-        InputDefinition(name="scene_ids_l8",
+                        description="Full path to the directory where the Sentinel-2/MSI scenes processed with `sen2cor` were saved."),
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Landsat-8 scene directories"
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Landsat-8/OLI scene directories"
                                     " defined in the `repository` resource."),
-        InputDefinition(name="scene_ids_s2",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for the validation. These names are equivalent to the Sentinel-2 scene directories"
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for the validation. These names are equivalent to the Sentinel-2/MSI scene directories"
                                     " defined in the `repository` resource.")
     ],
     config_schema={
@@ -637,15 +633,15 @@ def validation_nbar_l8_s2_sen2cor(context, lc8_nbar_dir: String, s2_sen2cor_nbar
     required_resource_keys={"repository"},
     description="Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
-def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir: String, sen2cor_cloud_dir: String,
-                                scene_ids_l8: List, scene_ids_s2: List) -> None:
+def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir: String, s2_sen2cor_cloud_dir: String,
+                                lc8_scene_ids: List, s2_scene_ids: List) -> None:
     """Validate (Compare) Sentinel-2 (with Sen2Cor atmosphere correction) and Landsat-8 NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs
     #
     pairs = validation_funcs.search_pairs_l8_s2(
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_l8),
-        validation_routines.create_a_temporary_file_with_lines(scene_ids_s2),
+        validation_routines.create_a_temporary_file_with_lines(lc8_scene_ids),
+        validation_routines.create_a_temporary_file_with_lines(s2_scene_ids),
         day_diff=context.solid_config["day_difference"])
 
     #
@@ -659,7 +655,7 @@ def validation_nbar_l8_s2_lasrc(context, lc8_nbar_dir: String, s2_lasrc_nbar_dir
     #
     # Validate the results
     #
-    validation_routines.validation_nbar_l8_s2_lasrc(lc8_nbar_dir, landsat8_dir, s2_lasrc_nbar_dir, sen2cor_cloud_dir,
+    validation_routines.validation_nbar_l8_s2_lasrc(lc8_nbar_dir, landsat8_dir, s2_lasrc_nbar_dir, s2_sen2cor_cloud_dir,
                                                     output_dir, pairs,
                                                     **{
                                                         "bands_l8": context.solid_config["bands_l8"],

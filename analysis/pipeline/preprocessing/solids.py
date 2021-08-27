@@ -18,16 +18,17 @@ from research_processing import toolbox
 
 @solid(
     input_defs=[
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for sen2cor processing.")
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for `sen2cor` processing.")
     ],
     output_defs=[
-        OutputDefinition(name="sen2cor_scene_path",
+        OutputDefinition(name="s2_sen2cor_scene_path",
                          dagster_type=String,
-                         description="Full path to the directory where the scenes processed with sen2cor were saved."),
-        OutputDefinition(name="sen2cor_sceneid",
+                         description="Full path to the directory where the Sentinel-2/MSI scenes processed with "
+                                    "`sen2cor` were saved."),
+        OutputDefinition(name="s2_sen2cor_scene_ids",
                          dagster_type=List[String],
                          description="List with the name of each of the scenes that were processed. These names are"
                                      " equivalent to the name of the directories where each of the processed scenes "
@@ -35,11 +36,11 @@ from research_processing import toolbox
                                      "directories)."),
     ],
     required_resource_keys={"repository"},
-    description="Apply atmospheric correction using the Sen2Cor algorithm. The solid input indicates which scenes are "
-                "to be processed from the Sentinel-2 data repository."
+    description="Apply atmospheric correction using the `sen2cor` algorithm. The solid input indicates which scenes are "
+                "to be processed from the Sentinel-2/MSI data repository."
 )
-def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
-    """Sen2Cor (Sentinel-2) Atmosphere correction."""
+def apply_sen2cor(context, s2_scene_ids: List[String]) -> Tuple[String, List[String]]:
+    """Sen2Cor (Sentinel-2/MSI) Atmosphere correction."""
     from research_processing.surface_reflectance import sen2cor
 
     #
@@ -48,12 +49,12 @@ def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String
     input_dir = context.resources.repository["sentinel2_input_dir"]
     output_dir = context.resources.repository["outdir_sentinel2"]
 
-    output_dir = toolbox.prepare_output_directory(output_dir, "sen2cor_sr")
+    output_dir = toolbox.prepare_output_directory(output_dir, "s2_sen2cor_sr")
 
     #
     # Apply sen2cor.
     #
-    sen2cor(input_dir, output_dir, scene_ids)
+    sen2cor(input_dir, output_dir, s2_scene_ids)
     sen2cor_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, sen2cor_scene_ids
@@ -61,16 +62,16 @@ def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String
 
 @solid(
     input_defs=[
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
-                                    "for LaSRC processing.")
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
+                                    "for `LaSRC` processing.")
     ],
     output_defs=[
-        OutputDefinition(name="lasrc_scene_path",
+        OutputDefinition(name="s2_lasrc_scene_path",
                          dagster_type=String,
-                         description="Full path to the directory where the scenes processed with LaSRC were saved."),
-        OutputDefinition(name="lasrc_sceneid",
+                         description="Full path to the directory where the Sentinel-2/MSI scenes processed with `LaSRC` were saved."),
+        OutputDefinition(name="s2_lasrc_scene_ids",
                          dagster_type=List[String],
                          description="List with the name of each of the scenes that were processed. These names are"
                                      " equivalent to the name of the directories where each of the processed scenes "
@@ -79,11 +80,11 @@ def apply_sen2cor(context, scene_ids: List[String]) -> Tuple[String, List[String
                          ),
     ],
     required_resource_keys={"lads_data", "repository"},
-    description="Apply atmospheric correction using the LaSRC algorithm. The solid input indicates which scenes are "
-                "to be processed from the Sentinel-2 data repository."
+    description="Apply atmospheric correction using the `LaSRC` algorithm. The solid input indicates which scenes are "
+                "to be processed from the Sentinel-2/MSI data repository."
 )
-def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
-    """LaSRC (Sentinel-2) Atmosphere correction."""
+def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[String]]:
+    """LaSRC (Sentinel-2/MSI) Atmosphere correction."""
     from research_processing.surface_reflectance import lasrc
 
     #
@@ -92,7 +93,7 @@ def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]
     input_dir = context.resources.repository["sentinel2_input_dir"]
     output_dir = context.resources.repository["outdir_sentinel2"]
 
-    output_dir = toolbox.prepare_output_directory(output_dir, "lasrc_sr")
+    output_dir = toolbox.prepare_output_directory(output_dir, "s2_lasrc_sr")
 
     #
     # Defining the auxiliary data.
@@ -102,7 +103,7 @@ def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]
     #
     # Applying LaSRC.
     #
-    lasrc(input_dir, output_dir, scene_ids, auxiliary_data)
+    lasrc(input_dir, output_dir, s2_scene_ids, auxiliary_data)
     lasrc_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, lasrc_scene_ids
@@ -110,11 +111,11 @@ def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]
 
 @solid(
     input_defs=[
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
+                        description="List with the name of the Landsat-8/OLI Level 2 scenes that should be used "
                                     "for NBAR Angles processing (Required step for NBAR processing "
-                                    "on Landsat-8 images).")
+                                    "on Landsat-8/OLI images).")
     ],
     output_defs=[
         OutputDefinition(name="lc8_nbar_angles",
@@ -122,11 +123,11 @@ def apply_lasrc(context, scene_ids: List[String]) -> Tuple[String, List[String]]
                          description="List with full path for each scene that had the angles generated."),
     ],
     required_resource_keys={"repository"},
-    description="Generate the angles of the Landsat-8 scenes used for processing the NBAR products. The generated "
+    description="Generate the angles of the Landsat-8/OLI scenes used for processing the NBAR products. The generated "
                 "angles are saved in the scene directory."
 )
-def lc8_nbar_angles(context, scene_ids: List[String]) -> List[String]:
-    """Landsat-8 Angles for NBAR."""
+def lc8_nbar_angles(context, lc8_scene_ids: List[String]) -> List[String]:
+    """Landsat-8/OLI Angles for NBAR."""
     from research_processing.nbar import lc8_generate_angles
 
     #
@@ -137,20 +138,20 @@ def lc8_nbar_angles(context, scene_ids: List[String]) -> List[String]:
     #
     # Generate Landsat-8 Angles for NBAR calculation.
     #
-    return lc8_generate_angles(input_dir, scene_ids)
+    return lc8_generate_angles(input_dir, lc8_scene_ids)
 
 
 @solid(
     input_defs=[
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Landsat-8 scenes that should be used "
+                        description="List with the name of the Landsat-8/OLI scenes that should be used "
                                     "for NBAR processing.")
     ],
     output_defs=[
         OutputDefinition(name="lc8_nbar_scene_path",
                          dagster_type=String,
-                         description="Full path to the directory where the NBAR products were saved."),
+                         description="Full path to the directory where the Landsat-8/OLI NBAR products were saved."),
         OutputDefinition(name="lc8_nbar_sceneid",
                          dagster_type=List[String],
                          description="List with the name of each NBAR product that were processed. These names are"
@@ -159,10 +160,10 @@ def lc8_nbar_angles(context, scene_ids: List[String]) -> List[String]:
                          ),
     ],
     required_resource_keys={"repository"},
-    description="Generate the NBAR products using Landsat-8 scenes."
+    description="Generate the NBAR products using Landsat-8/OLI scenes."
 )
-def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
-    """Landsat-8 NBAR."""
+def lc8_nbar(context, lc8_scene_ids: List[String]) -> Tuple[String, List[String]]:
+    """Landsat-8/OLI NBAR."""
     from research_processing.nbar import lc8_nbar
 
     #
@@ -176,7 +177,7 @@ def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
     #
     # Generate NBAR product for Landsat-8 scenes.
     #
-    lc8_nbar(input_dir, output_dir, scene_ids)
+    lc8_nbar(input_dir, output_dir, lc8_scene_ids)
     lc8_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, lc8_nbar_scene_ids
@@ -184,14 +185,14 @@ def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
 
 @solid(
     input_defs=[
-        InputDefinition(name="sen2cor_dir",
+        InputDefinition(name="s2_sen2cor_dir",
                         dagster_type=String,
-                        description="Path to the directory where the Sentinel-2 scenes corrected "
+                        description="Path to the directory where the Sentinel-2/MSI scenes corrected "
                                     "with Sen2Cor are located. It is expected that the scenes used as input will have "
-                                    "the influence of the atmosphere corrected with sen2cor."),
-        InputDefinition(name="scene_ids",
+                                    "the influence of the atmosphere corrected with `sen2cor`."),
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
                                     "for NBAR processing. The scene name must be equivalent to the name of the "
                                     "scene directories in the `sen2cor_dir` directory.")
     ],
@@ -202,14 +203,14 @@ def lc8_nbar(context, scene_ids: List[String]) -> Tuple[String, List[String]]:
         OutputDefinition(name="s2_sen2cor_nbar_sceneid",
                          dagster_type=List[String],
                          description="List with the name of each NBAR product that were processed with "
-                                     "Sentinel-2 scenes. These names are equivalent to the name of the directories "
+                                     "Sentinel-2/MSI scenes. These names are equivalent to the name of the directories "
                                      "where each of the processed scenes were saved."
                          ),
     ],
     required_resource_keys={"repository"},
-    description="Generate the NBAR products using Sentinel-2 scenes (with sen2cor atmosphere correction)."
+    description="Generate the NBAR products using Sentinel-2/MSI scenes (with sen2cor atmosphere correction)."
 )
-def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tuple[String, List[String]]:
+def s2_sen2cor_nbar(context, s2_sen2cor_dir: String, s2_scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Sentinel-2 (with sen2cor atmosphere correction) NBAR."""
     from research_processing.nbar import s2_sen2cor_nbar
 
@@ -222,7 +223,7 @@ def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tu
     #
     # Generate NBAR product for Sentinel-2 scenes (corrected with LaSRC).
     #
-    s2_sen2cor_nbar(sen2cor_dir, output_dir, scene_ids)
+    s2_sen2cor_nbar(s2_sen2cor_dir, output_dir, s2_scene_ids)
     s2_sen2cor_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, s2_sen2cor_nbar_scene_ids
@@ -230,14 +231,14 @@ def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tu
 
 @solid(
     input_defs=[
-        InputDefinition(name="lasrc_dir",
+        InputDefinition(name="s2_lasrc_dir",
                         dagster_type=String,
-                        description="Path to the directory where the Sentinel-2 scenes corrected "
+                        description="Path to the directory where the Sentinel-2/MSI scenes corrected "
                                     "with LaSRC are located. It is expected that the scenes used as input will have "
                                     "the influence of the atmosphere corrected with LaSRC."),
-        InputDefinition(name="scene_ids",
+        InputDefinition(name="s2_scene_ids",
                         dagster_type=List[String],
-                        description="List with the name of the Sentinel-2 scenes that should be used "
+                        description="List with the name of the Sentinel-2/MSI scenes that should be used "
                                     "for NBAR processing. The scene name must be equivalent to the name of the "
                                     "scene directories in the `lasrc_dir` directory.")
     ],
@@ -248,14 +249,14 @@ def s2_sen2cor_nbar(context, sen2cor_dir: String, scene_ids: List[String]) -> Tu
         OutputDefinition(name="s2_lasrc_nbar_sceneid",
                          dagster_type=List[String],
                          description="List with the name of each NBAR product that were processed with "
-                                     "Sentinel-2 scenes. These names are equivalent to the name of the directories "
+                                     "Sentinel-2/MSI scenes. These names are equivalent to the name of the directories "
                                      "where each of the processed scenes were saved."
                          ),
     ],
     required_resource_keys={"repository"},
     description="Generate the NBAR products using Sentinel-2 scenes (with LaSRC atmosphere correction)."
 )
-def s2_lasrc_nbar(context, lasrc_dir: String, scene_ids: List[String]) -> Tuple[String, List[String]]:
+def s2_lasrc_nbar(context, s2_lasrc_dir: String, s2_scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Sentinel-2 (with LaSRC atmosphere correction) NBAR."""
     from research_processing.nbar import s2_lasrc_nbar
 
@@ -268,7 +269,7 @@ def s2_lasrc_nbar(context, lasrc_dir: String, scene_ids: List[String]) -> Tuple[
     #
     # Generate NBAR product for Sentinel-2 scenes (corrected with LaSRC).
     #
-    s2_lasrc_nbar(lasrc_dir, output_dir, scene_ids)
+    s2_lasrc_nbar(s2_lasrc_dir, output_dir, s2_scene_ids)
     s2_lasrc_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, s2_lasrc_nbar_scene_ids

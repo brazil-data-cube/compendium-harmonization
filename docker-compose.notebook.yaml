@@ -14,8 +14,8 @@ services:
     build:
       context: .
       dockerfile: docker/notebook/Dockerfile
-    image: research-processing-notebook:0.1
-    container_name: research-processing-notebook
+    image: research-processing_notebook:0.1
+    container_name: research-processing_notebook
     environment:
       - DATA_DIRECTORY=${PWD}/analysis/data
     volumes:
@@ -34,8 +34,8 @@ services:
       - .env
     restart: on-failure
     networks:
-      - research-processing-network
+      - research_processing_network
 
 networks:
-  research-processing-network:
+  research_processing_network:
     external: true
