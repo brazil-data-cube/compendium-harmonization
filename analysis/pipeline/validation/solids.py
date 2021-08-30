@@ -333,7 +333,7 @@ def validation_nbar_s2_sen2cor(context, s2_sen2cor_nbar_dir: String, s2_sen2cor_
     description="Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."
 )
 def validation_nbar_s2_lasrc(context, s2_lasrc_nbar_dir: String, s2_sen2cor_cloud_dir: String,
-                             s2_scene_ids: List) -> None:
+                             s2_scene_ids: List) -> Nothing:
     """Validate (Compare) Sentinel-2 (with LaSRC atmosphere correction) NBAR images, of the same spatial location, acquired with a sensing date difference up to `day_difference`."""
     #
     # Search for pairs.
