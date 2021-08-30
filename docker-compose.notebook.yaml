@@ -17,6 +17,7 @@ services:
     image: research-processing_notebook:0.1
     container_name: research-processing_notebook
     environment:
+      - JUPYTER_ENABLE_LAB=yes
       - DATA_DIRECTORY=${PWD}/analysis/data
     volumes:
       - type: bind

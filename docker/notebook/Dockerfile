@@ -26,6 +26,7 @@ RUN pip install --upgrade \
     setuptools \
     wheel \
     && pip install \
+        pandas==1.3.2 \
         numpy==1.21.1 \
         rasterio==1.2.6 \
         matplotlib==3.4.2 \
