@@ -37,6 +37,7 @@ RUN pip install --upgrade \
     setuptools \
     wheel \
     && pip install \
+        pandas==1.3.2 \
         dagit==0.12.2 \
         numpy==1.21.1 \
         dagster==0.12.2 \
