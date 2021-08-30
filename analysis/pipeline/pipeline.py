@@ -62,31 +62,36 @@ def research_pipeline():
     #
 
     # Landsat-8 Surface Reflectance
-    validation_sr_l8(landsat8_sceneids)
+    v1 = validation_sr_l8(landsat8_sceneids)
 
     # Landsat-8 NBAR
-    validation_nbar_l8(lc8_nbar_dir, landsat8_sceneids)
+    v2 = validation_nbar_l8(lc8_nbar_dir, landsat8_sceneids)
 
     # Sentinel-2/MSI Surface Reflectance (Sen2Cor)
-    validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_dir, sentinel2_sceneids)
+    v3 = validation_sr_s2_sen2cor(sen2cor_dir, sen2cor_dir, sentinel2_sceneids)
 
     # Sentinel-2/MSI NBAR (Sen2Cor)
-    validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_dir, sentinel2_sceneids)
+    v4 = validation_nbar_s2_sen2cor(s2_sen2cor_nbar_dir, sen2cor_dir, sentinel2_sceneids)
 
     # Sentinel-2/MSI (LaSRC)
-    validation_sr_s2_lasrc(lasrc_dir, sen2cor_dir, sentinel2_sceneids)
+    v5 = validation_sr_s2_lasrc(lasrc_dir, sen2cor_dir, sentinel2_sceneids)
 
     # Sentinel-2/MSI NBAR (LaSRC)
-    validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_dir, sentinel2_sceneids)
+    v6 = validation_nbar_s2_lasrc(s2_lasrc_nbar_dir, sen2cor_dir, sentinel2_sceneids)
 
     # Compare Sen2Cor SR (Landsat-8 and Sentinel-2)
-    validation_sr_l8_s2_sen2cor(sen2cor_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
+    v7 = validation_sr_l8_s2_sen2cor(sen2cor_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
 
     # Compare LaSRC SR (Landsat-8 and Sentinel-2)
-    validation_sr_l8_s2_lasrc(lasrc_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
+    v8 = validation_sr_l8_s2_lasrc(lasrc_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
 
     # Compare Sen2Cor NBAR (Landsat-8 and Sentinel-2)
-    validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, s2_sen2cor_nbar_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
+    v9 = validation_nbar_l8_s2_sen2cor(lc8_nbar_dir, s2_sen2cor_nbar_dir, sen2cor_dir, landsat8_sceneids,
+                                       sentinel2_sceneids)
 
     # Compare LaSRC NBAR (Landsat-8 and Sentinel-2)
-    validation_nbar_l8_s2_lasrc(lc8_nbar_dir, s2_lasrc_nbar_dir, sen2cor_dir, landsat8_sceneids, sentinel2_sceneids)
+    v10 = validation_nbar_l8_s2_lasrc(lc8_nbar_dir, s2_lasrc_nbar_dir, sen2cor_dir, landsat8_sceneids,
+                                      sentinel2_sceneids)
+
+    # Merge the results and save it
+    validation_data_to_tidy([v1, v2, v3, v4, v5, v6, v7, v8, v9, v10])
