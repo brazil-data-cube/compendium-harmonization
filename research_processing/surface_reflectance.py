@@ -94,7 +94,7 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
                     "mode": "rw"
                 },
                 aux_data_dir: {
-                    "bind": "/mnt/atmcor_aux/lasrc/L8/LADS",
+                    "bind": "/mnt/atmcor_aux/lasrc/L8",
                     "mode": "ro"
                 }
             },
