@@ -108,8 +108,8 @@ def extract_example_data(downloaded_files: List) -> None:
     """
     for downloaded_file_directory in downloaded_files:
 
-        if "LADS" in downloaded_file_directory or "Reference" in downloaded_file_directory:
-            # LADS auxiliary data and Reference files does not require extra extraction.
+        if "LaSRC" in downloaded_file_directory or "ExampleFilesList" in downloaded_file_directory:
+            # LaSRC_AuxiliaryData auxiliary data and Example files does not require extra extraction.
             continue
 
         files_to_extract = [
