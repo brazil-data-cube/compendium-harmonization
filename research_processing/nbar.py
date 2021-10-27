@@ -57,16 +57,16 @@ def lc8_generate_angles(input_dir: str, output_dir: str, scene_ids: List[str]) -
     return processed_scenes
 
 
-def lc8_nbar(input_dir: str, output_dir: str, angle_dir: str, scene_ids: List[str]) -> List[str]:
+def lc8_nbar(input_dir: str, angle_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]:
     """Instantiate a docker container (`EnvironmentConfig.NBAR_IMAGE`) to generate NBAR products for Landsat-8 scenes.
 
     Args:
         input_dir (str): Directory where the directories of the scenes to be
         processed are located.
 
-        output_dir (str): Directory where the results will be saved.
+        angle_dir (str): Path to directory containing angle bands.
 
-        angle_dir (str) - path to directory containing angle bands.
+        output_dir (str): Directory where the results will be saved.
 
         scene_ids (List[str]): List with the scene_ids that should be processed.
         The scene_ids defined must be equivalent to the scene directory names in
@@ -81,7 +81,7 @@ def lc8_nbar(input_dir: str, output_dir: str, angle_dir: str, scene_ids: List[st
             image=EnvironmentConfig.NBAR_IMAGE,
             auto_remove=True,
             volumes={
-                os.path.join(input_dir, scene_id): {
+                input_dir: {
                     "bind": "/mnt/input-dir",
                     "mode": "ro"
                 },
@@ -90,7 +90,7 @@ def lc8_nbar(input_dir: str, output_dir: str, angle_dir: str, scene_ids: List[st
                     "mode": "rw"
                 },
                 angle_dir: {
-                    "bind": "/mnt/angles-dir/",
+                    "bind": "/mnt/angles-dir",
                     "mode": "rw"
                 }
             },
