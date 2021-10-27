@@ -90,7 +90,7 @@ def lc8_nbar(input_dir: str, output_dir: str, angle_dir: str, scene_ids: List[st
                     "mode": "rw"
                 },
                 angle_dir: {
-                    "bind": "/mnt/input-dir-angles",
+                    "bind": "/mnt/angles-dir/",
                     "mode": "rw"
                 }
             },
