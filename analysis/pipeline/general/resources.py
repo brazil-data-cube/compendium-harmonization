@@ -10,9 +10,9 @@
 
 import os
 
-from dagster import DagsterResourceFunctionError
-from dagster import Field, Dict, String
 from dagster import resource
+from dagster import Field, Dict, String
+from dagster import DagsterResourceFunctionError
 
 
 @resource(config_schema={
@@ -75,40 +75,50 @@ def resource_repository(_init_context) -> Dict:
 
 
 @resource(config_schema={
-    "lands_auxiliary_data_dir": Field(
+    "lasrc_auxiliary_data_dir": Field(
         config=String,
-        description="Directory where the LADS auxiliary data is stored. The contents of this directory should follow "
-                    "the structure definition found on the `USGS` website, where it reads: `Year/.hdf_fused`. This "
-                    "data will be used for the application of LaSRC to the Sentinel-2 scenes."
+        description="Directory where the LaSRC auxiliary data is stored. The contents of this directory should follow "
+                    "the structure definition found on the `USGS` website "
+                    "(L8 directory - https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/)"
     ),
 })
-def resource_lads_auxiliary_data(_init_context) -> Dict:
-    """LADS auxiliary files resource.
+def resource_lasrc_auxiliary_data(_init_context) -> Dict:
+    """LaSRC auxiliary data resource.
+
+    Resource for defining the directory where the LaSRC auxiliary data is stored. This directory is 
+    expected to be valid and contains the files, directories, and subdirectories provided by the 
+    USGS (https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/). As such, 
+    the expected directory should look like the content shown below:
+
+            lasrc_auxiliary/L8/
+                - LADS/
+                - LDCMLUT/
+                - MSILUT/ 
+                - CMGDEM.hdf
+                - ratiomapndwiexp.hdf
+
+    Note: 
+        You **don't** need to have all LADS data. You only need to have available the data that concerns your input data.
 
     Returns:
-        Dict: A dictionary with the `lads_auxiliary_directory` key, containing the directory where
-        the LADS auxiliary data is stored. It is expected that this directory will have the same structure as
-        the USGS site (`Year/.hdf_fused`). The structure looks like this:
-
-             - LADS (path you will pass in the resource configuration)
-               - 2013
-                  - L8ANC2013001.hdf_fused
-               - 2014
-                  - ...
-               - ...
-
-        Not all `hdf_fused` files need to be in these directories. Only those equivalent to the images used in
-        processing should be present.
+        Dict: Dict with the `lasrc_auxiliary_directory` key, which contains the reference to the LaSRC auxiliary 
+        data directory.
 
     See:
-        https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/LADS/
+        https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/
     """
-    lads_auxiliary_directory = _init_context.resource_config["lands_auxiliary_data_dir"]
+    lasrc_auxiliary_directory = _init_context.resource_config["lasrc_auxiliary_data_dir"]
 
-    if not os.path.isdir(lads_auxiliary_directory):
+    if not os.path.isdir(lasrc_auxiliary_directory):
         raise DagsterResourceFunctionError(
-            f"The directory {lads_auxiliary_directory} indicated as a resource does not exist or cannot be found.")
+            f"The directory {lasrc_auxiliary_directory} indicated as a resource does not exist or cannot be found.")
 
     return {
-        "lads_auxiliary_directory": lads_auxiliary_directory
+        "lasrc_auxiliary_directory": lasrc_auxiliary_directory
     }
+
+
+__all__ = (
+    "resource_repository",
+    "resource_lasrc_auxiliary_data"
+)

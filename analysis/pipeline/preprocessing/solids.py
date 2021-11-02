@@ -79,7 +79,7 @@ def apply_sen2cor(context, s2_scene_ids: List[String]) -> Tuple[String, List[Str
                                      "directories)."
                          ),
     ],
-    required_resource_keys={"lads_data", "repository"},
+    required_resource_keys={"lasrc_data", "repository"},
     description="Apply atmospheric correction using the `LaSRC` algorithm. The solid input indicates which scenes are "
                 "to be processed from the Sentinel-2/MSI data repository."
 )
@@ -96,9 +96,9 @@ def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[Strin
     output_dir = toolbox.prepare_output_directory(output_dir, "s2_lasrc_sr")
 
     #
-    # Defining the auxiliary data.
+    # Defining the LaSRC auxiliary data.
     #
-    auxiliary_data = context.resources.lads_data["lads_auxiliary_directory"]
+    auxiliary_data = context.resources.lasrc_data["lasrc_auxiliary_directory"]
 
     #
     # Applying LaSRC.

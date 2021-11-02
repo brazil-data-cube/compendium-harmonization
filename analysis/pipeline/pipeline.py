@@ -8,10 +8,11 @@
 
 from dagster import pipeline, ModeDefinition, fs_io_manager
 
-from general.resources import resource_repository, resource_lads_auxiliary_data
 from general.solids import *
-from preprocessing.solids import *
 from validation.solids import *
+from preprocessing.solids import *
+
+from general.resources import resource_repository, resource_lasrc_auxiliary_data
 
 
 @pipeline(
@@ -20,7 +21,7 @@ from validation.solids import *
             resource_defs={
                 "io_manager": fs_io_manager,
                 "repository": resource_repository,
-                "lads_data": resource_lads_auxiliary_data
+                "lasrc_data": resource_lasrc_auxiliary_data
             }
         )
     ],
