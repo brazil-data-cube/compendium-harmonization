@@ -35,7 +35,6 @@ def lc8_generate_angles(input_dir: str, output_dir: str, scene_ids: List[str]) -
         organizational structure will follow the data standards provided
         by the USGS.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.LANDSAT8_ANGLES_IMAGE,
@@ -53,8 +52,9 @@ def lc8_generate_angles(input_dir: str, output_dir: str, scene_ids: List[str]) -
             command=scene_id
         )
 
-        processed_scenes.append(scene_id)
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]
 
 
 def lc8_nbar(input_dir: str, angle_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]:
@@ -75,7 +75,6 @@ def lc8_nbar(input_dir: str, angle_dir: str, output_dir: str, scene_ids: List[st
     Returns:
         List[str]: List with full path for each nbar scene generated.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.NBAR_IMAGE,
@@ -97,8 +96,9 @@ def lc8_nbar(input_dir: str, angle_dir: str, output_dir: str, scene_ids: List[st
             command=scene_id
         )
 
-        processed_scenes.append(os.path.join(output_dir, scene_id))
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]
 
 
 def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]:
@@ -117,7 +117,6 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Li
     Returns:
         List[str]: List with full path for each nbar (sen2cor) scene generated.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.NBAR_IMAGE,
@@ -135,8 +134,9 @@ def s2_sen2cor_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> Li
             command=scene_id
         )
 
-        processed_scenes.append(os.path.join(output_dir, scene_id))
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]
 
 
 def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List[str]:
@@ -155,7 +155,6 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List
     Returns:
         List[str]: List with full path for each nbar (LaSRC) scene generated.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.NBAR_IMAGE,
@@ -173,5 +172,6 @@ def s2_lasrc_nbar(input_dir: str, output_dir: str, scene_ids: List[str]) -> List
             command=scene_id
         )
 
-        processed_scenes.append(os.path.join(output_dir, scene_id))
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]
