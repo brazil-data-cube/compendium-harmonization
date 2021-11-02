@@ -17,9 +17,9 @@ services:
     container_name: research-processing_dagster-pipeline
     environment:
       #
-      # 1. Path to the directory where the data is stored on the local machine.
+      # 1. Path to the directory where the data is stored on the local machine (Default is the minimal example directory).
       #
-      - DATA_DIRECTORY=${PWD}/analysis/data
+      - DATA_DIRECTORY=${PWD}/analysis/data/examples/minimal_example
     volumes:
 
       #
@@ -33,8 +33,8 @@ services:
       # 3. Volume with the mapping for the input and output directories. 
       #
       - type: bind
-        source: ${PWD}/analysis/data
-        target: ${PWD}/analysis/data  # Must be the same path set in the `DATA_DIRECTORY` environment variable.
+        source: ${PWD}/analysis/data/examples/minimal_example
+        target: ${PWD}/analysis/data/examples/minimal_example  # Must be the same path set in the `DATA_DIRECTORY` environment variable.
     ports:
       #
       # 4. Network port to access the DagIt web interface.

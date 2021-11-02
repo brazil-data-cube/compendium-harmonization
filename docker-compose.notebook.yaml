@@ -23,9 +23,9 @@ services:
       - JUPYTER_ENABLE_LAB=yes
 
       #
-      # 2. Path to the directory where the data is stored on the local machine.
+      # 2. Path to the directory where the data is stored on the local machine (Default is the minimal example directory).
       #
-      - DATA_DIRECTORY=${PWD}/analysis/data
+      - DATA_DIRECTORY=${PWD}/analysis/data/examples/minimal_example
     volumes:
 
       #
@@ -46,14 +46,14 @@ services:
       # 5. Volume with the mapping for the input and output directories. 
       #
       - type: bind
-        source: ${PWD}/analysis/data
-        target: ${PWD}/analysis/data  # Must be the same path set in the `DATA_DIRECTORY` environment variable.
+        source: ${PWD}/analysis/data/examples/minimal_example
+        target: ${PWD}/analysis/data/examples/minimal_example # Must be the same path set in the `DATA_DIRECTORY` environment variable.
     ports:
 
       #
       # 6. Network port to access the JupyterLab web interface.
       #
-      - "8889:8888"
+      - "8888:8888"
     env_file:
 
       #
