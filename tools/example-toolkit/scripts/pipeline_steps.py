@@ -210,7 +210,7 @@ def create_dagit_yaml_file(raw_data_dir: str, derived_data_dir: str, output_file
         `Solids` to express operations.
     """
     # Defining path to the LADS auxiliary data (LaSRC).
-    lads_auxiliary_data_dir = os.path.join(raw_data_dir, "lasrc_auxiliary_data")
+    lasrc_auxiliary_data_dir = os.path.join(raw_data_dir, "lasrc_auxiliary_data")
 
     # Preparing the data directory for Landsat-8 and Sentinel-2.
     landsat8_input_dir = os.path.join(raw_data_dir, "landsat8_data")
@@ -223,9 +223,9 @@ def create_dagit_yaml_file(raw_data_dir: str, derived_data_dir: str, output_file
     # Write the configuration
     pipeline_config = {
         "resources": {
-            "lads_data": {
+            "lasrc_data": {
                 "config": {
-                    "lads_auxiliary_data_dir": lads_auxiliary_data_dir
+                    "lasrc_auxiliary_data_dir": lasrc_auxiliary_data_dir
                 }
             },
             "repository": {
