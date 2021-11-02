@@ -9,18 +9,18 @@
 version: "3.2"
 
 services:
-  example-download-environment:
+  replication-download-environment:
     build:
       context: tools/example-toolkit/
     image: compendium-harmonization/research-processing_download-example:0.1
-    container_name: research-processing_download-minimal-example
+    container_name: research-processing_download-replication-example
     environment:
       #
       # 1. Environment variables used to define the input/output directories (Outside the Container).
       #    These variables are used when generating the Dagster configuration file.
       #
-      - RAW_DATA_DIR=${PWD}/analysis/data/examples/minimal_example/raw_data          # input
-      - DERIVED_DATA_DIR=${PWD}/analysis/data/examples/minimal_example/derived_data  # output
+      - RAW_DATA_DIR=${PWD}/analysis/data/examples/replication_example/raw_data          # input
+      - DERIVED_DATA_DIR=${PWD}/analysis/data/examples/replication_example/derived_data  # output
 
       #
       # 2. Directory where the dagster configuration file will be saved (Inside the Container).
@@ -28,12 +28,12 @@ services:
       - PIPELINE_DIR=/opt/article/pipeline
 
       #
-      # 3. Directory where the minimal example data will be downloaded (Inside the Container).
+      # 3. Directory where the replication data will be downloaded (Inside the Container).
       #
       - DOWNLOAD_OUTPUT_DIRECTORY=/opt/article/data
 
       #
-      # 4. JSON File with the reference to the data that will be downloaded for the minimum example. 
+      # 4. JSON File with the reference to the data that will be downloaded for the replication example (Outside the Container).
       #
       - DOWNLOAD_REFERENCE_FILE=/opt/article/github_tag_assets_data_to_download.json
 
@@ -42,7 +42,7 @@ services:
       # 5. Volume that mapping the directory where the downloaded files will be saved.
       # 
       - type: bind
-        source: ${PWD}/analysis/data/examples/minimal_example/raw_data
+        source: ${PWD}/analysis/data/examples/replication_example/raw_data
         target: /opt/article/data
 
       # 
@@ -56,7 +56,7 @@ services:
       # 7. Volume for the file that defines which data should be downloaded from Research Compendium GitHub repository. 
       #
       - type: bind
-        source: ${PWD}/tools/example-toolkit/config/example_files.json
+        source: ${PWD}/tools/example-toolkit/config/replication_files.json
         target: /opt/article/github_tag_assets_data_to_download.json
 
     networks:
