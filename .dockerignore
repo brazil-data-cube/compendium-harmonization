@@ -8,5 +8,13 @@
 analysis/data*
 analysis/data/*
 
+# Python virtual environment
 venv?
 venv/*
+
+#
+# Data files
+#
+*.tif
+*.jp2
+*.zip
