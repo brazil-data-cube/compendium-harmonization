@@ -8,10 +8,10 @@
 
 from dagster import pipeline, ModeDefinition, fs_io_manager
 
-from general.solids import *
 from validation.solids import *
 from preprocessing.solids import *
 
+from general.solids import load_and_standardize_sceneids_input
 from general.resources import resource_repository, resource_lasrc_auxiliary_data
 
 
