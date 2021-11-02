@@ -1,0 +1,46 @@
+name: base
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1
+  - _openmp_mutex=4.5
+  - brotlipy=0.7.0
+  - ca-certificates=2021.10.8
+  - certifi=2021.10.8
+  - cffi=1.14.3
+  - chardet=3.0.4
+  - colorama=0.4.4
+  - cryptography=3.1.1
+  - idna=2.10
+  - ld_impl_linux-64=2.35.1
+  - libffi=3.3
+  - libgcc-ng=9.3.0
+  - libgomp=9.3.0
+  - libstdcxx-ng=9.3.0
+  - loguru=0.5.3
+  - ncurses=6.2
+  - openssl=1.1.1l
+  - pip=21.2.4
+  - pycparser=2.20
+  - pyopenssl=19.1.0
+  - pysocks=1.7.1
+  - python=3.8.12
+  - python_abi=3.8
+  - pyyaml=5.4.1
+  - readline=8.1
+  - requests=2.24.0
+  - setuptools=58.0.4
+  - six=1.15.0
+  - sqlite=3.36.0
+  - tk=8.6.11
+  - tqdm=4.62.3
+  - urllib3=1.25.11
+  - wheel=0.37.0
+  - xz=5.2.5
+  - yaml=0.2.5
+  - zlib=1.2.11
+  - pip:
+    - bagit==1.8.1
+    - base32-lib==1.0.2
