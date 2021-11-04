@@ -29,7 +29,6 @@ def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
     Returns:
         List: List with full path to each output scene.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.SEN2COR_IMAGE,
@@ -47,8 +46,9 @@ def sen2cor(input_dir: str, output_dir: str, scene_ids: List[str]) -> List:
             command=scene_id
         )
 
-        processed_scenes.append(os.path.join(output_dir, scene_id))
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]
 
 
 def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
@@ -79,7 +79,6 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
         the `L8` directory (https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/L8/)
         provided by the USGS.
     """
-    processed_scenes = []
     for scene_id in scene_ids:
         ContainerManager.run_container(
             image=EnvironmentConfig.LASRC_IMAGE,
@@ -101,5 +100,6 @@ def lasrc(input_dir: str, output_dir: str, scene_ids: List[str],
             command=scene_id
         )
 
-        processed_scenes.append(os.path.join(output_dir, scene_id))
-    return processed_scenes
+    return [
+        os.path.join(output_dir, fs_object) for fs_object in os.listdir(output_dir)
+    ]

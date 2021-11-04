@@ -8,8 +8,8 @@
 
 """research-processing analysis general use solids."""
 
-from dagster import Field, String, Tuple, List
 from dagster import solid, OutputDefinition
+from dagster import Field, String, Tuple, List
 
 from research_processing import toolbox
 
@@ -61,3 +61,8 @@ def load_and_standardize_sceneids_input(context) -> Tuple[String, String]:
         sentinel2_sceneids = toolbox.standardize_filename(scene_list)
 
     return landsat8_sceneids, sentinel2_sceneids
+
+
+__all__ = (
+    "load_and_standardize_sceneids_input"
+)

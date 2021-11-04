@@ -8,10 +8,11 @@
 
 from dagster import pipeline, ModeDefinition, fs_io_manager
 
-from general.resources import resource_repository, resource_lads_auxiliary_data
-from general.solids import *
-from preprocessing.solids import *
 from validation.solids import *
+from preprocessing.solids import *
+
+from general.solids import load_and_standardize_sceneids_input
+from general.resources import resource_repository, resource_lasrc_auxiliary_data
 
 
 @pipeline(
@@ -20,7 +21,7 @@ from validation.solids import *
             resource_defs={
                 "io_manager": fs_io_manager,
                 "repository": resource_repository,
-                "lads_data": resource_lads_auxiliary_data
+                "lasrc_data": resource_lasrc_auxiliary_data
             }
         )
     ],
@@ -48,8 +49,8 @@ def research_pipeline():
     #
 
     # Landsat-8 NBAR
-    scene_angles_lc8 = lc8_nbar_angles(landsat8_sceneids)
-    lc8_nbar_dir, lc8_nbar_sceneids = lc8_nbar(scene_angles_lc8)
+    angles_lc8_dir, scene_angles_lc8 = lc8_nbar_angles(landsat8_sceneids)
+    lc8_nbar_dir, lc8_nbar_sceneids = lc8_nbar(angles_lc8_dir, scene_angles_lc8)
 
     # Sentinel-2/MSI (Sen2Cor)
     s2_sen2cor_nbar_dir, s2_sen2cor_nbar_sceneids = s2_sen2cor_nbar(sen2cor_dir, sen2cor_sceneids)

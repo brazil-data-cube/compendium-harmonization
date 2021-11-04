@@ -1,0 +1,50 @@
+#
+# This file is part of research-processing library
+# Copyright (C) 2021 INPE.
+#
+# research-processing is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+version: "3.2"
+
+services:
+  hash-github-assets-files:
+    build:
+      context: .
+    image: harmonization-compendium/tools-checksum:0.1
+    container_name: tools-checksum_github-assets
+    command: scripts/calculate_assets_checksum.py
+    environment:
+      #
+      # 1. Environment variables used to define the input/output directories (Outside the Container).
+      #
+      - INPUT_DATA_DIRECTORY=/opt/compendium/input  # Base directory where the directories to which BagIt will be applied are located.
+      - OUTPUT_DATA_DIRECTORY=/opt/compendium/output  # Directory to store the generated zip from each subdirectory present in `INPUT_DATA_DIRECTORY`.
+
+      #
+      # 2. Bagit Hashing process configuration.
+      #
+      - BAGIT_HASH_PROCESSES=8
+
+    volumes:
+      #
+      # 3. Volume for the input directory. The target must be the same as defined in the `INPUT_DATA_DIRECTORY` variable.
+      # 
+      - type: bind
+        source: /path/to/local/input
+        target: /opt/compendium/input
+
+      # 
+      # 4. Volume for the output directory. The target must be the same as defined in the `OUTPUT_DATA_DIRECTORY` variable
+      #
+      - type: bind
+        source: /path/to/local/output
+        target: /opt/compendium/output
+
+    networks:
+      - research_processing_network
+
+networks:
+  research_processing_network:
+    external: true

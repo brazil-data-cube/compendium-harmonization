@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks
 # Edit at https://www.toptal.com/developers/gitignore?templates=r,python,jupyternotebooks
 
-### JupyterNotebooks ###
+### Jupyter Notebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
@@ -206,6 +206,13 @@ vignettes/*.pdf
 
 # translation temp files
 po/*~
+
+# renv
+*library/
+*local/
+*lock/
+*python/
+*staging/
 
 ### R.Bookdown Stack ###
 # R package: bookdown caching files

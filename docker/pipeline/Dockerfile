@@ -6,57 +6,73 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-# Image: python:3.8-slim-buster
-# DockerHub: https://hub.docker.com/layers/python/library/python/3.8-slim-buster/images/sha256-5498332eee6c73a465a253fe1d00c6dc6f79562e3ea23d105129d00e6ce8736b?context=explore
-FROM python@sha256:3bc519ca3214d463ac521f838275e1070ab4b8dbb12e568b4739794db837dadb
+# Image: continuumio/miniconda3
+# Image Tag: :4.10.3
+# DockerHub: https://hub.docker.com/layers/continuumio/miniconda3/4.10.3/images/sha256-8ba38cba2d88e3e094e3e3c32f1daaacb57a331aaf17a5ee0194c30d774903e0?context=explore
+FROM continuumio/miniconda3@sha256:8ba38cba2d88e3e094e3e3c32f1daaacb57a331aaf17a5ee0194c30d774903e0
 
+
+#
+# 1. Defining the DagIt network port.
+#
 EXPOSE 3000
 
+#
+# 2. Configuring the Dagster environment variables.
+#
+
+# Directory where the dagster files (pipeline definition and configurations) will be saved.
 ENV DAGSTER_APP=/opt/dagster/app/
+
+# Dagster configuration directory.
 ENV DAGSTER_HOME=/opt/dagster/dagster_home/
+
+# Dagster persistance storage location (To save the pipeline status and other related files).
 ENV DAGSTER_LOCAL_STORAGE=/opt/dagster/storage/
 
 #
-# Create base directories
+# 3. Creating directories from the environment variables.
 #
 RUN mkdir -p $DAGSTER_APP $DAGSTER_HOME
 
 #
-# Copy the article analysis files.
+# 4. Copying the pipeline definitions.
 #
+
+# Pipeline scripts
 COPY analysis/pipeline $DAGSTER_APP
 
-COPY research_processing /opt/article/research_processing
-COPY setup.py /opt/article/setup.py
-
-#
-# Install dependencies
-#
-RUN pip install --upgrade \
-    pip \
-    setuptools \
-    wheel \
-    && pip install \
-        pandas==1.3.2 \
-        dagit==0.12.2 \
-        numpy==1.21.1 \
-        dagster==0.12.2 \
-        rasterio==1.2.6 \
-        matplotlib==3.4.2 \
-        shapely==1.7.1 \
-        docker==5.0.0 \
-        graphql-ws==0.3.1 \
-    && cd /opt/article/ \
-    && python3 setup.py install \
-    && apt update -y \
-    && apt install curl -y \
-    && curl -fsSL https://get.docker.com | sh
-
-#
-# Copy Dagster configuration files
-#
+# Configuration files
 COPY docker/pipeline/config/dagster.yaml $DAGSTER_HOME/dagster.yaml
 COPY docker/pipeline/config/workspace.yaml $DAGSTER_APP/workspace.yaml
 
+#
+# 5. Configuring the base dependencies
+#
+USER root
+RUN apt-get update -y \
+    && apt-get install -y git curl \
+    && curl -fsSL https://get.docker.com | sh \
+    && rm -rf /var/lib/apt/lists/*
+
+#
+# 6. Installing the research-processing library dependencies.
+#
+COPY docker/pipeline/environment.yml environment.yml
+
+RUN conda env update --file environment.yml --prune
+
+#
+# 7. Installing the research-processing library.
+#
+COPY research_processing /opt/compendium/research_processing
+COPY setup.py /opt/compendium/setup.py
+
+RUN cd /opt/compendium/ \
+    && python3 setup.py install
+
+#
+# 8. Defining the working directory and DagIt entrypoint
+#
 WORKDIR $DAGSTER_APP
 ENTRYPOINT ["dagit", "-h", "0.0.0.0", "-p", "3000"]

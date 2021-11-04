@@ -1,0 +1,42 @@
+version: "3.2"
+
+services:
+  example-build-environment:
+    build:
+      context: .
+    image: harmonization-compendium/tools-upload-assets_piggyback:0.1
+    container_name: tools-upload-assets_piggyback
+    environment:
+      #
+      # 1. GitHub configurations.
+      #
+      - GITHUB_TOKEN=
+      - GITHUB_TAGNAME=
+      - GITHUB_REPOSITORY=
+
+      #
+      # 2. Directories where the files that should be uploaded to GitHub assets are stored
+      #
+      - MINIMAL_EXAMPLE_DIRECTORY=/opt/compendium/example-files
+      - REPLICATION_EXAMPLE_DIRECTORY=/opt/compendium/replication-files
+    volumes:
+      #
+      # 3. Volume with the directory where the zip and checksum files of the minimum example are.
+      # 
+      - type: bind
+        source: /path/to/example/zip/files
+        target: /opt/compendium/example-files  # same defined on `MINIMAL_EXAMPLE_DIRECTORY` variable
+
+      #
+      # 4. Volume with the directory where the zip and checksum files of the minimum example are.
+      # 
+      - type: bind
+        source: /path/to/replication/zip/files
+        target: /opt/compendium/replication-files  # same defined on `REPLICATION_EXAMPLE_DIRECTORY` variable
+
+    networks:
+      - research_processing_network
+
+networks:
+  research_processing_network:
+    external: true

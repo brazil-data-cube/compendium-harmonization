@@ -6,36 +6,39 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-# Image: jupyter/minimal-notebook:python-3.8.8
-# DockerHub: https://hub.docker.com/layers/jupyter/minimal-notebook/python-3.8.8/images/sha256-60f7a194793fc473b168497c6d52ff1284a037c1b366e7310738966989eba1f5?context=explore
-FROM jupyter/minimal-notebook:python-3.8.8@sha256:60f7a194793fc473b168497c6d52ff1284a037c1b366e7310738966989eba1f5
+# Image: jupyter/base-notebook
+# Image Tag: lab-3.1.13
+# Image URL: https://hub.docker.com/layers/jupyter/base-notebook/lab-3.1.13/images/sha256-9a388da87e9d2b8019df20439977953d0576f6168348f621498ac62b45e2f88f?context=explore
+FROM jupyter/base-notebook@sha256:9a388da87e9d2b8019df20439977953d0576f6168348f621498ac62b45e2f88f
 
 USER root
 
 #
-# Copy the research-processing article package files.
+# 1. Configuring the base dependencies
 #
-COPY research_processing /opt/article/research_processing
-COPY setup.py /opt/article/setup.py
+USER root
+RUN apt-get update -y \
+    && apt-get install -y git curl \
+    && curl -fsSL https://get.docker.com | sh \
+    && rm -rf /var/lib/apt/lists/*
 
 #
-# Install dependencies
+# 2. Installing the research-processing library dependencies 
 #
-RUN pip install --upgrade \
-    pip \
-    setuptools \
-    wheel \
-    && pip install \
-        pandas==1.3.2 \
-        numpy==1.21.1 \
-        rasterio==1.2.6 \
-        matplotlib==3.4.2 \
-        shapely==1.7.1 \
-        docker==5.0.0 \
-    && cd /opt/article/ \
-    && python3 setup.py install \
-    && apt update -y \
-    && apt install curl -y \
-    && curl -fsSL https://get.docker.com | sh
+COPY docker/notebook/environment.yml environment.yml
 
-USER $NB_USER
+RUN conda env update --file environment.yml --prune
+
+#
+# 3. Installing the research-processing library.
+#
+COPY research_processing /opt/compendium/research_processing
+COPY setup.py /opt/compendium/setup.py
+
+RUN cd /opt/compendium/ \
+    && python3 setup.py install
+
+#
+# 4. Changing the user.
+#
+USER ${NB_USER}

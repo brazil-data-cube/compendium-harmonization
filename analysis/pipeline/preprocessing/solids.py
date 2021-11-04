@@ -79,7 +79,7 @@ def apply_sen2cor(context, s2_scene_ids: List[String]) -> Tuple[String, List[Str
                                      "directories)."
                          ),
     ],
-    required_resource_keys={"lads_data", "repository"},
+    required_resource_keys={"lasrc_data", "repository"},
     description="Apply atmospheric correction using the `LaSRC` algorithm. The solid input indicates which scenes are "
                 "to be processed from the Sentinel-2/MSI data repository."
 )
@@ -96,9 +96,9 @@ def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[Strin
     output_dir = toolbox.prepare_output_directory(output_dir, "s2_lasrc_sr")
 
     #
-    # Defining the auxiliary data.
+    # Defining the LaSRC auxiliary data.
     #
-    auxiliary_data = context.resources.lads_data["lads_auxiliary_directory"]
+    auxiliary_data = context.resources.lasrc_data["lasrc_auxiliary_directory"]
 
     #
     # Applying LaSRC.
@@ -120,7 +120,10 @@ def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[Strin
     output_defs=[
         OutputDefinition(name="lc8_nbar_angles",
                          dagster_type=List[String],
-                         description="List with full path for each scene that had the angles generated."),
+                         description="Name of each scene that had the angles generated."),
+        OutputDefinition(name="lc8_nbar_angles_dir",
+                         dagster_type=List[String],
+                         description="Path to the each generated angle directory.")
     ],
     required_resource_keys={"repository"},
     description="Generate the angles of the Landsat-8/OLI scenes used for processing the NBAR products. The generated "
@@ -134,15 +137,21 @@ def lc8_nbar_angles(context, lc8_scene_ids: List[String]) -> List[String]:
     # Prepare input/output directory.
     #
     input_dir = context.resources.repository["landsat8_input_dir"]
+    output_dir = context.resources.repository["outdir_landsat8"]
+
+    output_dir = toolbox.prepare_output_directory(output_dir, "lc8_nbar_angles")
 
     #
     # Generate Landsat-8 Angles for NBAR calculation.
     #
-    return lc8_generate_angles(input_dir, lc8_scene_ids)
+    return output_dir, lc8_generate_angles(input_dir, output_dir, lc8_scene_ids)
 
 
 @solid(
     input_defs=[
+        InputDefinition(name="lc8_nbar_angles_dir",
+                        dagster_type=String,
+                        description="Path to the directory where the generated scene angles are stored."),
         InputDefinition(name="lc8_scene_ids",
                         dagster_type=List[String],
                         description="List with the name of the Landsat-8/OLI scenes that should be used "
@@ -162,7 +171,7 @@ def lc8_nbar_angles(context, lc8_scene_ids: List[String]) -> List[String]:
     required_resource_keys={"repository"},
     description="Generate the NBAR products using Landsat-8/OLI scenes."
 )
-def lc8_nbar(context, lc8_scene_ids: List[String]) -> Tuple[String, List[String]]:
+def lc8_nbar(context, lc8_nbar_angles_dir: String, lc8_scene_ids: List[String]) -> Tuple[String, List[String]]:
     """Landsat-8/OLI NBAR."""
     from research_processing.nbar import lc8_nbar
 
@@ -177,7 +186,7 @@ def lc8_nbar(context, lc8_scene_ids: List[String]) -> Tuple[String, List[String]
     #
     # Generate NBAR product for Landsat-8 scenes.
     #
-    lc8_nbar(input_dir, output_dir, lc8_scene_ids)
+    lc8_nbar(input_dir, lc8_nbar_angles_dir, output_dir, lc8_scene_ids)
     lc8_nbar_scene_ids = toolbox.filename(os.listdir(output_dir))
 
     return output_dir, lc8_nbar_scene_ids

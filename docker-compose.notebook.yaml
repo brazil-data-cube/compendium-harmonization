@@ -6,7 +6,7 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-version: '3.2'
+version: "3.2"
 
 services:
   research-processing-notebook:
@@ -14,24 +14,51 @@ services:
     build:
       context: .
       dockerfile: docker/notebook/Dockerfile
-    image: research-processing_notebook:0.1
+    image: compendium-harmonization/research-processing_notebook:0.1
     container_name: research-processing_notebook
     environment:
+      #
+      # 1. Enable Jupyter Lab (https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#docker-options) 
+      #
       - JUPYTER_ENABLE_LAB=yes
-      - DATA_DIRECTORY=${PWD}/analysis/data
+
+      #
+      # 2. Path to the directory where the data is stored on the local machine (Default is the minimal example directory).
+      #
+      - DATA_DIRECTORY=${PWD}/analysis/data/examples/minimal_example
     volumes:
+
+      #
+      # 3. Volume that enable docker usage inside the container.
+      #
       - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock
+
+      #
+      # 4. Volume to mapping the compendium `analysis` directory to the user workspace inside the container.
+      #
       - type: bind
         source: ${PWD}/analysis/
         target: /home/jovyan/analysis
+
+      #
+      # 5. Volume with the mapping for the input and output directories. 
+      #
       - type: bind
-        source: ${PWD}/analysis/data
-        target: ${PWD}/analysis/data
+        source: ${PWD}/analysis/data/examples/minimal_example
+        target: ${PWD}/analysis/data/examples/minimal_example # Must be the same path set in the `DATA_DIRECTORY` environment variable.
     ports:
+
+      #
+      # 6. Network port to access the JupyterLab web interface.
+      #
       - "8888:8888"
     env_file:
+
+      #
+      # 7. Environment variables file to define the UID and GID used inside the container.
+      #
       - .env
     restart: on-failure
     networks:
