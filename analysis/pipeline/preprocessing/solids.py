@@ -118,12 +118,12 @@ def apply_lasrc(context, s2_scene_ids: List[String]) -> Tuple[String, List[Strin
                                     "on Landsat-8/OLI images).")
     ],
     output_defs=[
+        OutputDefinition(name="lc8_nbar_angles_dir",
+                        dagster_type=String,
+                        description="Path to the each generated angle directory."),
         OutputDefinition(name="lc8_nbar_angles",
                          dagster_type=List[String],
-                         description="Name of each scene that had the angles generated."),
-        OutputDefinition(name="lc8_nbar_angles_dir",
-                         dagster_type=List[String],
-                         description="Path to the each generated angle directory.")
+                         description="Name of each scene that had the angles generated.")
     ],
     required_resource_keys={"repository"},
     description="Generate the angles of the Landsat-8/OLI scenes used for processing the NBAR products. The generated "
