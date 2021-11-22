@@ -7,8 +7,20 @@ install_requires = [
     'docker>=5.0.0',
     'matplotlib>=3.4.2',
     'shapely>=1.7.1',
-    'numpy>=1.21.1'
+    'numpy>=1.21.1',
+    'pandas>='
 ]
+
+docs_require = [
+    'Sphinx>=4.3.0',
+    'sphinx-rtd-theme>=1.0.0',
+    'sphinxcontrib-napoleon>=0.7'
+]
+
+extras_require = {
+    'docs': docs_require
+}
+extras_require['all'] = [req for _, reqs in extras_require.items() for req in reqs]
 
 packages = find_packages()
 
