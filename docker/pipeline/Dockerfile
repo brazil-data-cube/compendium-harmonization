@@ -65,10 +65,9 @@ RUN conda env update --file environment.yml --prune
 #
 # 7. Installing the research-processing library.
 #
-COPY tools/auxiliary-library/research_processing /opt/compendium/research_processing
-COPY setup.py /opt/compendium/setup.py
+COPY tools/auxiliary-library/ /opt/compendium/research_processing
 
-RUN cd /opt/compendium/ \
+RUN cd /opt/compendium/research_processing \
     && python3 setup.py install
 
 #
