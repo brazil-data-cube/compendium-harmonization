@@ -208,7 +208,6 @@ vignettes/*.pdf
 po/*~
 
 # renv
-*library/
 *local/
 *lock/
 *python/
@@ -226,5 +225,12 @@ _publish.R
 _book
 _bookdown_files
 rsconnect
+
+# renv
+library/
+local/
+lock/
+python/
+staging/
 
 # End of https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks
