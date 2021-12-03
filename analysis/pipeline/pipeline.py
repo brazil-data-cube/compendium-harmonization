@@ -50,7 +50,7 @@ def research_pipeline():
 
     # Landsat-8 NBAR
     angles_lc8_dir, scene_angles_lc8 = lc8_nbar_angles(landsat8_sceneids)
-    lc8_nbar_dir, lc8_nbar_sceneids = lc8_nbar(angles_lc8_dir, scene_angles_lc8)
+    lc8_nbar_dir, lc8_nbar_sceneids = lc8_nbar(angles_lc8_dir, landsat8_sceneids)
 
     # Sentinel-2/MSI (Sen2Cor)
     s2_sen2cor_nbar_dir, s2_sen2cor_nbar_sceneids = s2_sen2cor_nbar(sen2cor_dir, sen2cor_sceneids)
