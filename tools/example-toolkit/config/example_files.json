@@ -1,6 +1,9 @@
 {
-  "repositoryTag": "",
+  "repositoryTag": "v5.0",
   "dataFiles": [
-    ""
+    "https://github.com/M3nin0/reproducible-large-data/releases/download/v5.0/minimal-example_landsat8_data.zip",
+    "https://github.com/M3nin0/reproducible-large-data/releases/download/v5.0/minimal-example_lasrc_auxiliary_data.zip",
+    "https://github.com/M3nin0/reproducible-large-data/releases/download/v5.0/minimal-example_scene_id_list.zip",
+    "https://github.com/M3nin0/reproducible-large-data/releases/download/v5.0/minimal-example_sentinel2_data.zip"
   ]
 }
