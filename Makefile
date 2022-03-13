@@ -1,12 +1,11 @@
 SHELL := /bin/bash
 
 .PHONY: documentation_build \
-				documentation_rstudio \
-				example_download_data \
-				example_base_notebook \
-				example_base_pipeline \
-				example_pipeline \
-				example_notebook
+			documentation_rstudio \
+			example_pipeline \
+			example_notebook \
+			replication_pipeline \
+			replication_notebook
 
 # 
 # Documentation (HTML pages)
@@ -16,41 +15,41 @@ documentation_build:     ## Build the HTML documentation
 		&& ./_build.sh
 
 # 
-# Documentation (Environment - RStudio)
+# Minimal example
 # 
-documentation_rstudio:     ## Create the RStudio Docker instance, used to develop the documentation.
-	docker-compose -f docker-compose.documentation.yaml up
 
-# 
-# Minimal example (Download data)
-# 
-analysis/data/raw_data/%/:
-	docker-compose -f docker-compose.example.yaml up --build
-	
-example_download_data: analysis/data/raw_data/%/  ## Download data to use on the minimal example
+# Data download targets
+analysis/data/examples/minimal_example/raw_data/%/:
+	docker-compose -f composes/minimal/docker-compose.data.yaml up --build
 
-# 
-# Minimal example (Environment - Jupyter Notebook)
-# 
-example_base_notebook:     ## Create the Jupyter-Notebook minimal example instance
-	# Configuring the `.env` used to define required Docker permissions on Jupyter Container.
-	rm -f .env
-	echo "UID=`id -u ${USER}`" > .env
-	echo "GID=`cut -d: -f3 < <(getent group docker)`" >> .env
-	
-	docker-compose -f docker-compose.notebook.yaml up --build
+example_download_data: analysis/data/examples/minimal_example/raw_data/%/  ## Download data to use on the minimal example
 
-# 
-# Minimal example (Environment - Dagster Pipeline)
-# 
-example_base_pipeline:     ## Create the Dagster minimal example instance
-	docker-compose -f docker-compose.pipeline.yaml up --build
+# Environment - Jupyter Notebook
+example_notebook: example_download_data     ## Create the Jupyter-Notebook minimal example instance
+	docker-compose -f composes/minimal/docker-compose.notebook.yaml up --build
 
-# 
-# Complete options for download and execute the minimal example.
-# 
-example_pipeline: example_download_data example_base_pipeline    ## Configure the minimal example data and create the Jupyter-Notebook instance
-example_notebook: example_download_data example_base_notebook    ## Configure the minimal example data and create the Dagster instance
+# Environment - Dagster Pipeline
+example_pipeline: example_download_data   ## Create the Dagster minimal example instance
+	docker-compose -f composes/minimal/docker-compose.pipeline.yaml up --build
+
+#
+# Replication example
+#
+
+# Data download targets
+analysis/data/examples/replication_example/raw_data/%:
+	docker-compose -f composes/replication/docker-compose.data.yaml up --build
+
+replication_download_data: analysis/data/examples/replication_example/raw_data/%  ## Download data to use on the replication example
+
+# Environment - Jupyter Notebook
+replication_notebook: replication_download_data     ## Create the Jupyter-Notebook minimal example instance
+	source setenv.sh \
+		&& docker-compose -f composes/replication/docker-compose.notebook.yaml up --build
+
+# Environment - Dagster Pipeline
+replication_pipeline: replication_download_data   ## Create the Dagster minimal example instance
+	docker-compose -f composes/replication/docker-compose.pipeline.yaml up --build
 
 #
 # Documentation function (thanks for https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html)
