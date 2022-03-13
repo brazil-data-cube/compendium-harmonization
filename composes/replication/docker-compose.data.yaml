@@ -11,7 +11,7 @@ version: "3.2"
 services:
   replication-download-environment:
     build:
-      context: tools/example-toolkit/
+      context: ${PWD}/tools/example-toolkit/
     image: compendium-harmonization/research-processing_download-example:0.1
     container_name: research-processing_download-replication-example
     environment:

@@ -12,8 +12,8 @@ services:
   research-processing-notebook:
     user: ${UID}:${GID}
     build:
-      context: .
-      dockerfile: docker/notebook/Dockerfile
+      context: ${PWD}
+      dockerfile: ${PWD}/docker/notebook/Dockerfile
     image: compendium-harmonization/research-processing_notebook:0.1
     container_name: research-processing_notebook
     environment:
@@ -25,7 +25,7 @@ services:
       #
       # 2. Path to the directory where the data is stored on the local machine (Default is the minimal example directory).
       #
-      - DATA_DIRECTORY=${PWD}/analysis/data/examples/minimal_example
+      - DATA_DIRECTORY=${PWD}/analysis/data/examples/replication_example
     volumes:
 
       #
@@ -46,8 +46,8 @@ services:
       # 5. Volume with the mapping for the input and output directories. 
       #
       - type: bind
-        source: ${PWD}/analysis/data/examples/minimal_example
-        target: ${PWD}/analysis/data/examples/minimal_example # Must be the same path set in the `DATA_DIRECTORY` environment variable.
+        source: ${PWD}/analysis/data/examples/replication_example
+        target: ${PWD}/analysis/data/examples/replication_example # Must be the same path set in the `DATA_DIRECTORY` environment variable.
     ports:
 
       #
