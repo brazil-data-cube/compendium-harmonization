@@ -1,7 +1,15 @@
-# Created by https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks
-# Edit at https://www.toptal.com/developers/gitignore?templates=r,python,jupyternotebooks
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
 
-### Jupyter Notebooks ###
+# Created by https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks,vagrant
+# Edit at https://www.toptal.com/developers/gitignore?templates=r,python,jupyternotebooks,vagrant
+
+### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
@@ -16,17 +24,6 @@ ipython_config.py
 #   git rm -r .ipynb_checkpoints/
 
 ### Python ###
-
-# research-processing example data
-analysis/data/raw_data/*.zip
-analysis/data/raw_data/Landsat8Data
-analysis/data/raw_data/LADS_AuxiliaryData
-analysis/data/raw_data/ReferenceFiles_L8-S2
-analysis/data/raw_data/Sentinel2Data
-
-# PyCharm IDE
-.idea
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -111,7 +108,7 @@ target/
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
 #   intended to run in multiple environments; otherwise, check them in:
-.python-version
+# .python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -119,6 +116,13 @@ target/
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
@@ -163,6 +167,13 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
+
 ### R ###
 # History files
 .Rhistory
@@ -170,6 +181,7 @@ cython_debug/
 
 # Session Data files
 .RData
+.RDataTmp
 
 # User-specific files
 .Ruserdata
@@ -207,30 +219,21 @@ vignettes/*.pdf
 # translation temp files
 po/*~
 
-# renv
-*local/
-*lock/
-*python/
-*staging/
+# RStudio Connect folder
+rsconnect/
 
 ### R.Bookdown Stack ###
 # R package: bookdown caching files
 /*_files/
 
-# Others (From bookdown-example)
-.Rproj.user
-.Rhistory
-.RData
-_publish.R
-_book
-_bookdown_files
-rsconnect
+### Vagrant ###
+# General
+.vagrant/
 
-# renv
-library/
-local/
-lock/
-python/
-staging/
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
 
-# End of https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks
+### Vagrant Patch ###
+*.box
+
+# End of https://www.toptal.com/developers/gitignore/api/r,python,jupyternotebooks,vagrant

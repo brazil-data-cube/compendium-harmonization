@@ -1,0 +1,136 @@
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+#
+# General configuration
+#
+docs_dir: pages
+site_name: Harmonization Compendium Documentation
+
+repo_name: marujore/compendium-harmonization
+repo_url: https://github.com/marujore/compendium-harmonization
+
+extra_css:
+  - assets/static/css/extra.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - assets/static/js/tablesort.js
+
+theme:
+  name: material
+  font:
+    code: "Roboto Mono"
+
+  palette:
+    - scheme: default
+      primary: "Blue Grey"
+      accent: "Blue Grey"
+
+  language: en
+  
+  features:
+    - navigation.top
+    - navigation.indexes
+    - navigation.sections
+
+    - search.share
+    - search.suggest
+    - search.highlight
+
+    - toc.follow
+  icon:
+    logo: material/test-tube
+
+#
+# Plugins
+#
+plugins:
+  - search
+  - i18n:
+      default_language: pt
+      languages:
+        en:
+          name: English
+          build: true
+        pt:
+          name: Brazilian Portuguese
+          build: true
+      nav_translations:
+        pt:
+          "Home": "Home"
+          "Introduction": "Introdução"
+          "Compendium Reference": "Referência"
+          "Software libraries": "Bibliotecas de software"
+          "Processing scripts": "Scripts de processamento"
+          "Auxiliary scripts": "Scripts auxiliares"
+          "Computational environments": "Ambientes computacionais"
+          "Reproducible Research": "Pesquisa reprodutível"
+          "Reproduction and Replication": "Reprodução e replicação"
+          "Minimal example": "Exemplo mínimo"
+          "Replication example": "Exemplo de replicação"
+          "Data processing": "Processamento de dados"
+
+        en:
+          "Home": "Home"
+          "Introduction": "Introduction"
+          "Software libraries": "Software libraries"
+          "Processing scripts": "Processing scripts"
+          "Auxiliary scripts": "Auxiliary scripts"
+          "Computational environments": "Computational environments"
+          "Reproducible Research": "Reproducible Research"
+          "Reproduction and Replication": "Reproduction and Replication"
+          "Minimal example": "Minimal example"
+          "Replication example": "Replication example"
+          "Data processing": "Data processing"
+
+#
+# Documentation pages
+#
+nav:
+  - Home: "index.md"
+  - "Compendium Reference":
+      - "Introduction": "tools/index.md"
+      - "Software libraries": "tools/libraries/index.md"
+      - "Processing scripts": "tools/processing/index.md"
+      - "Auxiliary scripts": "tools/utilitary/index.md"
+      - "Computational environments": "tools/environment/index.md"
+  - "Data processing":
+      - "Introduction": "reproducible-research/index.md"
+      - "Minimal example": "reproducible-research/minimal-example/index.md"
+      - "Replication example": "reproducible-research/replication-example/index.md"
+
+#
+# Customization
+#
+extra:
+  social:
+  - icon: "fontawesome/brands/github"
+    link: "https://github.com/marujore/compendium-harmonization"
+
+#
+# Extensions
+#
+markdown_extensions:
+  - abbr
+  - tables
+  - def_list
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.snippets
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg

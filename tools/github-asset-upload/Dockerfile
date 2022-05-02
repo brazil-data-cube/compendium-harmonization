@@ -1,3 +1,11 @@
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
 # Image: rocker/r-ver
 # Image Tag: 4.0.2
 # Dockerhub URL: https://hub.docker.com/layers/rocker/r-ver/4.0.2/images/sha256-a1d68ac7723fdc3dbbbbf2ff8214a97ccfa66f75b32a35c1e280d29357c87cef?context=explore

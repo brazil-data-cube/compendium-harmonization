@@ -1,10 +1,11 @@
 #
-# This file is part of research-processing library
-# Copyright (C) 2021 INPE.
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
 #
-# research-processing is free software; you can redistribute it and/or modify it
+# compendium-harmonization is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
+
 import tqdm
 import requests
 

@@ -1,55 +1,73 @@
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
 SHELL := /bin/bash
 
-.PHONY: documentation_build \
-			documentation_rstudio \
-			example_pipeline \
-			example_notebook \
-			replication_pipeline \
-			replication_notebook
-
-# 
-# Documentation (HTML pages)
-# 
-documentation_build:     ## Build the HTML documentation
-	cd docs \
-		&& ./_build.sh
+.PHONY: example_cleanup_data \
+		example_download_data \
+		example_pipeline \
+		example_notebook \
+		replication_cleanup_data \
+		replication_download_data \
+		replication_pipeline \
+		replication_notebook
 
 # 
 # Minimal example
 # 
 
+# Utilities
+example_cleanup_data:       ## Clean all input/output data generated during the minimal example execution
+	rm -rf analysis/data/examples/minimal_example/* \
+		&& mkdir -p analysis/data/examples/minimal_example/raw_data \
+		&& mkdir -p analysis/data/examples/minimal_example/derived_data
+
 # Data download targets
-analysis/data/examples/minimal_example/raw_data/%/:
+example_download_data:      ## Download data to use on the minimal example
 	docker-compose -f composes/minimal/docker-compose.data.yaml up --build
 
-example_download_data: analysis/data/examples/minimal_example/raw_data/%/  ## Download data to use on the minimal example
+# Environment - Dagster Pipeline
+example_pipeline:           ## Create the Dagster for the minimal example execution.
+	docker-compose -f composes/minimal/docker-compose.pipeline.yaml up --build
 
 # Environment - Jupyter Notebook
-example_notebook: example_download_data     ## Create the Jupyter-Notebook minimal example instance
-	docker-compose -f composes/minimal/docker-compose.notebook.yaml up --build
-
-# Environment - Dagster Pipeline
-example_pipeline: example_download_data   ## Create the Dagster minimal example instance
-	docker-compose -f composes/minimal/docker-compose.pipeline.yaml up --build
+example_notebook:           ## Create the Jupyter-Notebook for the minimal example execution.
+	./setenv.sh \
+		&& docker-compose \
+			--project-directory ${PWD} \
+			-f composes/minimal/docker-compose.notebook.yaml up \
+			--build
 
 #
 # Replication example
 #
 
+# Utilities
+replication_cleanup_data:   ## Clean all input/output data generated during the replication example execution
+	rm -rf analysis/data/examples/replication_example/* \
+		&& mkdir -p analysis/data/examples/replication_example/raw_data \
+		&& mkdir -p analysis/data/examples/replication_example/derived_data
+
 # Data download targets
-analysis/data/examples/replication_example/raw_data/%:
+replication_download_data:  ## Download data to use on the replication example
 	docker-compose -f composes/replication/docker-compose.data.yaml up --build
 
-replication_download_data: analysis/data/examples/replication_example/raw_data/%  ## Download data to use on the replication example
+# Environment - Dagster Pipeline
+replication_pipeline:       ## Create the Dagster for the replication example execution.
+	docker-compose -f composes/replication/docker-compose.pipeline.yaml up --build
 
 # Environment - Jupyter Notebook
-replication_notebook: replication_download_data     ## Create the Jupyter-Notebook minimal example instance
-	source setenv.sh \
-		&& docker-compose -f composes/replication/docker-compose.notebook.yaml up --build
-
-# Environment - Dagster Pipeline
-replication_pipeline: replication_download_data   ## Create the Dagster minimal example instance
-	docker-compose -f composes/replication/docker-compose.pipeline.yaml up --build
+replication_notebook:       ## Create the Jupyter-Notebook for the replication example execution.
+	./setenv.sh \
+		&& docker-compose \
+			--project-directory ${PWD} \
+			-f composes/replication/docker-compose.notebook.yaml up \
+			--build
 
 #
 # Documentation function (thanks for https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html)

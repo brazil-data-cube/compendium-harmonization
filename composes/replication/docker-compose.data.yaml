@@ -1,19 +1,21 @@
 #
-# This file is part of research-processing library
-# Copyright (C) 2021 INPE.
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
 #
-# research-processing is free software; you can redistribute it and/or modify it
+# compendium-harmonization is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
 version: "3.2"
 
 services:
-  replication-download-environment:
+  example-replication-download-data:
+
     build:
       context: ${PWD}/tools/example-toolkit/
-    image: compendium-harmonization/research-processing_download-example:0.1
-    container_name: research-processing_download-replication-example
+    image: marujore/example-toolkit-docker:latest
+    container_name: example-replication-download-data
+
     environment:
       #
       # 1. Environment variables used to define the input/output directories (Outside the Container).

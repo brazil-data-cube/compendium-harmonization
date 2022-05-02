@@ -1,11 +1,18 @@
 #!/bin/bash
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
 
 #
 # 1. Base user
 #
-export COMPENDIUM_UID=`id -u ${USER}`
+echo "UID=`id -u ${USER}`" > .env
 
 #
 # 2. Docker group
 #
-export COMPENDIUM_GID=`cut -d: -f3 < <(getent group docker)`
+echo "GID=`cut -d: -f3 < <(getent group docker)`" >> .env

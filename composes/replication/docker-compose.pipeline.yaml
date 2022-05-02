@@ -1,25 +1,28 @@
 #
-# This file is part of research-processing library
-# Copyright (C) 2021 INPE.
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
 #
-# research-processing is free software; you can redistribute it and/or modify it
+# compendium-harmonization is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
 version: "3.2"
 
 services:
-  research-processing-dagster:
+  example-replication-pipeline:
+
     build:
       context: ${PWD}
       dockerfile: ${PWD}/docker/pipeline/Dockerfile
-    image: compendium-harmonization/research-processing_dagster:0.1
-    container_name: research-processing_dagster-pipeline
+    image: marujore/research-processing-dagster:latest
+    container_name: example-replication-pipeline
+
     environment:
       #
       # 1. Path to the directory where the data is stored on the local machine (Default is the minimal example directory).
       #
       - DATA_DIRECTORY=${PWD}/analysis/data/examples/replication_example
+
     volumes:
 
       #
@@ -35,11 +38,13 @@ services:
       - type: bind
         source: ${PWD}/analysis/data/examples/replication_example
         target: ${PWD}/analysis/data/examples/replication_example  # Must be the same path set in the `DATA_DIRECTORY` environment variable.
+
     ports:
       #
       # 4. Network port to access the DagIt web interface.
       #
       - "3000:3000"
+
     restart: on-failure
     networks:
       - research_processing_network
