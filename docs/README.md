@@ -20,4 +20,4 @@ That's it! Now access the address [http://127.0.0.1:8000/](http://127.0.0.1:8000
 
 ## Acknowledgments
 
-The documentation was created with [mkdocs](https://www.mkdocs.org/) using the [Material] theme (https://squidfunk.github.io/mkdocs-material/). Many thanks to the developers of both projects.
+The documentation was created with [mkdocs](https://www.mkdocs.org/) using the [Material](https://squidfunk.github.io/mkdocs-material/) theme. Many thanks to the developers of both projects.
