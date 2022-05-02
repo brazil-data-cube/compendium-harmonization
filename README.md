@@ -60,9 +60,9 @@ In addition to these directories, some files are fundamental to using the materi
 
 <!-- ToDo: Update the documentation link -->
 
-To learn more about the materials, scripts, computing environments, and data, of this RC, please refer to the official documentation:[link to official documentation here](#)
+To learn more about the materials, scripts, computing environments, and data, of this RC, please refer to the official documentation: [link to official documentation here](#)
 
-### Licenses
+#### Licenses
 
 **Code :** [MIT](LICENSE);
 
