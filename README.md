@@ -1,108 +1,72 @@
-# Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable environment
+### Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow
 
-This repository is a Research Compendium of the article: "Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable environment".
+[![rc](https://img.shields.io/badge/research%20compendium-ready-brightgreen)](#)
 
-Input images: Lansat-8/OLI and Sentinel-2/MSI. Source: http://earthexplorer.usgs.gov/ and https://scihub.copernicus.eu/dhus/#/home.
+This is the official `Research Compendium` (RC) documentation, with all the materials (Codes, data, and computing environments) needed for the reproduction, replication, and evaluation of the results presented in the paper:
 
-Authors: Rennan de Freitas Bezerra Marujo (https://orcid.org/0000-0002-0082-9498), Felipe M. Carlos (0000-0002-3334-4315), Raphael W. Costa (), Carlos A. F. Noronha (), José Guilherme Fronza (https://orcid.org/0000-0002-0830-8101), Jeferson de Souza Arcanjo (), Anderson Soares (https://orcid.org/0000-0001-6513-2192), Gilberto R. Queiroz (https://orcid.org/0000-0001-7534-0219) and Karine R. Ferreira (https://orcid.org/0000-0003-2656-5504)
+> Marujo *et al* (2022). `Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow`. This Paper will be submitted in June 2022.
 
-## 1. Environment Preparation
-To replicate this article `docker` is required.
+#### Research Compendium Content
 
-You can build the docker images (harmonization/environment/docker-files directory) or import them (harmonization/environment/docker-images directory);
+The organization defined for this RC, aims to facilitate the use of the codes implemented to generate the results presented in the article. The processing codes are made available in a structure of [examples](/en/reproducible-research/) that allow the execution without difficulties, making it possible for others to reproduce and replicate the study performed.
 
-### 1.1 Docker: Sen2cor
-Load the image by:
-`cd harmonization/environment/docker-images`
+These codes are stored in the `analysis` directory, which has three subdirectories:
 
-`docker load < sen2cor-fmask-2.9.0.tar.gz`
+- [:file_folder: analysis/notebook](analysis/notebook): Directory with the Jupyter Notebook version of the processing flow implemented in the article associated with this RC. For more information, see the Reference Section [Processing Scripts](/en/tools/processing/);
 
-### 1.2 Docker: LaSRC LEDAPS Fmask
-Load the image by:
-`cd harmonization/environment/docker-images`
+- [:file_folder: analysis/pipeline](analysis/pipeline): Directory with the Dagster version of the processing flow implemented in the article associated with this RC. For more information, see the Reference Section [Processing Scripts](/en/tools/processing/);
 
-`docker load < lasrc_ledaps_fmask43.tar.gz`
+- [:file_folder: analysis/data](analysis/data/): Directory for storing the generated input and output data. It contains the following subdirectories:
 
-### 1.3 Docker: Landsat Angle Bands
-Load the image by:
+    - [:file_folder: examples](analysis/data/examples): Directory with the data (Input/Output) of the examples provided in this RC. For more information about the examples, see Chapter [Data Processing](/en/reproducible-research/); 
 
-`cd harmonization/environment/docker-images`
+    - [:file_folder: original_scene_ids](analysis/data/original_scene_ids): Directory for storing the original scene id index files used to produce the article results. This data can be applied to the codes provided in the [analysis/notebook](analysis/notebook) and [analysis/pipeline](analysis/pipeline) directories for reproducing the article results.
 
-`docker load < l8angs.tar.gz`
+By default, the input data, because of the size of the files, is not stored directly in the data directory (`analysis/data/`). Instead, as described in detail in the Reference Section [Helper scripts](/en/tools/utilitary/), they are made available in the GitHub Release Assets of the RC repository.
 
-### 1.4 Docker: NBAR
-Load the image by:
+To build the [processing scripts](/en/tools/processing/) available in the `analysis` directory, we have created several [software libraries](/pt/tools/libraries/) and [scripts auxiliary](/en/tools/utilitary/). The source code for some of these tools is available in the `tools` directory. In this directory there are four subdirectories, namely:
 
-`cd harmonization/environment/docker-images`
+- [:file_folder: tools/auxiliary-library](tools/auxiliary-library): Source code for the [research-processing](/en/tools/libraries/#research-processing-python-library-research-processing) library , which provides the high-level operations for processing the data in this RC;
 
-`docker load < nbar.tar.gz`
+- [:file_folder: tools/calculate-checksum](tools/calculate-checksum): Source code of script [calculate-checksum](/en/tools/utilitary/#calculate-checksum-e-github-asset-upload), created to calculate the checksum of the files in this RC before sharing;
 
-## 2. Input data preparation
+- [:file_folder: tools/example-toolkit](tools/example-toolkit): Source code of the script [example-toolkit](/en/tools/utilitarian/#example-toolkit), created to facilitate the download and validation of example data from the GitHub Release Assets;
 
-### 2.1 Extract Sentinel-2 Data
-`mkdir -p harmonization/work/s2/`
+- [:file_folder: tools/github-asset-upload](tools/github-asset-upload): Source code of the script [github-asset-upload](/en/tools/utilitary/#calculate-checksum-e-github-asset-upload), created to facilitate the upload of example data to the GitHub Release Assets.
 
-`for f in harmonization/input/data/s2_compressed/*.zip; do
-    unzip $f -d harmonization/work/s2/
-done`
+Another directory available in this RC is `composes`. In this directory are [Docker Compose](https://docs.docker.com/compose/) configuration files for the computing environments needed to run the examples available in this RC. For more information about the RC computing environments, see the Reference Section [Computing Environments](/environment/).
 
-### 2.2 Extract Landsat-8 Data
-`mkdir -p harmonization/work/l8/`
+In the `composes` directory, there are two subdirectories:
 
-`for f in harmonization/input/data/l8_compressed/*.tar; do
-    tar xf $f --directory harmonization/work/l8 --one-top-level
-done`
+- [:file_folder: composes/minimal](composes/minimal): Directory with the Docker Composes to run the [Minimal example](/en/reproducible-research/minimal-example/) provided in this RC;
 
+- [:file_folder: composes/replication](composes/replication): Directory with the Docker Composes to run the [Replication example](/en/reproducible-research/replication-example/) provided in this RC.
 
-## 3. Process Surface Reflectance Data
+For more information about the examples, see Section [Data Processing](/en/reproducible-research/).
 
-The obtained Landsat-8 images are already surface reflectance products.
-So let's process Sentinel-2 images.
+Complementary to the `composes` directory is the `docker` directory. This directory holds the [Dockerfile](https://docs.docker.com/engine/reference/builder/) files used to build the environments used in Docker Composes. This directory has two subdirectories:
 
-### 3.1 Processing Sentinel-2 through Sen2cor 2.9.0 and Fmask 4.3
-Open `process-sr_s2_sen2cor.py` and edit the paths.
-After that, run `process-sr_s2_sen2cor.py` to obtain the running commands and execute them.
+- [:file_folder: docker/notebook](docker/notebook): Directory with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) of the environment required for [running the Jupyter Notebook version](/environment/#jupyter-notebook) of this RC process stream.
 
-### 3.2 Processing Sentinel-2 through LaSRC 2.0.1 and Fmask 4.3
-Download LaSRC auxiliary files (https://edclpdsftp.cr.usgs.gov/downloads/auxiliaries/lasrc_auxiliary/)
+- [:file_folder: docker/pipeline](docker/pipeline): Directory with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) of the environment needed for [running the Dagster version](/en/tools/environment/#dagster) of this RC process stream.
 
-Open `process-sr_s2_lasrc.py` and edit the paths.
-After that, run `process-sr_s2_lasrc.py` to obtain the running commands and execute them.
+In addition to these directories, some files are fundamental to using the materials in this RC:
 
-## 4. Process NBAR
-Now let's process the NBAR
-### 4.1 Landsat-8 NBAR
-#### 4.1.1 Generate Landsat Angle Bands
-Open `generate-angle_l8.py` to edit the paths and execute it to obtain the running commands. After that, execute them.
-#### 4.1.2 Processing Landsat-8 NBAR
-Open `process-nbar_l8.py` to edit the paths and execute it to obtain the running commands. After that, execute them.
+- [Vagrantfile](Vagrantfile) and [bootstrap.sh](bootstrap.sh): [Vagrant](https://www.vagrantup.com/) files used to build a virtual machine with the complete environment for running the [Processing scripts](/en/tools/processing/) available in the `analysis` directory. For more information, see the reference section [Computing Environments - Virtual Machine with Vagrant](/en/tools/environment/#virtual-machine-with-vagrant);
 
-### 4.2 Sentinel-2 NBAR
-### 4.2.1 Processing Sentinel-2 Sen2cor NBAR
-Open `process-nbar_s2_sen2cor` to edit the paths and execute it to obtain the running commands. After that, execute them.
-### 4.2.3 Copy Sentinel-2 Angle Bands to SR products folder
-Open `copy-s2_angle-bands.py` to edit the paths and execute it.
-### 4.2.4 Processing Sentinel-2 LaSRC NBAR
-Open `process-nbar_s2_lasrc.py` to edit the paths and execute it to obtain the running commands and execute them.
+- [Makefile](Makefile): `GNU Make` definition file to make the use of the materials available in the `analysis` and `composes` directories easier. The [setenv.sh](setenv.sh) file is used by `Makefile` to define the user who will run Jupyter Notebook environment. More information is provided in Section [Data Processing](/en/reproducible-research/).
 
-## 5. Validation
+#### Documentation
 
-### 5.1 L8 SR-NBAR Comparison
-Open `validation-nbar_l8` to edit the paths and execute it.
-### 5.2 S2 SR-NBAR Sen2cor Comparison
-Open `validation-nbar_s2_sen2cor` to edit the paths and execute it.
-### 5.3 S2 SR-NBAR LaSRC Comparison
-Open `validation-nbar_s2_lasrc` to edit the paths and execute it.
-### 5.4 L8 vs S2 SR Sen2cor Comparison
-Open `validation-sr_l8_s2_sen2cor` to edit the paths and execute it.
-### 5.5 L8 vs S2 SR LaSRC Comparison
-Open `validation-sr_l8_s2_lasrc` to edit the paths and execute it.
-### 5.6 L8 vs S2 NBAR Sen2cor Comparison
-Open `validation-nbar_l8_s2_sen2cor` to edit the paths and execute it.
-### 5.7 L8 vs S2 NBAR LaSRC Comparison
-Open `validation-nbar_l8_s2_lasrc.py` to edit the paths and execute it.
-## Citation
+<!-- ToDo: Update the documentation link -->
 
-### Formated Citation
+To learn more about the materials, scripts, computing environments, and data, of this RC, please refer to the official documentation: [link to official documentation here](#)
 
-### Bibtex
+#### Licenses
+
+**Code :** [MIT](LICENSE);
+
+**Data :** [CC-0](http://creativecommons.org/publicdomain/zero/1.0/);
+
+**Text and figures:**
+[CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/);

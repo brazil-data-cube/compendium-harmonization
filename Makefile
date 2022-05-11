@@ -1,56 +1,73 @@
+#
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
+#
+# compendium-harmonization is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
 SHELL := /bin/bash
 
-.PHONY: documentation_build \
-				documentation_rstudio \
-				example_download_data \
-				example_base_notebook \
-				example_base_pipeline \
-				example_pipeline \
-				example_notebook
+.PHONY: example_cleanup_data \
+		example_download_data \
+		example_pipeline \
+		example_notebook \
+		replication_cleanup_data \
+		replication_download_data \
+		replication_pipeline \
+		replication_notebook
 
 # 
-# Documentation (HTML pages)
+# Minimal example
 # 
-documentation_build:     ## Build the HTML documentation
-	cd docs \
-		&& ./_build.sh
 
-# 
-# Documentation (Environment - RStudio)
-# 
-documentation_rstudio:     ## Create the RStudio Docker instance, used to develop the documentation.
-	docker-compose -f docker-compose.documentation.yaml up
+# Utilities
+example_cleanup_data:       ## Clean all input/output data generated during the minimal example execution
+	rm -rf analysis/data/examples/minimal_example/* \
+		&& mkdir -p analysis/data/examples/minimal_example/raw_data \
+		&& mkdir -p analysis/data/examples/minimal_example/derived_data
 
-# 
-# Minimal example (Download data)
-# 
-analysis/data/raw_data/%/:
-	docker-compose -f docker-compose.example.yaml up --build
-	
-example_download_data: analysis/data/raw_data/%/  ## Download data to use on the minimal example
+# Data download targets
+example_download_data:      ## Download data to use on the minimal example
+	docker-compose -f composes/minimal/docker-compose.data.yaml up --build
 
-# 
-# Minimal example (Environment - Jupyter Notebook)
-# 
-example_base_notebook:     ## Create the Jupyter-Notebook minimal example instance
-	# Configuring the `.env` used to define required Docker permissions on Jupyter Container.
-	rm -f .env
-	echo "UID=`id -u ${USER}`" > .env
-	echo "GID=`cut -d: -f3 < <(getent group docker)`" >> .env
-	
-	docker-compose -f docker-compose.notebook.yaml up --build
+# Environment - Dagster Pipeline
+example_pipeline:           ## Create the Dagster for the minimal example execution.
+	docker-compose -f composes/minimal/docker-compose.pipeline.yaml up --build
 
-# 
-# Minimal example (Environment - Dagster Pipeline)
-# 
-example_base_pipeline:     ## Create the Dagster minimal example instance
-	docker-compose -f docker-compose.pipeline.yaml up --build
+# Environment - Jupyter Notebook
+example_notebook:           ## Create the Jupyter-Notebook for the minimal example execution.
+	./setenv.sh \
+		&& docker-compose \
+			--project-directory ${PWD} \
+			-f composes/minimal/docker-compose.notebook.yaml up \
+			--build
 
-# 
-# Complete options for download and execute the minimal example.
-# 
-example_pipeline: example_download_data example_base_pipeline    ## Configure the minimal example data and create the Jupyter-Notebook instance
-example_notebook: example_download_data example_base_notebook    ## Configure the minimal example data and create the Dagster instance
+#
+# Replication example
+#
+
+# Utilities
+replication_cleanup_data:   ## Clean all input/output data generated during the replication example execution
+	rm -rf analysis/data/examples/replication_example/* \
+		&& mkdir -p analysis/data/examples/replication_example/raw_data \
+		&& mkdir -p analysis/data/examples/replication_example/derived_data
+
+# Data download targets
+replication_download_data:  ## Download data to use on the replication example
+	docker-compose -f composes/replication/docker-compose.data.yaml up --build
+
+# Environment - Dagster Pipeline
+replication_pipeline:       ## Create the Dagster for the replication example execution.
+	docker-compose -f composes/replication/docker-compose.pipeline.yaml up --build
+
+# Environment - Jupyter Notebook
+replication_notebook:       ## Create the Jupyter-Notebook for the replication example execution.
+	./setenv.sh \
+		&& docker-compose \
+			--project-directory ${PWD} \
+			-f composes/replication/docker-compose.notebook.yaml up \
+			--build
 
 #
 # Documentation function (thanks for https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html)

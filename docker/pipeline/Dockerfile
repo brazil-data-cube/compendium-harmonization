@@ -1,8 +1,8 @@
 #
-# This file is part of research-processing library
-# Copyright (C) 2021 INPE.
+# This file is part of compendium-harmonization
+# Copyright (C) 2021-2022 INPE.
 #
-# research-processing is free software; you can redistribute it and/or modify it
+# compendium-harmonization is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
@@ -67,8 +67,7 @@ RUN conda env update --file environment.yml --prune
 #
 COPY tools/auxiliary-library/ /opt/compendium/research_processing
 
-RUN cd /opt/compendium/research_processing \
-    && python3 setup.py install
+RUN pip3 install /opt/compendium/research_processing
 
 #
 # 8. Defining the working directory and DagIt entrypoint
