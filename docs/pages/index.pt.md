@@ -8,7 +8,7 @@ Essa é a documentação oficial do `Research Compendium` (RC), com todos os mat
 
 !!! quote ""
 
-    Marujo *et al* (2022). `Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow`. Paper será submetido em Junho de 2022. 
+    Marujo *et al* (2022). `Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow`. Paper será submetido em Junho de 2022.
 
 #### Organização do Research Compendium
 
@@ -22,7 +22,7 @@ Esses códigos, são armazenados no diretório `analysis`, o qual possui três s
 
 - [:file_folder: analysis/data](analysis/data/): Diretório para armazenar os dados de entrada e saída gerados. Contém os seguintes subdiretórios:
 
-    - [:file_folder: examples](analysis/data/examples): Diretório com os dados (Entrada/Saída) dos exemplos disponibilizados neste RC. Ao todo, são dois exemplos. Para mais informações sobre os exemplos, consulte o Capítulo [Processamento de dados](/pt/reproducible-research/); 
+    - [:file_folder: examples](analysis/data/examples): Diretório com os dados (Entrada/Saída) dos exemplos disponibilizados neste RC. Ao todo, são dois exemplos. Para mais informações sobre os exemplos, consulte o Capítulo [Processamento de dados](/pt/reproducible-research/);
 
     - [:file_folder: original_scene_ids](analysis/data/original_scene_ids): Diretório para armazenar os arquivos de índices de cenas originais utilizados na produção dos resultados dos artigos. Esses dados podem ser aplicados nos códigos disponibilizados nos diretórios [analysis/notebook](analysis/notebook) e [analysis/pipeline](analysis/pipeline) para a reprodução do resultados do artigo.
 

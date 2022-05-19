@@ -12,9 +12,9 @@ Para o compartilhamento deste RC, foi adotada uma estratégia em que todos os ma
 
 O armazenamento de materiais como os *scripts* e a documentação não requerem muito espaço em disco. Com isso, o uso do GitHub foi feito diretamente, sem a necessidade de modificações. No entanto, os dados auxiliares, que são utilizadas nos exemplos de execução e replicação disponíveis neste RC, possuem tamanhos que os tornam inviáveis para versionamento em repositórios git comum. Como alternativa, adotou-se a abordagem da publicação desses dados através dos [Release Assets](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github). Com essa alternativa, arquivos com até 2 GB podem ser publicados e mantidos associados no repositório.
 
-Com isso, fez-se necessário a preparação e organização dos dados, de modo que eles pudessem ser compartilhados no GitHub Release Assets. Para essa preparação, fez-se a criação de dois *scripts* auxiliares: 
+Com isso, fez-se necessário a preparação e organização dos dados, de modo que eles pudessem ser compartilhados no GitHub Release Assets. Para essa preparação, fez-se a criação de dois *scripts* auxiliares:
 
-`Calculate Checksum` 
+`Calculate Checksum`
 
 :   `Calculate Checksum` é um *script* Python que realiza a criação de [BagIt](https://datatracker.ietf.org/doc/html/rfc8493) e faz seu armazenamento em arquivos `zip`.
 
@@ -48,7 +48,7 @@ Conforme pode ser visto na figura acima, inicialmente, o `Example toolkit` reali
 
     Caso você deseje saber mais sobre como o Dagster é utilizado neste RC e onde o arquivo de configuração deve ser utilizado, consulte a Seção [Scripts de processamento - Dagster](/pt/tools/processing/#arquivo-de-configuracao-dagster).
 
-Nas próxima seção, é feita a apresentação de como o `Example toolkit` é configurado e executado.
+Na próxima seção, é feita a apresentação de como o `Example toolkit` é configurado e executado.
 
 #### Utilização
 
@@ -65,14 +65,14 @@ Por se tratar de um *script* Python, a utilização do `Example toolkit`, requer
     Para realizar a configuração manual do ambiente Python junto as dependências necessárias a utilização do `Example toolkit`, você pode utilizar o [conda](https://docs.conda.io/en/latest/). Com esse gerenciador de pacote, você pode criar um novo ambiente que possui todas as dependências exigidas pelo `Example toolkit`. Para criar esse ambiente, utilize o arquivo `environment.yml` que está disponível no diretório [tools/example-toolkit](#):
 
     ``` shell
-    conda env create -f environment.yml 
+    conda env create -f environment.yml
     ```
 
 A primeira etapa necessária para a execução do `Example toolkit` é a definição das configurações que devem ser consideradas. Essas configurações, serão utilizadas para determinar o local onde os dados baixados serão salvos. São definidos também alguns parâmetros que auxiliam o *script* na geração do arquivo de configuração Dagster. A definição dessas configurações é feita através de variáveis de ambiente. Ao todo, as seguintes variáveis de ambiente devem ser declaradas:
 
 <!-- ToDo: Atualizar o link do Exemplo mínimo e replicação para o github -->
 
-`DOWNLOAD_REFERENCE_FILE` 
+`DOWNLOAD_REFERENCE_FILE`
 
 :   Variável de ambiente para determinar o caminho absoluto para o arquivo `JSON` que define o endereço dos dados que serão baixados do GitHub Assets Release. Exemplos desse arquivo podem ser encontrados no diretório [tools/example-toolkit/config](#) deste RC.
 :   *Exemplo de valor*: `/compendium/config/example-toolkit.json`

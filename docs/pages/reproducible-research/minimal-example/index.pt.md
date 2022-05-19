@@ -141,8 +141,8 @@ Para fazer o uso dos notebooks e processar os dados, você deve utilizar o coman
 ``` sh
 make example_notebook
 
-#> (omitted)    | [C 2022-05-02 02:09:19.813 ServerApp] 
-#> (omitted)    |     
+#> (omitted)    | [C 2022-05-02 02:09:19.813 ServerApp]
+#> (omitted)    |
 #> (omitted)    |     To access the server, open this file in a browser:
 #> (omitted)    |         file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
 #> (omitted)    |     Or copy and paste one of these URLs:
@@ -179,23 +179,23 @@ Após a execução, os produtos gerados estarão disponíveis no diretório `ana
 
 ## Processando dados com Dagster
 
-A segunda abordagem para o processamento dos dados baixados é feita com o uso do Dagster. Com essa ferramenta, faz-se a execução do fluxo de processamento dos dados em formato *batch*.
+A segunda abordagem para o processamento dos dados baixados é feita com o uso do Dagster. Com essa ferramenta faz-se a execução do fluxo de processamento dos dados em formato *batch*.
 
 !!! tip "Mais Dagster"
 
     Para saber mais sobre os Dagster neste RC, consulte a Seção [Scripts de processamento - Dagster](/pt/tools/processing/#dagster).
 
-Para fazer o uso do Dagster e processar os dados, você deve utilizar o comando `example_pipeline` através do `GNU Make`. Esse comando, fará a configuração do Container para que você possa executar acessar o Dagster através da interface [DagIt](https://docs.dagster.io/0.12.15/concepts/dagit/dagit):
+Para fazer o uso do Dagster e processar os dados, você deve utilizar o comando `example_pipeline` através do `GNU Make`. Esse comando fará a configuração do Container para que você possa acessar o Dagster através da interface [DagIt](https://docs.dagster.io/0.12.15/concepts/dagit/dagit):
 
 ``` sh
 make example_pipeline
 
 #> (omitted)
 #> (omitted)    |   Welcome to Dagster!
-#> (omitted)    | 
+#> (omitted)    |
 #> (omitted)    |   If you have any questions or would like to engage with the Dagster team, please join us on Slack
 #> (omitted)    |   (https://bit.ly/39dvSsF).
-#> (omitted)    | 
+#> (omitted)    |
 #> (omitted)    | Serving on http://0.0.0.0:3000 in process 1
 ```
 

@@ -10,7 +10,7 @@ This is the official `Research Compendium` (RC) documentation, with all the mate
 
 The organization defined for this RC, aims to facilitate the use of the codes implemented to generate the results presented in the article. The processing codes are made available in a structure of [examples](/en/reproducible-research/) that allow the execution without difficulties, making it possible for others to reproduce and replicate the study performed.
 
-These codes are stored in the `analysis` directory, which has three subdirectories:
+These codes are stored in the [:file_folder: analysis](analysis) directory, which has three subdirectories:
 
 - [:file_folder: analysis/notebook](analysis/notebook): Directory with the Jupyter Notebook version of the processing flow implemented in the article associated with this RC. For more information, see the Reference Section [Processing Scripts](/en/tools/processing/);
 
@@ -18,13 +18,13 @@ These codes are stored in the `analysis` directory, which has three subdirectori
 
 - [:file_folder: analysis/data](analysis/data/): Directory for storing the generated input and output data. It contains the following subdirectories:
 
-    - [:file_folder: examples](analysis/data/examples): Directory with the data (Input/Output) of the examples provided in this RC. For more information about the examples, see Chapter [Data Processing](/en/reproducible-research/); 
+    - [:file_folder: examples](analysis/data/examples): Directory with the data (Input/Output) of the examples provided in this RC. For more information about the examples, see Chapter [Data Processing](/en/reproducible-research/);
 
     - [:file_folder: original_scene_ids](analysis/data/original_scene_ids): Directory for storing the original scene id index files used to produce the article results. This data can be applied to the codes provided in the [analysis/notebook](analysis/notebook) and [analysis/pipeline](analysis/pipeline) directories for reproducing the article results.
 
 By default, the input data, because of the size of the files, is not stored directly in the data directory (`analysis/data/`). Instead, as described in detail in the Reference Section [Helper scripts](/en/tools/utilitary/), they are made available in the GitHub Release Assets of the RC repository.
 
-To build the [processing scripts](/en/tools/processing/) available in the `analysis` directory, we have created several [software libraries](/pt/tools/libraries/) and [scripts auxiliary](/en/tools/utilitary/). The source code for some of these tools is available in the `tools` directory. In this directory there are four subdirectories, namely:
+To build the [processing scripts](/en/tools/processing/) available in the `analysis` directory, we have created several [software libraries](/pt/tools/libraries/) and [auxiliary scripts](/en/tools/utilitary/). The source code for some of these tools is available in the [:file_folder: tools](tools) directory. In this directory there are four subdirectories, namely:
 
 - [:file_folder: tools/auxiliary-library](tools/auxiliary-library): Source code for the [research-processing](/en/tools/libraries/#research-processing-python-library-research-processing) library , which provides the high-level operations for processing the data in this RC;
 
@@ -60,7 +60,7 @@ In addition to these directories, some files are fundamental to using the materi
 
 <!-- ToDo: Update the documentation link -->
 
-To learn more about the materials, scripts, computing environments, and data, of this RC, please refer to the official documentation: [link to official documentation here](#)
+To learn more about the materials, scripts, computing environments, and data, of this RC, please refer to the official documentation: [https://github.com/brazil-data-cube/compendium-harmonization](#)
 
 #### Licenses
 

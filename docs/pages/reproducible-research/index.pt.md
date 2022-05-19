@@ -14,7 +14,7 @@ Os exemplos disponíveis, são generalizáveis e podem ser utilizados como base 
 
 !!! important "Exemplos generalizáveis e customizáveis"
 
-    Essas características foram atribuídas aos exemplos disponibilizados já que, durante o desenvolvimento do artigo, eles foram os primeiros componentes a serem desenvovidos. Em seguida, com as ferramentas prontas e testadas, fez-se a geração dos resultados finais.
+    Essas características foram atribuídas aos exemplos disponibilizados já que, durante o desenvolvimento do artigo, eles foram os primeiros componentes a serem desenvolvidos. Em seguida, com as ferramentas prontas e testadas, fez-se a geração dos resultados finais.
 
     Para essa geração dos resultados finais, a única ação necessária foi a troca do conjunto de dados de entrada dos exemplos para o conjunto completo de dados do artigo. Com isso, é possível dizer que os exemplos são generalizábeis em seu uso e customizáveis o suficiente para permitir que outros conjuntos de dados e regiões sejam processados.
 
@@ -52,8 +52,8 @@ Com esse `Makefile`, os conjuntos de comandos necessários para a execução de 
 
 !!! tip "Make e pesquisa reprodutível"
 
-    A ideia da utilização do `Make` foi retirada do magnífico [*The Turing Way handbook to reproducible, ethical and collaborative data science*](https://the-turing-way.netlify.app/welcome.html). 
-    
+    A ideia da utilização do `Make` foi retirada do magnífico [*The Turing Way handbook to reproducible, ethical and collaborative data science*](https://the-turing-way.netlify.app/welcome.html).
+
     Para mais sobre o `GNU Make` e pesquisa reprodutível, consulte o material [Reproducibility with Make](https://the-turing-way.netlify.app/reproducible-research/make.html).
 
 Ao fazer o uso do `GNU Make`, conforme ilustrado na Figura abaixo, a interação com o Docker Compose e possíveis configurações necessárias nessas etapas, são realizadas através de códigos prontos e testados. Com isso, evitamos que erros nos comandos impessam o uso de nosso material. Além disso, por se tratar de um documento de texto simples, para aqueles que desejam obter cada etapa realizada, basta abrir o arquivo e verificar o que é realizado.
