@@ -37,7 +37,7 @@ No Jupyter Notebook implementado, todas as etapas são documentadas e descritas,
 
 ### Configurações
 
-Para a utilização desse Jupyter Notebook é necessário apenas uma configuração: A definição da variável de ambiente `DATA_DIRECTORY`. Essa variável de ambiente, determina o local onde está o diretório de dados que deverá ser utilizado pelo notebook para carregar os dados de entrada e salvar os resultados gerados. 
+Para a utilização desse Jupyter Notebook é necessário apenas uma configuração: A definição da variável de ambiente `DATA_DIRECTORY`. Essa variável de ambiente, determina o local onde está o diretório de dados que deverá ser utilizado pelo notebook para carregar os dados de entrada e salvar os resultados gerados.
 
 !!! tip "Sobre o diretório de dados"
 
@@ -61,7 +61,7 @@ Com a metodologia implementada e pronta para ser utilizada, sua execução com o
 2. Controle de falhas;
 3. Reexecução.
 
-Com base nessa necessidade, foi criado o *script* de processamento utilizando a ferramenta [Dagster](https://docs.dagster.io/0.12.15/getting-started). Com essa ferramenta, toda a orquestração da operação pode ser feita de maneira simples e direta. Além disso, quando necessário e devidamente configurado, diferentes formas de execução podem ser adotados, como execuções distribuídas, paralelas. Outro ponto possitivo ao uso do Dagster está no controle de falhas e reexecução.
+Com base nessa necessidade, foi criado o *script* de processamento utilizando a ferramenta [Dagster](https://docs.dagster.io/0.12.15/getting-started). Com essa ferramenta, toda a orquestração da operação pode ser feita de maneira simples e direta. Além disso, quando necessário e devidamente configurado, diferentes formas de execução podem ser adotados, como execuções distribuídas, paralelas. Outro ponto positivo ao uso do Dagster está no controle de falhas e reexecução.
 
 A criação do *script* de processamento é feita utilizando uma interface de programação (API) em linguagem Python, no entanto, a manipulação e uso do *script* é feita através de uma interface *web*. Nessa interface, tem-se disponível opções para executar o processamento, fazer seu gerenciamento, bem como consultar a documentação de cada uma das etapas e ver o fluxo geral que é realizado. O vídeo abaixo, apresenta uma visão geral dessa interface:
 
@@ -79,13 +79,13 @@ Para realizar a execução do *script* de processamento criado com o Dagster, é
 3. Quais imagens e bandas espectrais devem ser utilizadas;
 4. Especificação de recursos computacionais (e.g., Quantidade de CPU utilizada).
 
-Esse arquivo, uma vez criado, é inserido na interface do Dagster, onde é feita sua validação e uso para a criação de uma nova execução do *script*. 
+Esse arquivo, uma vez criado, é inserido na interface do Dagster, onde é feita sua validação e uso para a criação de uma nova execução do *script*.
 
 !!! tip "Sobre execuções no Dagster"
 
     Para saber mais detalhes sobre como o Dagster realiza a criação de suas execuções na versão `0.12.15`, por favor, consulte a [documentação oficial da ferramenta](https://docs.dagster.io/0.12.15/concepts/configuration/config-schema#config-schema)
 
-Para que você seja capaz de criar configurações do Dagster para realizar execuções com seus próprios dados e necessidades, nas subseções abaixo faz-se a apresentação da estrutura do arquivo de configuração `YAML` do Dagster. 
+Para que você seja capaz de criar configurações do Dagster para realizar execuções com seus próprios dados e necessidades, nas subseções abaixo faz-se a apresentação da estrutura do arquivo de configuração `YAML` do Dagster.
 
 #### Arquivo de configuração Dagster
 
@@ -105,11 +105,11 @@ No Dagster, [resources](https://docs.dagster.io/0.12.15/concepts/modes-resources
 
 *Resource* onde tem-se a disponibilização de dados relacionados a ferramenta LaSRC. A definição de um *resource* `lasrc_data` requer a especificação da seguinte variável de configuração:
 
-`lasrc_auxiliary_data_dir`: Variável onde faz-se a definição do caminho para o diretório de dados auxiliares da ferramente LaSRC, requeridos para a realização da correção atmosférica em imagens Sentinel-2/MSI. 
+`lasrc_auxiliary_data_dir`: Variável onde faz-se a definição do caminho para o diretório de dados auxiliares da ferramente LaSRC, requeridos para a realização da correção atmosférica (usado neste RC em imagens Sentinel-2/MSI).
 
 
 !!! info "Organização do diretório de dados"
-    
+
     Para mais detalhes de como esse diretório de dados auxiliares deve ser organizado, por favor, consulte a seção [Diretório de dados](#diretorio-de-dados).
 
 Um exemplo completo de definição de um *resource* `lasrc_data` é apresentado abaixo:
@@ -145,7 +145,7 @@ resources:
     config:
       derived_data_dir: /path/to/derived/data/dir
       landsat8_input_dir: /path/to/input/landsat8/data/dir
-      sentinel2_input_dir: /path/to/input/sentinel2/data/dir 
+      sentinel2_input_dir: /path/to/input/sentinel2/data/dir
 ```
 
 Esse bloco de código deve ser definido dentro do arquivo de configuração. Para um exemplo completo, consulte o [arquivo de configuração do dagster](#full-example).
@@ -191,7 +191,7 @@ resources:
     config:
       derived_data_dir: /path/to/derived/data/dir
       landsat8_input_dir: /path/to/input/landsat8/data/dir
-      sentinel2_input_dir: /path/to/input/sentinel2/data/dir 
+      sentinel2_input_dir: /path/to/input/sentinel2/data/dir
 
 solids:
   load_and_standardize_sceneids_input:
@@ -236,7 +236,7 @@ landsat8_data
     └── LC08_L2SP_223081_20171111_20200902_02_T1
 ```
 
-A organização das imagens dentro de cada diretório, deve seguir o formato utilizado pela **U**nited **S**tates **G**eological **S**urvey (USGS) na distribuição dos dados L2 (com correção atmosférica). Além disso, a nomenclatura do diretório, também deve seguir o padrão de disseminação da USGS. Caso esse padrão não seja seguido, erros podem surgir durante as etapas de processamento.
+A organização das imagens dentro de cada diretório, deve seguir o formato utilizado pela **U**nited **S**tates **G**eological **S**urvey (USGS) na distribuição dos dados L2 (com correção atmosférica) da coleção 2 (C2). Além disso, a nomenclatura do diretório, também deve seguir o padrão de disseminação da USGS. Caso esse padrão não seja seguido, erros podem surgir durante as etapas de processamento.
 
 Abaixo, tem um exemplo de como esse diretório deve estar organizado internamente:
 
@@ -282,7 +282,7 @@ sentinel2_data
     └── S2B_MSIL1C_20171122T134159_N0206_R124_T22JBM_20171122T200800.SAFE
 ```
 
-A organização das imagens dentro de cada diretório, deve seguir o formato dos diretórios `.SAFE` disponibilizados pela USGS. Deve-se notar que, a nomenclatura do diretório, também deve seguir o padrão de disseminação da USGS (Incluindo o `.SAFE`). Caso esse padrão não seja seguido, erros podem surgir durante as etapas de processamento.
+A organização das imagens dentro de cada diretório, deve seguir o formato dos diretórios `.SAFE` disponibilizados pela ESA. Deve-se notar que, a nomenclatura do diretório, também deve seguir o padrão de disseminação da ESA (Incluindo o `.SAFE`). Caso esse padrão não seja seguido, erros podem surgir durante as etapas de processamento.
 
 Abaixo, tem um exemplo de como esse diretório deve estar organizado internamente:
 
@@ -302,7 +302,7 @@ sentinel2_data
 
 **raw_data/scene_id_list**
 
-Diretório onde estão os arquivos de definição de quais dados, daqueles que estão disponíveis nos diretórios `landsat8_data` e `sentinel2_data`, devem ser considerados nas etapas de processamento. Para isso, nesse diretório tem-se dois arquivos:
+Diretório onde estão os arquivos de definição de quais dados estão disponíveis nos diretórios `landsat8_data` e `sentinel2_data`, devem ser considerados nas etapas de processamento. Para isso, nesse diretório tem-se dois arquivos:
 
 `scene_ids_lc8.txt`: Arquivo de definição de quais imagens Landsat-8/OLI do diretório (`landsat8_data`) devem ser processados;
 `scene_ids_s2.txt`: Arquivo de definição de quais imagens Sentinel-2/MSI do diretório (`sentinel2_data`) devem ser processados.
@@ -365,7 +365,6 @@ lasrc_auxiliary_data
     ├── CMGDEM.hdf
     └── LADS
        └── 2017
-           ├── L8ANC2017315.hdf_fused
            ├── L8ANC2017323.hdf_fused
            └── L8ANC2017326.hdf_fused
 ```
