@@ -20,7 +20,7 @@ Nesta Seção, é feita a apresentação de cada uma dessas Docker Images, suas 
     Embora tenhamos esperança de que os comandos e dicas apresentados neste documento possam ser utilizados sem problemas em sistemas operacionais Linux (e.g., Ubuntu, Debian) e MacOS, não há uma garantia de que isso sempre se manterá verdadeiro. Além disso, para aqueles que utilizam Windows, mudanças nos comandos podem ser necessárias.
 
     Com o objetivo de evitar que os materiais produzidos não possam ser utilizados por essa barreira tecnológica, nós criamos uma Máquina Virtual Ubuntu 20.04, com todas as dependências necessárias (e.g., [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)) para que os comandos apresentados aqui, possam ser utilizados.
-    
+
     Caso você precise utilizar essa Máquina Virtual, por favor, consulte a Seção [Máquina Virtual com Vagrant](/pt/tools/environment/#maquina-virtual-com-vagrant).
 
 
@@ -55,7 +55,7 @@ Nas Subseções a seguir, as Docker Images criadas neste RC serão apresentadas.
     Para mais informações sobre o Sen2Cor, consulte o [Manual oficial do usuário](http://step.esa.int/thirdparties/sen2cor/2.9.0/docs/S2-PDGS-MPC-L2A-SRN-V2.9.0.pdf).
 
 
-Com todas essas funcionalidades, o Sen2Cor possui um processo de instalação e configuração com diversas etapas. De modo a possibilitar que as execuções realizadas com Sen2Cor fossem reprodutíveis e reutilizáveis, preparou-se uma Docker Image específica para essa ferramenta. Essa Docker Image, nomeada de `sen2cor`, possui todas as dependências e configurações necessárias para a execução do Sen2Cor.
+De modo a possibilitar que as execuções realizadas com Sen2Cor fossem reprodutíveis e reutilizáveis, preparou-se uma Docker Image específica para essa ferramenta. Essa Docker Image, nomeada de `sen2cor`, possui todas as dependências e configurações necessárias para a execução do Sen2Cor.
 
 !!! note "Versões do Sen2Cor"
 
@@ -71,7 +71,7 @@ Para a execução da `sen2cor`, é necessário o uso de alguns dados auxiliares.
 2. Faça seu cadastro (caso não tenha) e login;
 3. Após o login, procure pelo pacote `ESACCI-LC for Sen2Cor data package`;
 4. Faça o *download* desse pacote (Arquivo `zip`);
-5. Extraia o conteúdo em um diretório. Recomenda-se para esse diretório o nome `CCI4SEn2COR`.
+5. Extraia o conteúdo em um diretório. Recomenda-se para esse diretório o nome `CCI4SEN2COR`.
 
 Após a extração dos arquivos, o diretório de destino deverá conter os seguintes arquivos:
 
@@ -148,7 +148,7 @@ Para mais informações, consulte o [repositório do GitHub](https://github.com/
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/pt/tools/environment/#docker-images)
 [![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/lasrc)
 
-[LaSRC](https://ntrs.nasa.gov/api/citations/20190001670/downloads/20190001670.pdf) é um processador de correção atmosférica originalmente proposto para produtos Landsat-8 Collection 1, sendo posteriormente adaptado para ser capaz também de corrigir produtos Sentinel-2. Ele recebe como entrada produtos Landsat em Número Digital (DN, do inglês *Digital Number*) ou produtos Sentinel-2 em nível de radiância de topo de atmosféra (ToA), também chamados Level-1C (L1C). O resultado desse processador consiste em produtos em nível reflectância de superfície (SR, do inglês *Surface Reflectance*). 
+[LaSRC](https://ntrs.nasa.gov/api/citations/20190001670/downloads/20190001670.pdf) é um processador de correção atmosférica originalmente proposto para produtos Landsat-8 Collection 1, sendo posteriormente adaptado para ser capaz também de corrigir produtos Sentinel-2. Ele recebe como entrada produtos Landsat em Número Digital (DN, do inglês *Digital Number*) ou produtos Sentinel-2 em nível de radiância de topo de atmosféra (ToA), também chamados Level-1C (L1C). O resultado desse processador consiste em produtos em nível reflectância de superfície (SR, do inglês *Surface Reflectance*).
 
 Para facilitar a utilização do LaSRC neste RC, e garantir que a execução seja reprodutível e reutilizável, fez-se a criação de um Docker Image para o LaSRC, nomeada de `lasrc`. A `lasrc`, possui todas as dependências e configurações necessárias para a execução do processador LaSRC.
 
@@ -180,7 +180,7 @@ Ao final da aquisição dos dados auxiliares, o diretório onde os dados foram a
 
 **Volumes**
 
-Para a utilização da `lasrc`, é necessário a definição de alguns Docker Volumes. Esses volumes, especificam os dados de entrada, saída, arquivos de configuração e dados auxiliares utilizados pela ferramenta durante o processamento. Abaixo, tem-se um descritivo de todos volumes que devem ser criados durante a execução da Docker Image Sen2Cor:
+Para a utilização da `lasrc`, é necessário a definição de alguns Docker Volumes. Esses volumes, especificam os dados de entrada, saída e dados auxiliares utilizados pela ferramenta durante o processamento. Abaixo, tem-se um descritivo de todos volumes que devem ser criados durante a execução da Docker Image LaSRC:
 
 `Dados de entrada` (Obrigatório)
 
@@ -258,7 +258,7 @@ Para mais informações, consulte o [repositório do GitHub](https://github.com/
 
     Para informações detalhadas sobre o Landsat Ang Tool, consulte o [site oficial da USGS sobre a ferramenta](https://www.usgs.gov/core-science-systems/nli/landsat/solar-illumination-and-sensor-viewing-angle-coefficient-files?qt-science_support_page_related_con=1#qt-science_support_page_related_con).
 
-Neste RC, as imagens Landsat-8/OLI (Collection-2) são obtidas já processadas em nível de reflectância de superfície (L2). Entretanto, para processamentos posteriores, é necessário a geração das bandas de ângulos. Neste caso, faz-se o uso do [Landsat Ang Tool](https://www.usgs.gov/landsat-missions/landsat-tools). 
+Neste RC, as imagens Landsat-8/OLI (Collection-2) são obtidas já processadas em nível de reflectância de superfície (L2). Entretanto, para processamentos posteriores, é necessário a geração das bandas de ângulos. Neste caso, faz-se o uso do [Landsat Ang Tool](https://www.usgs.gov/landsat-missions/landsat-tools).
 
 A instalação e configuração do [Landsat Ang Tool](https://www.usgs.gov/landsat-missions/landsat-tools) pode tornar difícil a reprodução e replicação no futuro. Sendo assim, para facilitar as operações deste RC que utilizam essa ferramenta, fez-se a criação de uma Docker Image específica para ela, nomeada de `l8angs`.
 
@@ -289,14 +289,14 @@ docker run --rm \
 
     # Volume: Dados de entrada
     -v /path/to/input/:/mnt/input-dir:rw \
-    
+
     # Especificação da Docker Image e cena a ser processada
     marujore/l8angs:latest LC08_L2SP_222081_20190502_20200829_02_T1
 ```
 
 A execução do comando apresentado acima, fará a criação de um Docker Container `l8angs`. Esse Docker Container fará o processamento da cena `LC08_L2SP_222081_20190502_20200829_02_T1`. Neste comando, deve-se notar que, o diretório de entrada (`/path/to/input/`) especificado, deve conter um subdiretório com o mesmo nome da cena escolhida, neste caso `LC08_L2SP_222081_20190502_20200829_02_T1`. Além disso, é esperado que nesse subdiretório, todos os dados da cena estejam disponíveis para o processamento.
 
-Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/lasrc-docker), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `lasrc`.
+Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/landsat-angles-docker)), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `l8angs`.
 
 ### Sensor Harm
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/pt/tools/environment/#docker-images)
@@ -304,7 +304,7 @@ Para mais informações, consulte o [repositório do GitHub](https://github.com/
 
 Neste RC, as imagens Landsat-8 Collection-2 já obtidas em nível de reflectância de superfície (L2) e as imagens Sentinel-2 (processadas para reflectância de superfície tanto utilizando Sen2cor quanto LaSRC) são harmonizadas utilizando a biblioteca [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm). Para potencializar a reprodução e replicação no uso dessa ferramenta, fez-se a criação da Docker Image `nbar`. Nesta Image, estão disponíveis todas as dependências e configurações necessárias para a execução do [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm).
 
-Os tópicos a seguir, apresentam as principais características desta Docker Image, volumes requeridos e exemplos de utilização. 
+Os tópicos a seguir, apresentam as principais características desta Docker Image, volumes requeridos e exemplos de utilização.
 
 **Volumes**
 
@@ -407,7 +407,7 @@ Nos tópicos abaixo, é feita a apresentação das configurações necessárias 
 
 Para a utilização da `research-processing-jupyter`, é necessário definir a seguinte variável de ambiente:
 
-`DATA_DIRECTORY`  (Obrigatório)
+`DATA_DIRECTORY` (Obrigatório)
 
 :   Variável de ambiente para determinar o diretório, na máquina local, onde os dados baixados devem ser salvos.
 
@@ -454,14 +454,14 @@ Abaixo, faz-se a apresentação de um exemplo de uso da Docker Image `research-p
 ``` sh
 docker run \
   --name research-processing-jupyter \
-  
+
   # Definição do usuário
   --user ${UID}:${GID} \
 
   # Variáveis de ambiente
   --env JUPYTER_ENABLE_LAB=yes \ # Ativando JupyterLab
   --env DATA_DIRECTORY=/my-data-dir \
-  
+
   # Volume: Volume de dados
   --volume /my-data-dir:/my-data-dir \
 
@@ -522,7 +522,7 @@ services:
     # Definição do usuário
     user: ${UID}:${GID}
     image: marujore/research-processing-jupyter:latest
-    
+
     environment:
       # Variáveis de ambiente
       - JUPYTER_ENABLE_LAB=yes
@@ -631,7 +631,7 @@ Abaixo, faz-se a apresentação de um exemplo de uso da Docker Image `research-p
 ``` sh
 docker run \
   --name research-processing-dagster \
-  
+
   # Variáveis de ambiente
   --env DATA_DIRECTORY=/my-data-dir \
 
@@ -648,7 +648,7 @@ docker run \
   marujore/research-processing-dagster:latest
 ```
 
-Após a execução do comando acima, deverá ser produzir um resultado parecido com o apresentado abaixo:
+Após a execução do comando acima, um resultado parecido com o apresentado abaixo deve aparecer:
 
 ``` sh
   # (Omitted)
@@ -749,11 +749,11 @@ Para a utilização da `example-toolkit-docker`, é necessário a definição de
 
 :   Diretório onde os dados baixados serão armazenados. Esse volume precisa ser criado no mesmo diretório definido na variável de ambiente `DOWNLOAD_OUTPUT_DIRECTORY` (Configuração do `Example toolkit`).
 
-`Volume de configuração Dagster`  (Obrigatório)
+`Volume de configuração Dagster` (Obrigatório)
 
 :   Diretório onde o arquivo de configuração Dagster gerado será salvo. Esse volume precisa ser criado no mesmo diretório definido na variável de ambiente `PIPELINE_DIR` (Configuração do `Example toolkit`).
 
-`Volume de configuração do download`  (Obrigatório)
+`Volume de configuração do download` (Obrigatório)
 
 :   Arquivo de configuração com a referência aos dados que precisam ser baixado. O arquivo definido nesse volume deve ser o mesmo especificado na variável `DOWNLOAD_REFERENCE_FILE` (Configuração do `Example toolkit`).
 
@@ -772,14 +772,14 @@ Abaixo, faz-se a execução da Docker Image, identificada com a tag `example-too
 ``` sh
 docker run \
   --name example-toolkit-docker \
-  
+
   # Variáveis de ambiente
   --env RAW_DATA_DIR=/compendium/data/raw_data \
   --env DERIVED_DATA_DIR=/compendium/data/derived_data \
   --env PIPELINE_DIR=/compendium/config \
   --env DOWNLOAD_OUTPUT_DIRECTORY=/compendium/data \
   --env DOWNLOAD_REFERENCE_FILE=/compendium/config/example-toolkit.json \
-  
+
   # Volume: Volume de dados
   --volume /my-data/dir:/compendium/data \
 
@@ -976,7 +976,7 @@ vagrant ssh
 #>  * Support:        https://ubuntu.com/advantage
 
  # (Omitted)
- 
+
 #> vagrant@ubuntu:~$
 ```
 
