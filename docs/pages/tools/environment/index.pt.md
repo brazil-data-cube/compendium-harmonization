@@ -137,12 +137,12 @@ docker run --rm \
     --volume /path/to/srtm:/root/sen2cor/2.9/dem/srtm \
 
     # Especificação da Docker Image e cena a ser processada
-    marujore/sen2cor:2.9.0 S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE
+    brazildatacube/sen2cor:2.9.0 S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE
 ```
 
 A execução do comando apresentado acima, fará a criação de um Docker Container `sen2cor`. Esse Docker Container fará o processamento da cena `S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE`. Neste comando, deve-se notar que, o diretório de entrada (`/path/to/input_dir`) especificado, deve conter um subdiretório com o mesmo nome da cena escolhida, neste caso `S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE`. Além disso, é esperado que nesse subdiretório, todos os dados da cena estejam disponíveis para o processamento.
 
-Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/sen2cor-docker), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `sen2cor`.
+Para mais informações, consulte o [repositório do GitHub](https://github.com/brazil-data-cube/sen2cor-docker), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `sen2cor`.
 
 ### LaSRC 2.0.1
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/pt/tools/environment/#docker-images)
@@ -246,7 +246,7 @@ docker run --rm \
 
 Como pode-se notar, a diferença para o uso da `lasrc` para os dados dos diferentes satélite-sensor, está apenas na especificação do nome da cena. Deve-se notar também que, é esperado, para ambos os casos que, no diretório de entrada (`/path/to/input/`) tenha subdiretórios com as cenas específicas, neste caso `LC08_L1TP_220069_20190112_20190131_01_T1` e `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`. Além disso, é esperado que nesses subdiretórios, todos os dados das cenas estejam disponíveis para o processamento.
 
-Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/lasrc-docker), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `lasrc`.
+Para mais informações, consulte o [repositório do GitHub](https://github.com/brazil-data-cube/lasrc-docker), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `lasrc`.
 
 ### L8Angs
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/pt/tools/environment/#docker-images)
@@ -915,7 +915,7 @@ Para começar a utilizar a VM através do Vagrant, o primeiro passo é realizar 
 Uma vez que o Vagrant está instalado em seu sistema, para a criação da VM, o primeiro passo é realizar o clone do repositório onde estão todos os materiais deste RC:
 
 ``` sh
-git clone https://github.com/marujore/compendium-harmonization
+git clone https://github.com/brazil-data-cube/compendium-harmonization
 ```
 
 Após o clone, acesse o diretório `compendium-harmonization`:

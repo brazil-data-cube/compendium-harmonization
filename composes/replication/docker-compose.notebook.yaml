@@ -20,7 +20,7 @@ services:
 
     environment:
       #
-      # 1. Enable Jupyter Lab (https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#docker-options) 
+      # 1. Enable Jupyter Lab (https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#docker-options)
       #
       - JUPYTER_ENABLE_LAB=yes
 

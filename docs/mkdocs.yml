@@ -12,8 +12,8 @@
 docs_dir: pages
 site_name: Harmonization Compendium Documentation
 
-repo_name: marujore/compendium-harmonization
-repo_url: https://github.com/marujore/compendium-harmonization
+repo_name: brazil-data-cube/compendium-harmonization
+repo_url: https://github.com/brazil-data-cube/compendium-harmonization
 
 extra_css:
   - assets/static/css/extra.css
@@ -111,7 +111,7 @@ nav:
 extra:
   social:
   - icon: "fontawesome/brands/github"
-    link: "https://github.com/marujore/compendium-harmonization"
+    link: "https://github.com/brazil-data-cube/compendium-harmonization"
 
 #
 # Extensions

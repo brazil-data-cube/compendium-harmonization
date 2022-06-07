@@ -142,7 +142,7 @@ docker run --rm \
 
 The execution of the command presented above will create a `sen2cor` Docker Container. This Docker Container will process the `S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE` scene. Note that in this command, the input directory (`/path/to/input_dir`) must contain a subdirectory with the scene `S2A_MSIL1C_20210903T140021_N0301_R067_T21KVR_20210903T172609.SAFE`.
 
-For more information, consult the [GitHub Repository](https://github.com/marujore/sen2cor-docker), where the versioning of the changes in this Docker Image (`sen2cor`) has been keep.
+For more information, consult the [GitHub Repository](https://github.com/brazil-data-cube/sen2cor-docker), where the versioning of the changes in this Docker Image (`sen2cor`) has been keep.
 
 ### LaSRC 2.0.1
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/en/tools/environment/#docker-images)
@@ -222,7 +222,7 @@ docker run --rm \
     --volume /path/to/lasrc_auxiliaries/L8:/mnt/atmcor_aux/lasrc/L8:ro \
 
     # Docker Image and scene to be processed
-    --tty marujore/lasrc:2.0.1 LC08_L1TP_220069_20190112_20190131_01_T1
+    --tty brazildatacube/lasrc:2.0.1 LC08_L1TP_220069_20190112_20190131_01_T1
 ```
 
 *LaSRC Sentinel-2/MSI example*
@@ -240,12 +240,12 @@ docker run --rm \
     --volume /path/to/lasrc_auxiliaries/L8:/mnt/atmcor_aux/lasrc/L8:ro \
 
     # Docker Image and scene to be processed
-    --tty marujore/lasrc:2.0.1 S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
+    --tty brazildatacube/lasrc:2.0.1 S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
 ```
 
 As can be noted, the difference on using `lasrc` for different satellite-sensors relly only on the sceneid name. It is important to note that, for both cases, the input directory (`/path/to/input/`) must contain the scenes to be processed. In this case `LC08_L1TP_220069_20190112_20190131_01_T1` and `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`.
 
-For more information, consult the [Github repository](https://github.com/marujore/lasrc-docker), where the versioning of the changes in this Docker Image (`lasrc`) has been keep.
+For more information, consult the [Github repository](https://github.com/brazil-data-cube/lasrc-docker), where the versioning of the changes in this Docker Image (`lasrc`) has been keep.
 
 ### L8Angs
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/en/tools/environment/#docker-images)
@@ -366,12 +366,12 @@ docker run --rm \
     --volume /path/to/output:/mnt/output-dir:rw \
 
     # Docker Image and scene to be processed
-    --tty marujore/nbar:latest S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
+    --tty brazildatacube/sensor-harm:latest S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
 ```
 
 As can be noted, the difference on using `nbar` for different satellite-sensors relly only on the sceneid name. It is important to note that, for both cases, the input directory (`/path/to/input/`) must contain the scenes to be processed. In this case `LC08_L1TP_220069_20190112_20190131_01_T1` and `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`
 
-For more information, consult the [Github repository](https://github.com/marujore/sensor-harm), where the versioning of the changes in this Docker Image (`nbar`) has been keep.
+For more information, consult the [Github repository](https://github.com/brazil-data-cube/sensor-harm), where the versioning of the changes in this Docker Image (`nbar`) has been keep.
 
 ### Processing scripts Docker Images
 
@@ -911,7 +911,7 @@ To use the VM through Vagrant, first you need to install Vagrant. For that it is
 Once Vagrant is installed in your system, to create the VM, the first step consinsts in clonning the repository that contains this RC's materials:
 
 ``` sh
-git clone https://github.com/marujore/compendium-harmonization
+git clone https://github.com/brazil-data-cube/compendium-harmonization
 ```
 
 After clonning, enter the directory `compendium-harmonization`:

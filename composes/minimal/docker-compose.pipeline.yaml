@@ -33,7 +33,7 @@ services:
         target: /var/run/docker.sock
 
       #
-      # 3. Volume with the mapping for the input and output directories. 
+      # 3. Volume with the mapping for the input and output directories.
       #
       - type: bind
         source: ${PWD}/analysis/data/examples/minimal_example

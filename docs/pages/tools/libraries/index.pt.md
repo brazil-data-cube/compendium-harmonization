@@ -33,13 +33,13 @@ Considerando essas características, inicialmente foi definido que neste RC, doi
 
 `Aplicação`
 
-:   Bibliotecas que através da união de bibliotecas **Base**, disponibiliza funcionalidades que 
-    permitem a aplicação de diferentes metodologias e fluxos de processamento (e.g., Geração de 
+:   Bibliotecas que através da união de bibliotecas **Base**, disponibiliza funcionalidades que
+    permitem a aplicação de diferentes metodologias e fluxos de processamento (e.g., Geração de
     produtos harmonizados).
 
 Partindo dessas definições, para a produção deste RC e a geração de seus resultados, fez-se o desenvolvimento de duas bibliotecas **Base**:
 
-[s2-angs](https://github.com/marujore/s2-angs)
+[s2-angs](https://github.com/brazil-data-cube/s2-angs)
 
 :   Disponibiliza funcionalidades para a geração de bandas ângulos de imagens Sentinel-2;
 
@@ -78,14 +78,14 @@ Para que se tenha uma ideia onde cada uma das bibliotecas apresentadas anteriorm
 
 ## Especificação das bibliotecas
 
-Nesta seção, de forma complementar a visão geral apresentada até aqui, é feita a especificação das `funcionalidades` e `forma de uso` de cada uma das bibliotecas mencionadas anteriormente. 
+Nesta seção, de forma complementar a visão geral apresentada até aqui, é feita a especificação das `funcionalidades` e `forma de uso` de cada uma das bibliotecas mencionadas anteriormente.
 
 ### Sentinel-2 Angle Generator Python Library (s2-angs)
-[![s2-angs-badge-stars](https://img.shields.io/github/stars/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
-[![s2-angs-badge-forks](https://img.shields.io/github/forks/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
-[![s2-angs-badge-version](https://img.shields.io/github/v/release/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
+[![s2-angs-badge-stars](https://img.shields.io/github/stars/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
+[![s2-angs-badge-forks](https://img.shields.io/github/forks/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
+[![s2-angs-badge-version](https://img.shields.io/github/v/release/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
 
-A biblioteca [s2-angs](https://github.com/marujore/s2-angs), como mencionado anteriormente, é responsável pela geração de bandas de ângulos para imagens Sentinel-2. Essas bandas contém informações, por pixel, de ângulos solar azimutal (SAA), solar zenital (SZA), sensor azimutal (VAA) e sensor zenital (VZA). Essas informações são extraídas dos metadados de imagens Sentinel-2. Inicialmente esses dados são fornecidos em forma de matrizes de `23x23` (linhas X colunas), ou seja, em uma resolução espacial de aproximadamente `5000` metros. Entretanto, essa informação precisa estar em resolução espacial equivalente à das bandas espectrais do sensor (`10`, `20` ou `60` metros) para que possam ser aproveitadas em correções por pixel. Assim, a biblioteca s2-angs é capaz de estimar os ângulos e salvá-slos arquivos `.tif`, tanto em sua resolução espacial original, quanto reamostrados para a resolução espacial das bandas do sensor.
+A biblioteca [s2-angs](https://github.com/brazil-data-cube/s2-angs), como mencionado anteriormente, é responsável pela geração de bandas de ângulos para imagens Sentinel-2. Essas bandas contém informações, por pixel, de ângulos solar azimutal (SAA), solar zenital (SZA), sensor azimutal (VAA) e sensor zenital (VZA). Essas informações são extraídas dos metadados de imagens Sentinel-2. Inicialmente esses dados são fornecidos em forma de matrizes de `23x23` (linhas X colunas), ou seja, em uma resolução espacial de aproximadamente `5000` metros. Entretanto, essa informação precisa estar em resolução espacial equivalente à das bandas espectrais do sensor (`10`, `20` ou `60` metros) para que possam ser aproveitadas em correções por pixel. Assim, a biblioteca s2-angs é capaz de estimar os ângulos e salvá-slos arquivos `.tif`, tanto em sua resolução espacial original, quanto reamostrados para a resolução espacial das bandas do sensor.
 
 Com isso, pode-se listar como funcionalidades principais dessa biblioteca:
 
@@ -94,7 +94,7 @@ Com isso, pode-se listar como funcionalidades principais dessa biblioteca:
 
 #### Principais operações disponíveis
 
-A tabela abaixo apresenta um resumo das principais operações que estão disponíveis na biblioteca [s2-angs](https://github.com/marujore/s2-angs).
+A tabela abaixo apresenta um resumo das principais operações que estão disponíveis na biblioteca [s2-angs](https://github.com/brazil-data-cube/s2-angs).
 
 <div align="center" markdown>
 |     **Function**      |                 **Description**                 |
@@ -178,7 +178,7 @@ O código acima fará a geração das bandas de ângulos da imagem definida na e
       <figcaption>View Zenith resampled result</figcaption>
     </figure>
 
-Para mais informações, por favor, consulte o [repositório oficial da biblioteca s2-angs](https://github.com/marujore/s2-angs).
+Para mais informações, por favor, consulte o [repositório oficial da biblioteca s2-angs](https://github.com/brazil-data-cube/s2-angs).
 
 ## Sensor Harmonization Python Library (sensor-harm)
 [![s2-angs-badge-stars](https://img.shields.io/github/stars/marujore/sensor-harm?style=social)](https://github.com/marujore/sensor-harm)

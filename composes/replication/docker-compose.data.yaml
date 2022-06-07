@@ -42,20 +42,20 @@ services:
     volumes:
       #
       # 5. Volume that mapping the directory where the downloaded files will be saved.
-      # 
+      #
       - type: bind
         source: ${PWD}/analysis/data/examples/replication_example/raw_data
         target: /opt/article/data
 
-      # 
+      #
       # 6. Volume that mapping to save the dagster configuration file.
       #
       - type: bind
         source: ${PWD}/analysis/pipeline/
         target: /opt/article/pipeline
 
-      # 
-      # 7. Volume for the file that defines which data should be downloaded from Research Compendium GitHub repository. 
+      #
+      # 7. Volume for the file that defines which data should be downloaded from Research Compendium GitHub repository.
       #
       - type: bind
         source: ${PWD}/tools/example-toolkit/config/replication_files.json

@@ -37,7 +37,7 @@ Considering these characteristics, initially, we defined that in this RC, we wou
 
 Based on these definitions, for the production of this RC and the generation of its results, we developed two **Base** libraries:
 
-[s2-angs](https://github.com/marujore/s2-angs)
+[s2-angs](https://github.com/brazil-data-cube/s2-angs)
 
 :   Library create to provide functionality for generating angle bands from Sentinel-2/MSI data;
 
@@ -77,11 +77,11 @@ The figure below gives you an overview of where the libraries presented above ar
 In this section, as a complement to the overview presented so far, the `features` and `usage example` of each of the aforementioned libraries are specified.
 
 ### Sentinel-2 Angle Generator Python Library (s2-angs)
-[![s2-angs-badge-stars](https://img.shields.io/github/stars/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
-[![s2-angs-badge-forks](https://img.shields.io/github/forks/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
-[![s2-angs-badge-version](https://img.shields.io/github/v/release/marujore/s2-angs?style=social)](https://github.com/marujore/s2-angs)
+[![s2-angs-badge-stars](https://img.shields.io/github/stars/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
+[![s2-angs-badge-forks](https://img.shields.io/github/forks/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
+[![s2-angs-badge-version](https://img.shields.io/github/v/release/brazil-data-cube/s2-angs?style=social)](https://github.com/brazil-data-cube/s2-angs)
 
-The [s2-angs](https://github.com/marujore/s2-angs) library, as mentioned earlier, is responsible for generating angle bands for Sentinel-2 imagery. These bands contain per-pixel information for solar azimuthal (SAA), solar zenithal (SZA), azimuthal sensor (VAA), and zenithal sensor (VZA) angles. This information is extracted from the Sentinel-2 image metadata. Initially, this data is provided as a `23x23` (rows X columns) matrix, i.e., at a spatial resolution of about `5000` meters. However, this information needs to be at a spatial resolution equivalent to that of the spectral bands of the sensor (`10`, `20` or `60` meters) to take advantage of per-pixel corrections. Thus, the s2-angs library can estimate angles and save them as `.tif` files, either at their original spatial resolution or resampled to the spatial resolution of the sensor bands.
+The [s2-angs](https://github.com/brazil-data-cube/s2-angs) library, as mentioned earlier, is responsible for generating angle bands for Sentinel-2 imagery. These bands contain per-pixel information for solar azimuthal (SAA), solar zenithal (SZA), azimuthal sensor (VAA), and zenithal sensor (VZA) angles. This information is extracted from the Sentinel-2 image metadata. Initially, this data is provided as a `23x23` (rows X columns) matrix, i.e., at a spatial resolution of about `5000` meters. However, this information needs to be at a spatial resolution equivalent to that of the spectral bands of the sensor (`10`, `20` or `60` meters) to take advantage of per-pixel corrections. Thus, the s2-angs library can estimate angles and save them as `.tif` files, either at their original spatial resolution or resampled to the spatial resolution of the sensor bands.
 
 So, we can list as main features of this library:
 
@@ -90,7 +90,7 @@ So, we can list as main features of this library:
 
 #### Operations available
 
-The table below gives a summary of the operations that are available in the [s2-angs](https://github.com/marujore/s2-angs) library.
+The table below gives a summary of the operations that are available in the [s2-angs](https://github.com/brazil-data-cube/s2-angs) library.
 
 <div align="center" markdown>
 |     **Function**      |                 **Description**                 |
@@ -174,7 +174,7 @@ The above code will generate the angle bands from the image defined in the input
       <figcaption>View Zenith resampled result</figcaption>
     </figure>
 
-To learn more about the library, please, see the [official s2-angs library repository](https://github.com/marujore/s2-angs) on GitHub.
+To learn more about the library, please, see the [official s2-angs library repository](https://github.com/brazil-data-cube/s2-angs) on GitHub.
 
 ## Sensor Harmonization Python Library (sensor-harm)
 [![s2-angs-badge-stars](https://img.shields.io/github/stars/marujore/sensor-harm?style=social)](https://github.com/marujore/sensor-harm)
