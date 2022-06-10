@@ -13,7 +13,7 @@ services:
 
     build:
       context: ${PWD}/tools/example-toolkit/
-    image: marujore/example-toolkit-docker:latest
+    image: brazildatacube/example-toolkit-docker:latest
     container_name: example-minimal-download-data
 
     environment:

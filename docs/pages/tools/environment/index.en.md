@@ -249,7 +249,7 @@ For more information, consult the [Github repository](https://github.com/brazil-
 
 ### L8Angs
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/en/tools/environment/#docker-images)
-[![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/l8angs)
+[![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/landsat-angles)
 
 [Landsat Ang Tool](https://www.usgs.gov/landsat-missions/landsat-tools) is a tool developed and maintained by [**U**nited **S**tates **G**eological **S**urvey](https://www.usgs.gov/). This tool uses the `ANG.txt` that are provided alongside Landsat-8 images and use them to generate per *pixel* angle bands. The angle bands are solar azimuth angle (`SAA`), solar zenithal angle (`SZA`), view azimuth angle (`VAA`) and view zenithal angle (`VZA`). The bands are generated with the same resolution as OLI soectral bands (30m).
 
@@ -277,7 +277,7 @@ The code bellow, presents a use example of the `l8angs` through Docker CLI.
 
 !!! tip "Image name"
 
-    In the following commands, the `l8angs` Docker image, identified as `marujore/l8angs:latest` on DockerHub.
+    In the following commands, the `l8angs` Docker image, identified as `marujore/landsat-angles:latest` on DockerHub.
 
 !!! warning "Command format"
 
@@ -290,24 +290,24 @@ docker run --rm \
     -v /path/to/input/:/mnt/input-dir:rw \
 
     # Docker Image and scene to be processed
-    marujore/l8angs:latest LC08_L2SP_222081_20190502_20200829_02_T1
+    marujore/landsat-angles:latest LC08_L2SP_222081_20190502_20200829_02_T1
 ```
 
 The execution of the command presented above will create a `l8angs` Docker Container. This Docker Container will process the `LC08_L2SP_222081_20190502_20200829_02_T1` scene. In this command, the input dir (`/path/to/input/`) must contain a subdirectory named `LC08_L2SP_222081_20190502_20200829_02_T1`, which is the scene being processed.
 
-For more information, consult the [GitHub repository](https://github.com/marujore/landsat-angles-docker), which contains the versioning and changes made on `l8angs`.
+For more information, consult the [GitHub repository](https://github.com/brazil-data-cube/landsat-angles-docker), which contains the versioning and changes made on `l8angs`.
 
 ### Sensor Harm
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/en/tools/environment/#docker-images)
-[![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/nbar)
+[![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/sensor-harm)
 
-In this RC, the Landsat-8 Collection-2 images were already obtained as surface reflectance products (L2) while Sentinel-2 images were obtained as L1C and processed using Sen2cor or LaSRC. Both Landsat-8 and Sentinel-2 images are harmonized using the [sensor-harm](/en/tools/libraries/#sensor-harmonization-python-library-sensor-harm) library. To allow reproductibility and replicability of this tool use, we created a Docker Image called `nbar`. In this image, all dependencies and configurations to execute [sensor-harm](/en/tools/libraries/#sensor-harmonization-python-library-sensor-harm) are already prepared.
+In this RC, the Landsat-8 Collection-2 images were already obtained as surface reflectance products (L2) while Sentinel-2 images were obtained as L1C and processed using Sen2cor or LaSRC. Both Landsat-8 and Sentinel-2 images are harmonized using the [sensor-harm](/en/tools/libraries/#sensor-harmonization-python-library-sensor-harm) library. To allow reproductibility and replicability of this tool use, we created a Docker Image called `sensor-harm`. In this image, all dependencies and configurations to execute [sensor-harm](/en/tools/libraries/#sensor-harmonization-python-library-sensor-harm) are already prepared.
 
 The following topics present the main characteristics of this Docker Image, the volumes it requires and use examples.
 
 **Volumes**
 
-To use the `nbar`, it is required to define some Docker Volumes. These volumes specify the input and auxiliary data used by sensor-harm. Bellow a list of these volumes is listed and descripted:
+To use the `sensor-harm`, it is required to define some Docker Volumes. These volumes specify the input and auxiliary data used by sensor-harm. Bellow a list of these volumes is listed and descripted:
 
 `Input data` (Required)
 
@@ -326,11 +326,11 @@ To use the `nbar`, it is required to define some Docker Volumes. These volumes s
 
 **Use example (Docker CLI)**
 
-The codes bellow present two examples on how to use `nbar` through Docker CLI. In the first example, the processing is performed on a Landsat-8/OLI scene, while on the second a Sentinel-2/MSI scene is used.
+The codes bellow present two examples on how to use `sensor-harm` through Docker CLI. In the first example, the processing is performed on a Landsat-8/OLI scene, while on the second a Sentinel-2/MSI scene is used.
 
 !!! tip "Image name"
 
-    On the following commands, a `nbar` Docker Image is identified as `marujore/nbar:latest`, stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub.
+    On the following commands, a `sensor-harm` Docker Image is identified as `marujore/sensor-harm:latest`, stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub.
 
 !!! warning "Command format"
 
@@ -351,7 +351,7 @@ docker run --rm \
     --volume /path/to/angles:/mnt/angles-dir:ro \
 
     # Docker Image and scene to be processed
-    --tty marujore/nbar:latest LC08_L1TP_220069_20190112_20190131_01_T1
+    --tty marujore/sensor-harm:latest LC08_L1TP_220069_20190112_20190131_01_T1
 ```
 
 *Sentinel-2/MSI example*
@@ -369,9 +369,9 @@ docker run --rm \
     --tty brazildatacube/sensor-harm:latest S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
 ```
 
-As can be noted, the difference on using `nbar` for different satellite-sensors relly only on the sceneid name. It is important to note that, for both cases, the input directory (`/path/to/input/`) must contain the scenes to be processed. In this case `LC08_L1TP_220069_20190112_20190131_01_T1` and `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`
+As can be noted, the difference on using `sensor-harm` for different satellite-sensors relly only on the sceneid name. It is important to note that, for both cases, the input directory (`/path/to/input/`) must contain the scenes to be processed. In this case `LC08_L1TP_220069_20190112_20190131_01_T1` and `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`
 
-For more information, consult the [Github repository](https://github.com/brazil-data-cube/sensor-harm), where the versioning of the changes in this Docker Image (`nbar`) has been keep.
+For more information, consult the [Github repository](https://github.com/brazil-data-cube/sensor-harm), where the versioning of the changes in this Docker Image (`sensor-harm`) has been keep.
 
 ### Processing scripts Docker Images
 
@@ -439,9 +439,9 @@ To define the user duering `research-processing-jupyter` execution, you can use 
 
 Bellow is presented an example of how to use the `research-processing-jupyter` Docker Image through the Docker CLI:
 
-!!! tip "Image name"
+<!---!!! tip "Image name"
 
-    On the following commands, a `research-processing-jupyter` Docker Image is identified as `marujore/research-processing-jupyter:latest` , stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub.
+    On the following commands, a `research-processing-jupyter` Docker Image is identified as `brazildatacube/research-processing-jupyter:latest` , stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub.-->
 
 !!! warning "Command format"
 
@@ -468,7 +468,7 @@ docker run \
   --publish 8888:8888 \
 
   # Docker Image
-  marujore/research-processing-jupyter:latest
+  brazildatacube/research-processing-jupyter:latest
 ```
 
 !!! tip "User definition"
@@ -505,9 +505,9 @@ firefox http://127.0.0.1:8888/lab?token=0497e15e042d52cfb498a2edf3d2c6e5874e79b4
 
 Bellow, the same example performed using `Docker CLI` is presented using [Docker Compose](https://docs.docker.com/compose/). First, the `docker-compose.yml` file was created:
 
-!!! tip "Image name"
+<!---!!! tip "Image name"
 
-    On the following commands, a `research-processing-jupyter` Docker Image is identified as `marujore/research-processing-jupyter:latest`, stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub as `latest`.
+    On the following commands, a `research-processing-jupyter` Docker Image is identified as `brazildatacube/research-processing-jupyter:latest`, stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub as `latest`.-->
 
 ``` yml title="docker-compose.yml"
 version: '3.2'
@@ -517,7 +517,7 @@ services:
 
     # User definition
     user: ${UID}:${GID}
-    image: marujore/research-processing-jupyter:latest
+    image: brazildatacube/research-processing-jupyter:latest
 
     environment:
       # Environment variable
@@ -615,9 +615,9 @@ The execution of the `research-processing-dagster` requires the definition of th
 
 Bellow is presented an example of how to use the `research-processing-dagster` Docker Image through the Docker CLI:
 
-!!! tip "Image name"
+<!---!!! tip "Image name"
 
-    On the following commands, a `research-processing-dagster` Docker Image is identified as `marujore/research-processing-dagster:latest` stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub as `latest`.
+    On the following commands, a `research-processing-dagster` Docker Image is identified as `brazildatacube/research-processing-dagster:latest` stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub as `latest`.-->
 
 !!! warning "Command format"
 
@@ -641,7 +641,7 @@ docker run \
   --publish 3000:3000 \
 
   # Docker Image
-  marujore/research-processing-dagster:latest
+  brazildatacube/research-processing-dagster:latest
 ```
 
 After executing the above command, a result similar to the showed bellow will be displayed:
@@ -667,16 +667,16 @@ firefox http://127.0.0.1:3000
 
 Bellow, the same example performed using `Docker CLI` is presented using [Docker Compose](https://docs.docker.com/compose/). First, the `docker-compose.yml` file was created:
 
-!!! tip "Image name"
+<!---!!! tip "Image name"
 
-    On the following commands, a `research-processing-dagster` Docker Image is identified as `marujore/research-processing-dagster:latest` stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub as `latest`.
+    On the following commands, a `research-processing-dagster` Docker Image is identified as `brazildatacube/research-processing-dagster:latest` stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub as `latest`.-->
 
 ``` yml title="docker-compose.yml"
 version: '3.2'
 
 services:
   my-dagster:
-    image: marujore/research-processing-dagster:latest
+    image: brazildatacube/research-processing-dagster:latest
 
     environment:
       # Environmnet variables
@@ -757,9 +757,9 @@ The execution of the `example-toolkit-docker`, requires the definition of a few 
 
 Bellow the Docker Image tagged as `example-toolkit-docker` is executed:
 
-!!! tip "Image nameNome da imagem"
+<!---!!! tip "Image nameNome da imagem"
 
-    On the following commands, a `example-toolkit-docker` Docker Image is identified as `marujore/example-toolkit-docker:latest` stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub as `latest`.
+    On the following commands, a `example-toolkit-docker` Docker Image is identified as `brazildatacube/example-toolkit-docker:latest` stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub as `latest`.-->
 
 !!! warning "Command format"
 
@@ -786,7 +786,7 @@ docker run \
   --volume /my-toolkit/config.json:/compendium/config/example-toolkit.json \
 
   # Docker Image
-  marujore/example-toolkit-docker:latest
+  brazildatacube/example-toolkit-docker:latest
 ```
 
 After executing the above command, a result similar to the showed bellow will be displayed:
@@ -809,9 +809,9 @@ After executing the above command, a result similar to the showed bellow will be
 
 Bellow, the same example performed using `Docker CLI` is presented using [Docker Compose](https://docs.docker.com/compose/). First, the `docker-compose.yml` file was created:
 
-!!! tip "Image name"
+<!---!!! tip "Image name"
 
-    On the following commands, a `example-toolkit-docker` Docker Image is identified as `marujore/example-toolkit-docker:latest` stored in the profile [marujore](https://hub.docker.com/u/marujore) on DockerHub as `latest`.
+    On the following commands, a `example-toolkit-docker` Docker Image is identified as `brazildatacube/example-toolkit-docker:latest` stored in the profile [brazildatacube](https://hub.docker.com/u/brazildatacube) on DockerHub as `latest`.-->
 
 ``` yml title="docker-compose.yml"
 version: '3.2'
@@ -819,7 +819,7 @@ version: '3.2'
 services:
   my-dagster:
     # Docker Image specification
-    image: marujore/example-toolkit-docker:latest
+    image: brazildatacube/example-toolkit-docker:latest
 
     environment:
       # VEnvironmnet variables

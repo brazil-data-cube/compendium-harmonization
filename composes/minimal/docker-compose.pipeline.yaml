@@ -14,7 +14,7 @@ services:
     build:
       context: ${PWD}
       dockerfile: ${PWD}/docker/pipeline/Dockerfile
-    image: marujore/research-processing-dagster:latest
+    image: brazildatacube/research-processing-dagster:latest
     container_name: example-minimal-pipeline
 
     environment:

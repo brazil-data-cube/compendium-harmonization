@@ -15,12 +15,12 @@ services:
     build:
       context: ${PWD}
       dockerfile: ${PWD}/docker/notebook/Dockerfile
-    image: marujore/research-processing-jupyter:latest
+    image: brazildatacube/research-processing-jupyter:latest
     container_name: example-minimal-notebook
 
     environment:
       #
-      # 1. Enable Jupyter Lab (https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#docker-options) 
+      # 1. Enable Jupyter Lab (https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#docker-options)
       #
       - JUPYTER_ENABLE_LAB=yes
 

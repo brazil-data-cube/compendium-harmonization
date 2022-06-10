@@ -42,7 +42,7 @@ Based on these definitions, for the production of this RC and the generation of 
 :   Library create to provide functionality for generating angle bands from Sentinel-2/MSI data;
 
 
-[sensor-harm](https://github.com/marujore/sensor-harm)
+[sensor-harm](https://github.com/brazil-data-cube/sensor-harm)
 
 :   Library create to generate harmonized produts from Sentinel-2/MSI and Landsat-8/OLI data;
 
@@ -177,15 +177,15 @@ The above code will generate the angle bands from the image defined in the input
 To learn more about the library, please, see the [official s2-angs library repository](https://github.com/brazil-data-cube/s2-angs) on GitHub.
 
 ## Sensor Harmonization Python Library (sensor-harm)
-[![s2-angs-badge-stars](https://img.shields.io/github/stars/marujore/sensor-harm?style=social)](https://github.com/marujore/sensor-harm)
-[![sensor-harm-badge-forks](https://img.shields.io/github/forks/marujore/sensor-harm?style=social)](https://github.com/marujore/sensor-harm)
-[![sensor-harm-badge-version](https://img.shields.io/github/v/release/marujore/sensor-harm?style=social)](https://github.com/marujore/sensor-harm)
+[![s2-angs-badge-stars](https://img.shields.io/github/stars/brazil-data-cube/sensor-harm?style=social)](https://github.com/brazil-data-cube/sensor-harm)
+[![sensor-harm-badge-forks](https://img.shields.io/github/forks/brazil-data-cube/sensor-harm?style=social)](https://github.com/brazil-data-cube/sensor-harm)
+[![sensor-harm-badge-version](https://img.shields.io/github/v/release/brazil-data-cube/sensor-harm?style=social)](https://github.com/brazil-data-cube/sensor-harm)
 
 In this RC, part of the results consists of harmonized products, i.e., surface reflectance level products with correction for `Bi-Directional Reflectance Distribution Function` (BRDF) effects and spectral adjustments. For this purpose, the [sensor-harm](https://github.com/brazil-data-center/sensor-harm) library was created. The BRDF correction is done using the `c-factor` method to generate Nadir BRDF-Adjusted Reflectance (NBAR) products in this library. In contrast, the spectral adjustment is made using `bandpass` adopting Landsat-8 images as the reference. Using this library, these methods can be applied to images from Landsat-4/TM, Landsat-5/TM, Landsat-7/ETM+, Landsat-8/OLI, and Sentinel-2/MSI sensor satellites. They can be harmonized between these different data. The library features two main functions, one for harmonizing images from sensors onboard the Landsat satellites and one for images from sensors onboard the Sentinel-2 satellites.
 
 #### Operations available
 
-The table below summarizes the operations available in the [sensor-harm](https://github.com/marujore/sensor-harm) library.
+The table below summarizes the operations available in the [sensor-harm](https://github.com/brazil-data-cube/sensor-harm) library.
 
 <div align="center" markdown>
 |     **Function**                           |                 **Description**                 |
@@ -261,7 +261,7 @@ The above code will generate the angle bands from the image defined in the input
       <figcaption>Sentinel-2/MSI Image (B12) NBAR 20m</figcaption>
     </figure>
 
-To learn more about the library, please, see the [official sensor-harm library repository](https://github.com/marujore/sensor-harm) on GitHub.
+To learn more about the library, please, see the [official sensor-harm library repository](https://github.com/brazil-data-cube/sensor-harm) on GitHub.
 
 ## Research Processing Python Library (research-processing)
 
@@ -367,7 +367,7 @@ From the functions presented in the table above, the ones listed below are used 
 
       - Atmospheric correction with LaSRC: [LaSRC 2.0.1 Docker Image](/environment/#lasrc-201)
       - Atmospheric correction with Sen2Cor: [Sen2Cor 2.9.0 Docker Image](/pt/tools/environment/#sen2cor-290)
-    
+
     These `Docker Images` were created to run in this RC. For more information, see the [Computational Environments](/en/tools/environment) section.
 
 **Angle band generation (Landsat-8/OLI and Sentinel-2/MSI)**
@@ -394,7 +394,7 @@ The processing performed by both functions listed above is also done inside a `D
     Creating a `Docker Container` depends on a `Docker Image` that defines the environment and its settings. This is no different in `research-processing`. To create the `Docker Container` angle band generation, the following `Docker Image` is used:
 
       - Angle band generation for Landsat-8/OLI data: [L8Angs Docker Image](/pt/tools/environment/#l8angs)
-    
+
     The `L8Angs Docker Image` was created to run in this RC. For more information, see the [Computational Environments](/en/tools/environment) section.
 
 **NBAR products generation (Sentinel-2/MSI and Landsat-8/OLI)**
@@ -412,7 +412,7 @@ These functions are implemented with the `execution model` Containerized. Thus, 
     Creating a `Docker Container` depends on a `Docker Image` that defines the environment and its settings. This is no different in `research-processing`. To create the NBAR product generation `Docker Container` (all functions), the following `Docker Image` is used:
 
       - NBAR product generation (Sentinel-2/MSI e Landsat-8/OLI): [NBAR Docker Image](/pt/tools/environment/#nbar)
-    
+
     The `NBAR Docker Image` was created to run in this RC. For more information, see the [Computational Environments](/en/tools/environment) section.
 
 **Routines for validating the products created in the processing flow**
