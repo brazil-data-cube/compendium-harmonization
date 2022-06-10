@@ -33,7 +33,7 @@ theme:
       accent: "Blue Grey"
 
   language: en
-  
+
   features:
     - navigation.top
     - navigation.indexes
