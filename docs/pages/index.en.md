@@ -22,7 +22,7 @@ These codes are stored in the `analysis` directory, which has three subdirectori
 
 - [:file_folder: analysis/data](analysis/data/): Directory for storing the generated input and output data. It contains the following subdirectories:
 
-    - [:file_folder: examples](analysis/data/examples): Directory with the data (Input/Output) of the examples provided in this RC. For more information about the examples, see Chapter [Data Processing](/en/reproducible-research/); 
+    - [:file_folder: examples](analysis/data/examples): Directory with the data (Input/Output) of the examples provided in this RC. For more information about the examples, see Chapter [Data Processing](/en/reproducible-research/);
 
     - [:file_folder: original_scene_ids](analysis/data/original_scene_ids): Directory for storing the original scene id index files used to produce the article results. This data can be applied to the codes provided in the [analysis/notebook](analysis/notebook) and [analysis/pipeline](analysis/pipeline) directories for reproducing the article results.
 
@@ -56,6 +56,6 @@ Complementary to the `composes` directory is the `docker` directory. This direct
 
 In addition to these directories, some files are fundamental to using the materials in this RC:
 
-- [Vagrantfile](Vagrantfile) and [bootstrap.sh](bootstrap.sh): [Vagrant](https://www.vagrantup.com/) files used to build a virtual machine with the complete environment for running the [Processing scripts](/en/tools/processing/) available in the `analysis` directory. For more information, see the reference section [Computing Environments - Virtual Machine with Vagrant](/en/tools/environment/#virtual-machine-with-vagrant);
+- [Vagrantfile](Vagrantfile) and `bootstrap.sh`: [Vagrant](https://www.vagrantup.com/) files used to build a virtual machine with the complete environment for running the [Processing scripts](/en/tools/processing/) available in the `analysis` directory. For more information, see the reference section [Computing Environments - Virtual Machine with Vagrant](/en/tools/environment/#virtual-machine-with-vagrant);
 
-- [Makefile](Makefile): `GNU Make` definition file to make the use of the materials available in the `analysis` and `composes` directories easier. The [setenv.sh](setenv.sh) file is used by `Makefile` to define the user who will run Jupyter Notebook environment. More information is provided in Section [Data Processing](/en/reproducible-research/).
+- [Makefile](Makefile): `GNU Make` definition file to make the use of the materials available in the `analysis` and `composes` directories easier. The `setenv.sh` file is used by `Makefile` to define the user who will run Jupyter Notebook environment. More information is provided in Section [Data Processing](/en/reproducible-research/).
