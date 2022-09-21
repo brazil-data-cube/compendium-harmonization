@@ -1,4 +1,4 @@
-..
+<!--
     This file is part of Brazil Data Cube compendium-harmonization.
     Copyright (C) 2022 INPE.
 
@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
-
+-->
 
 *[RC]: Research Compendium
 *[SAA]: Solar Azimutal

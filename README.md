@@ -1,4 +1,4 @@
-..
+<!--
     This file is part of Brazil Data Cube compendium-harmonization.
     Copyright (C) 2022 INPE.
 
@@ -14,15 +14,15 @@
 
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
+-->
 
-
-### Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow
+### A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images
 
 [![rc](https://img.shields.io/badge/research%20compendium-ready-brightgreen)](#)
 
 This is the official `Research Compendium` (RC) documentation, with all the materials (Codes, data, and computing environments) needed for the reproduction, replication, and evaluation of the results presented in the paper:
 
-> Marujo *et al* (2022). `Evaluating Landsat-8 and Sentinel-2 Nadir BRDF Adjusted Reflectance (NBAR) on South of Brazil through a Reproducible and Replicable Workflow`. This Paper will be submitted in June 2022.
+> Marujo *et al* (2022). `A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images`. This Paper will be submitted in September 2022.
 
 #### Research Compendium Content
 

@@ -1,4 +1,4 @@
-..
+<!--
     This file is part of Brazil Data Cube compendium-harmonization.
     Copyright (C) 2022 INPE.
 
@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
-
+-->
 
 *[RC]: Research Compendium
 *[SAA]: Solar Azimutal
@@ -329,7 +329,7 @@ Based on these two modes of operation, the library implements and provides `proc
 
 #### Function communication approach
 
-The `research-processing` library features can be used together to build a processing flow that allows the materialization of the experiment methodology followed in this RC. In this context, one point to consider is how the inputs and outputs of these functions are used together. 
+The `research-processing` library features can be used together to build a processing flow that allows the materialization of the experiment methodology followed in this RC. In this context, one point to consider is how the inputs and outputs of these functions are used together.
 
 In `research-processing`, the implemented operations are performed in a way that avoids data movement (Inputs and Outputs). To do this, the processing functions operate based on the `data path`. This gives the functions the path where the data is stored and where the results should be saved. This mode of operation allows better definitions regarding where the data will be loaded and saved, avoiding unnecessary movement and storage in places that can present problems with space limitation and inadequate performance. This mode of operation is represented in the figure below.
 
