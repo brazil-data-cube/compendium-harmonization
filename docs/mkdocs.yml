@@ -43,7 +43,7 @@ theme:
       accent: "Blue Grey"
 
   language: en
-  
+
   features:
     - navigation.top
     - navigation.indexes
@@ -141,6 +141,6 @@ markdown_extensions:
       alternate_style: true
   - toc:
       permalink: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+#  - pymdownx.emoji:
+#      emoji_index: !!python/name:materialx.emoji.twemoji
+#      emoji_generator: !!python/name:materialx.emoji.to_svg

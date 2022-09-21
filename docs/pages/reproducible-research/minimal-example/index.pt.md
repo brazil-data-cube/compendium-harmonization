@@ -39,22 +39,22 @@ Espera-se que com esse exemplo, os pesquisadores e interessados sejam capazes de
 O primeiro passo para a realização desse exemplo, é o *download* deste RC e todos os seus materiais. Para isso, em um terminal, utilize a ferramenta `git` e faça o [clone](https://git-scm.com/docs/git-clone) do repositório onde o RC está armazenado:
 
 ``` sh
-git clone https://github.com/brazil-data-cube/Evaluating-Landsat-8-and-Sentinel-2-Nadir-BRDF-Adjusted-Reflectance
+git clone https://github.com/brazil-data-cube/compendium-harmonization
 ```
 
-Após o [clone](https://git-scm.com/docs/git-clone), um novo diretório será criado no diretório em que você está. O nome deste novo diretório é `Evaluating-Landsat-8-and-Sentinel-2-Nadir-BRDF-Adjusted-Reflectance`:
+Após o [clone](https://git-scm.com/docs/git-clone), um novo diretório será criado no diretório em que você está. O nome deste novo diretório é `compendium-harmonization`:
 
 ``` sh
 ls -ls .
 
-#> 4 drwxrwxr-x 3 ubuntu ubuntu 4096 May  2 00:44 Evaluating-Landsat-8-and-Sentinel-2-Nadir-BRDF-Adjusted-Reflectance
+#> 4 drwxrwxr-x 3 ubuntu ubuntu 4096 May  2 00:44 compendium-harmonization
 ```
 
-Agora, acesse o diretório `Evaluating-Landsat-8-and-Sentinel-2-Nadir-BRDF-Adjusted-Reflectance` e liste os conteúdos:
+Agora, acesse o diretório `compendium-harmonization` e liste os conteúdos:
 
 *Mudando de diretório*
 ``` sh
-cd Evaluating-Landsat-8-and-Sentinel-2-Nadir-BRDF-Adjusted-Reflectance
+cd compendium-harmonization
 ```
 
 *Listando o conteúdo do diretório*

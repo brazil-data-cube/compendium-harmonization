@@ -25,7 +25,7 @@ services:
     build:
       context: ${PWD}
       dockerfile: ${PWD}/docker/notebook/Dockerfile
-    image: marujore/research-processing-jupyter:latest
+    image: brazildatacube/research-processing-jupyter:latest
     container_name: example-replication-notebook
 
     environment:

@@ -389,7 +389,7 @@ Das funções apresentadas na tabela acima, as listadas a seguir são utilizadas
 
       - Correção atmosférica com LaSRC: [Docker Image LaSRC 2.0.1](/pt/tools/environment/#lasrc-201)
       - Correção atmosféria com Sen2COr: [Docker Image Sen2Cor 2.9.0](/pt/tools/environment/#sen2cor-290)
-    
+
     Essas `Docker Images` foram criadas para execução nesse RC. Para mais informações, consulte a seção [Ambientes computacionais](/pt/tools/environment).
 
 **Geração de bandas de ângulos (Landsat-8/OLI e Sentinel-2/MSI)**
@@ -415,7 +415,7 @@ O processamento realizado por ambas as funções listadas acima também é feito
     A criação de um `Docker Container` depende de uma `Docker Image` que define o ambiente e suas configurações. Isso não é diferente no `research-processing`. Para a criação do `Docker Container` de geração de banda de ângulos, é feito o uso da seguinte `Docker Image`:
 
       - Geração de bandas de ângulos para dados Landsat-8/OLI: [Docker Image L8Angs](/pt/tools/environment/#l8angs)
-    
+
     Essas imagens foram criadas para execução nesse RC. Para mais informações, consulte a seção [Ambientes computacionais](/pt/tools/environment).
 
 **Geração de produtos NBAR (Sentinel-2/MSI e Landsat-8/OLI)**
@@ -433,7 +433,7 @@ Essas funções, são implementadas com o `modelo de execução` Containerized. 
     A criação de um `Docker Container` depende de uma `Docker Image` que define o ambiente e suas configurações. Isso não é diferente no `research-processing`. Para a criação do `Docker Container` de geração de produtos NBAR (todas as funções), é feito o uso da seguinte `Docker Image`:
 
       - Geração de produtos NBAR (Sentinel-2/MSI e Landsat-8/OLI): [Docker Image NBAR](/pt/tools/environment/#nbar)
-    
+
     Essas imagens foram criadas para execução nesse RC. Para mais informações, consulte a seção [Ambientes computacionais](/pt/tools/environment).
 
 **Rotinas de validação das correções realizadas**
@@ -450,14 +450,14 @@ Para exemplificar a forma de utilização da biblioteca `research-processing`, a
 from research_processing.surface_reflectance import sen2cor
 
 # sen2cor(
-#  input_dir  = "<path to directory where .safe is>", 
-#  output_dir = "<path where result will be saved>" , 
+#  input_dir  = "<path to directory where .safe is>",
+#  output_dir = "<path where result will be saved>" ,
 #  scene_ids  = ["<scene ids of `input_dir` that will be processed>"]
 #)
 # For example:
 sen2cor(
-  input_dir  = "/data/input", 
-  output_dir = "/data/output" , 
+  input_dir  = "/data/input",
+  output_dir = "/data/output" ,
   scene_ids  = ["S2B_MSIL1C_20171119T133209_N0206_R081_T22JBM_20171120T175608.SAFE"]
 )
 ```
