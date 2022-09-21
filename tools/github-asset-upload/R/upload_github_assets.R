@@ -1,9 +1,19 @@
 #
-# This file is part of compendium-harmonization
-# Copyright (C) 2021-2022 INPE.
+# This file is part of Brazil Data Cube compendium-harmonization.
+# Copyright (C) 2022 INPE.
 #
-# compendium-harmonization is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 #
 
 library(magrittr)
@@ -20,7 +30,7 @@ github_repository <- Sys.getenv("GITHUB_REPOSITORY")
 github_tagname <- Sys.getenv("GITHUB_TAGNAME")
 
 #
-# 2. Defining the data directories (Folder with the .zip files that should 
+# 2. Defining the data directories (Folder with the .zip files that should
 #    be uploaded to the repository)
 #
 print("Defining the data directories")

@@ -302,13 +302,13 @@ Para mais informações, consulte o [repositório do GitHub](https://github.com/
 [![docker-image-type](https://img.shields.io/badge/Type-Executable-brightgreen)](/pt/tools/environment/#docker-images)
 [![dockerhub-badge](https://img.shields.io/badge/avaliable%20on-dockerhub-blue)](https://hub.docker.com/r/marujore/nbar)
 
-Neste RC, as imagens Landsat-8 Collection-2 já obtidas em nível de reflectância de superfície (L2) e as imagens Sentinel-2 (processadas para reflectância de superfície tanto utilizando Sen2cor quanto LaSRC) são harmonizadas utilizando a biblioteca [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm). Para potencializar a reprodução e replicação no uso dessa ferramenta, fez-se a criação da Docker Image `nbar`. Nesta Image, estão disponíveis todas as dependências e configurações necessárias para a execução do [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm).
+Neste RC, as imagens Landsat-8 Collection-2 já obtidas em nível de reflectância de superfície (L2) e as imagens Sentinel-2 (processadas para reflectância de superfície tanto utilizando Sen2cor quanto LaSRC) são harmonizadas utilizando a biblioteca [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm). Para potencializar a reprodução e replicação no uso dessa ferramenta, fez-se a criação da Docker Image `sensor-harm`. Nesta Image, estão disponíveis todas as dependências e configurações necessárias para a execução do [sensor-harm](/pt/tools/libraries/#sensor-harmonization-python-library-sensor-harm).
 
 Os tópicos a seguir, apresentam as principais características desta Docker Image, volumes requeridos e exemplos de utilização.
 
 **Volumes**
 
-Para a utilização da `nbar`, é necessário a definição de alguns Docker Volumes. Esses volumes, especificam os dados de entrada e dados auxiliares utilizados pelo sensor-harm. Abaixo, esses volumes são listados e descritos:
+Para a utilização da `sensor-harm`, é necessário a definição de alguns Docker Volumes. Esses volumes, especificam os dados de entrada e dados auxiliares utilizados pelo sensor-harm. Abaixo, esses volumes são listados e descritos:
 
 `Dados de entrada` (Obrigatório)
 
@@ -327,11 +327,11 @@ Para a utilização da `nbar`, é necessário a definição de alguns Docker Vol
 
 **Exemplo de utilização (Docker CLI)**
 
-Os códigos abaixo apresentam dois exemplos de utilização do `nbar`, através da Docker CLI. No primeiro exemplo, faz-se o processamento de uma cena Landsat-8/OLI, enquanto no segundo é processado uma cena Sentinel-2/MSI.
+Os códigos abaixo apresentam dois exemplos de utilização do `sensor-harm`, através da Docker CLI. No primeiro exemplo, faz-se o processamento de uma cena Landsat-8/OLI, enquanto no segundo é processado uma cena Sentinel-2/MSI.
 
 !!! tip "Nome da imagem"
 
-    Nos comandos apresentados abaixo, a Docker Image `nbar` é identificada como `marujore/nbar:latest` já que esta, está armazenada no perfil de usuário [marujore](https://hub.docker.com/u/marujore) no DockerHub e a versão escolhida é a `latest`.
+    Nos comandos apresentados abaixo, a Docker Image `sensor-harm` é identificada como `marujore/nbar:latest` já que esta, está armazenada no perfil de usuário [marujore](https://hub.docker.com/u/marujore) no DockerHub e a versão escolhida é a `latest`.
 
 !!! warning "Formatação do comando"
 
@@ -352,7 +352,7 @@ docker run --rm \
     --volume /path/to/angles:/mnt/angles-dir:ro \
 
     # Especificação da Docker Image e cena a ser processada
-    --tty marujore/nbar:latest LC08_L1TP_220069_20190112_20190131_01_T1
+    --tty brazildatacube/sensor-harm:latest LC08_L1TP_220069_20190112_20190131_01_T1
 ```
 
 *Exemplo para dados Sentinel-2/MSI*
@@ -370,12 +370,12 @@ docker run --rm \
     --volume /path/to/angles:/mnt/angles-dir:ro \
 
     # Especificação da Docker Image e cena a ser processada
-    --tty marujore/nbar:latest S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
+    --tty brazildatacube/sensor-harm:latest S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE
 ```
 
-Como pode-se notar, a diferença para o uso da `nbar` para os dados dos diferentes satélite-sensor, está apenas na especificação do nome da cena. Deve-se notar também que, é esperado, para ambos os casos que, no diretório de entrada (`/path/to/input/`) tenha subdiretórios com as cenas específicas, neste caso `LC08_L1TP_220069_20190112_20190131_01_T1` e `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`. Além disso, é esperado que nesses subdiretórios, todos os dados das cenas estejam disponíveis para o processamento.
+Como pode-se notar, a diferença para o uso da `sensor-harm` para os dados dos diferentes satélite-sensor, está apenas na especificação do nome da cena. Deve-se notar também que, é esperado, para ambos os casos que, no diretório de entrada (`/path/to/input/`) tenha subdiretórios com as cenas específicas, neste caso `LC08_L1TP_220069_20190112_20190131_01_T1` e `S2A_MSIL1C_20190105T132231_N0207_R038_T23LLF_20190105T145859.SAFE`. Além disso, é esperado que nesses subdiretórios, todos os dados das cenas estejam disponíveis para o processamento.
 
-Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/sensor-harm), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `nbar`.
+Para mais informações, consulte o [repositório do GitHub](https://github.com/marujore/sensor-harm), onde tem-se mantido o versionamento das mudanças realizadas na Docker Image `sensor-harm`.
 
 ### Docker Images para Scripts de processamento
 
