@@ -1,16 +1,26 @@
 #
-# This file is part of compendium-harmonization
-# Copyright (C) 2021-2022 INPE.
+# This file is part of Brazil Data Cube compendium-harmonization.
+# Copyright (C) 2022 INPE.
 #
-# compendium-harmonization is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 #
 
 import os
 
 from pipeline_steps import (
-    extract_data, 
-    create_dagit_yaml_file, 
+    extract_data,
+    create_dagit_yaml_file,
     replace_subdirectories_name,
     download_data_files_from_github,
     change_files_permission_recursive
@@ -37,7 +47,7 @@ if __name__ == "__main__":
 
     # Path to the input data directory.
     raw_data_dir = os.environ.get("RAW_DATA_DIR")
-    
+
     # Path to the output data directory.
     derived_data_dir = os.environ.get("DERIVED_DATA_DIR")
 

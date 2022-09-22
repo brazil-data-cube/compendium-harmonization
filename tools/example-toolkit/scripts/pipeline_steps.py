@@ -1,9 +1,19 @@
 #
-# This file is part of compendium-harmonization
-# Copyright (C) 2021-2022 INPE.
+# This file is part of Brazil Data Cube compendium-harmonization.
+# Copyright (C) 2022 INPE.
 #
-# compendium-harmonization is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 #
 
 import os
@@ -22,12 +32,12 @@ from toolbox import download_file, extract_packed_files
 
 
 def download_data_files_from_github(output_directory: str, download_files_reference: str) -> List[str]:
-    """Download data from the Research Compendium Github Repository. 
+    """Download data from the Research Compendium Github Repository.
 
     Args:
         output_directory (str): Directory where the downloaded files will be saved.
 
-        download_files_reference (str): Path to the JSON file containing the data definitions that should be downloaded from 
+        download_files_reference (str): Path to the JSON file containing the data definitions that should be downloaded from
         the Research Compendium GitHub repository. This JSON must be contains the following structure:
             {
               "repositoryTag": "...",
@@ -150,14 +160,14 @@ def change_files_permission_recursive(root_path: str, permission: int):
 
 
 def replace_subdirectories_name(base_directory: str, in_pattern: str, out_pattern: str):
-    """Replace the subdirectories names of a directory based on a pattern. 
+    """Replace the subdirectories names of a directory based on a pattern.
 
-    In this function every subdirectory of the `base_directory` that has the specified pattern (`in_pattern`) will be renamed 
+    In this function every subdirectory of the `base_directory` that has the specified pattern (`in_pattern`) will be renamed
     to the newly defined pattern (`out_pattern`). For example, for the call:
 
             >> replace_subdirectories_name('/my/path', 'local', 'online')
 
-        All directories at the first level below `/my/path`, which contain in their name the pattern `local` 
+        All directories at the first level below `/my/path`, which contain in their name the pattern `local`
         will be renamed with the new pattern `online`:
 
             `Original subfolders names`
@@ -206,7 +216,7 @@ def create_dagit_yaml_file(raw_data_dir: str, derived_data_dir: str, output_file
         None: The configuration content will be saved on the `output_file`.
 
     Note:
-        In the version of Dagster used to produce the article (0.12.2), the tool uses the concept of 
+        In the version of Dagster used to produce the article (0.12.2), the tool uses the concept of
         `Solids` to express operations.
     """
     # Defining path to the LADS auxiliary data (LaSRC).

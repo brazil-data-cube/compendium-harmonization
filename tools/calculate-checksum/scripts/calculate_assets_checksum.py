@@ -1,9 +1,19 @@
 #
-# This file is part of compendium-harmonization
-# Copyright (C) 2021-2022 INPE.
+# This file is part of Brazil Data Cube compendium-harmonization.
+# Copyright (C) 2022 INPE.
 #
-# compendium-harmonization is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 #
 
 import os
@@ -12,7 +22,7 @@ from toolbox import bagit_directory
 
 if __name__ == "__main__":
     #
-    # 1. Configuring the input/output directory. 
+    # 1. Configuring the input/output directory.
     #
     input_directory_to_bagit = os.environ.get("INPUT_DATA_DIRECTORY")
     output_directory_to_save_bagit = os.environ.get("OUTPUT_DATA_DIRECTORY")
