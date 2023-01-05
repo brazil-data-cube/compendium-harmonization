@@ -22,7 +22,7 @@
 
 This is the official `Research Compendium` (RC) documentation, with all the materials (Codes, data, and computing environments) needed for the reproduction, replication, and evaluation of the results presented in the paper:
 
-> Marujo *et al* (2022). `A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images`. This Paper will be submitted in September 2022.
+> Marujo *et al* (2022). `A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images`. This Paper is not published yet.
 
 #### Research Compendium Content
 
