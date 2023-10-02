@@ -112,10 +112,49 @@ For each approach, automatic commands can be used through the `Makefile`. You ca
 make replication_notebook
 ```
 
+!!! attention "Changes required"
+
+    As the replication example uses other data from that presented in the minimal example, you should modify some Jupyter Notebook parameters — specifically, the `day_diff` parameter. This parameter defines the number of days difference between images. This change should only be made for tests where only Sentinel-2 is used.
+    
+    So, you must change the following sections of the Jupyter Notebook:
+
+    - `4.3.1: Searching for image pairs`
+    - `4.4.1: Searching for image pairs`
+    - `4.5.1: Searching for image pairs`
+    - `4.6.1: Searching for image pairs`
+
+    In all of them, you must change `day_diff` to `15 days`:
+
+    ```python
+    validation_funcs.search_pairs_s2(sentinel2_sceneid_list, day_diff=15)
+    ```
+
 *Dagster*
 
 ``` sh
 make replication_pipeline
 ```
+
+!!! attention "Changes required"
+
+    As the replication example uses other data from that presented in the minimal example, you should modify some Jupyter Notebook parameters — specifically, the `day_diff` parameter. This parameter defines the number of days difference between images. This change should only be made for tests where only Sentinel-2 is used.
+    
+    So, you must add the following changes to the `solids` section of your [Dagster configuration file](/en/tools/utilitary):
+
+    ```yaml
+    solids:
+        validation_sr_s2_sen2cor:
+            config:
+            day_difference: 15
+        validation_sr_s2_lasrc:
+            config:
+            day_difference: 15
+        validation_nbar_s2_sen2cor:
+            config:
+            day_difference: 15
+        validation_nbar_s2_lasrc:
+            config:
+            day_difference: 15
+    ```
 
 Once the environment is chosen, the processing and data analysis can be performed.

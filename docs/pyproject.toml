@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 license = "GPLv3"
+packages = [{include = "pages"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"

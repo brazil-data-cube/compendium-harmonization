@@ -1,6 +1,9 @@
 {
-  "repositoryTag": "",
+  "repositoryTag": "v0.1-data",
   "dataFiles": [
-    ""
+    "https://github.com/brazil-data-cube/compendium-harmonization/releases/download/v0.1-data/replication-example_landsat8_data.zip",
+    "https://github.com/brazil-data-cube/compendium-harmonization/releases/download/v0.1-data/replication-example_lasrc_auxiliary_data.zip",
+    "https://github.com/brazil-data-cube/compendium-harmonization/releases/download/v0.1-data/replication-example_scene_id_list.zip",
+    "https://github.com/brazil-data-cube/compendium-harmonization/releases/download/v0.1-data/replication-example_sentinel2_data.zip"
   ]
 }

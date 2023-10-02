@@ -112,10 +112,49 @@ Para ambas abordagens adotadas, tem-se comandos de automação no `Makefile`. Se
 make replication_notebook
 ```
 
+!!! attention "Modificação necessária"
+
+    Como o exemplo de replicação utiliza dados diferentes dos apresentados no exemplo mínimo, faz-se necessário pequenas modificações nos parâmetros utilizados no Jupyter Notebook. Especificamente, o parâmetro `day_diff`. Esse parâmetro define a quantidade de dias de diferença entre imagens. Essa mudança deve ser feita apenas para testes onde faz-se o uso apenas do Sentinel-2.
+    
+    Com isso, você deve alterar as seguintes seções do Jupyter Notebook:
+
+    - `4.3.1: Searching for image pairs`
+    - `4.4.1: Searching for image pairs`
+    - `4.5.1: Searching for image pairs`
+    - `4.6.1: Searching for image pairs`
+
+    Em todas elas, deve-se alterar o `day_diff` para 15 dias:
+
+    ```python
+    validation_funcs.search_pairs_s2(sentinel2_sceneid_list, day_diff=15)
+    ```
+
 *Dagster*
 
 ``` sh
 make replication_pipeline
 ```
 
-Com o ambiente escolhido, o processamento e análise dos dados pode ser realizado.
+!!! attention "Modificação necessária"
+
+    Como o exemplo de replicação utiliza dados diferentes dos apresentados no exemplo mínimo, faz-se necessário pequenas modificações nos parâmetros do pipeline. Especificamente, o parâmetro `day_diff` deve ser alterado para `15 dias`. Esse parâmetro define a quantidade de dias de diferença entre imagens. Essa mudança deve ser feita apenas para testes onde faz-se o uso apenas do Sentinel-2.
+    
+    Com isso, você deve adicionar na seção `solids` de seu [arquivo de configuração Dagster](/tools/utilitary/) as seguintes mudanças:
+
+    ```yaml
+    solids:
+        validation_sr_s2_sen2cor:
+            config:
+            day_difference: 15
+        validation_sr_s2_lasrc:
+            config:
+            day_difference: 15
+        validation_nbar_s2_sen2cor:
+            config:
+            day_difference: 15
+        validation_nbar_s2_lasrc:
+            config:
+            day_difference: 15
+    ```
+
+Com o ambiente escolhido, o processamento e análise dos dados podem ser realizados.

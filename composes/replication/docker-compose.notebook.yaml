@@ -55,6 +55,13 @@ services:
         source: ${PWD}/analysis/
         target: /home/jovyan/analysis
 
+      #
+      # 5. Volume with the mapping for the input and output directories. 
+      #
+      - type: bind
+        source: ${PWD}/analysis/data/examples/replication_example
+        target: ${PWD}/analysis/data/examples/replication_example # Must be the same path set in the `DATA_DIRECTORY` environment variable.
+
     ports:
 
       #
