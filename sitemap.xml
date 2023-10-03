@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+         <loc>None.</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/"/>
+         
+    </url>
+    <url>
+         <loc>Nonereproducible-research/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/reproducible-research/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/reproducible-research/"/>
+         
+    </url>
+    <url>
+         <loc>Nonereproducible-research/minimal-example/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/reproducible-research/minimal-example/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/reproducible-research/minimal-example/"/>
+         
+    </url>
+    <url>
+         <loc>Nonereproducible-research/replication-example/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/reproducible-research/replication-example/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/reproducible-research/replication-example/"/>
+         
+    </url>
+    <url>
+         <loc>Nonetools/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/tools/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/tools/"/>
+         
+    </url>
+    <url>
+         <loc>Nonetools/environment/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/tools/environment/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/tools/environment/"/>
+         
+    </url>
+    <url>
+         <loc>Nonetools/libraries/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/tools/libraries/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/tools/libraries/"/>
+         
+    </url>
+    <url>
+         <loc>Nonetools/processing/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/tools/processing/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/tools/processing/"/>
+         
+    </url>
+    <url>
+         <loc>Nonetools/utilitary/</loc>
+         <lastmod>2023-10-03</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="Noneen/tools/utilitary/"/>
+         <xhtml:link rel="alternate" hreflang="pt" href="Nonept/tools/utilitary/"/>
+         
+    </url>
+</urlset>

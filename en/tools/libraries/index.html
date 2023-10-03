@@ -1,0 +1,1402 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Software libraries - Harmonization Compendium Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/static/css/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="Blue-Grey" data-md-color-accent="Blue-Grey">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#software-libraries" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Harmonization Compendium Documentation" class="md-header__button md-logo" aria-label="Harmonization Compendium Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 2v2h1v14a4 4 0 0 0 4 4 4 4 0 0 0 4-4V4h1V2H7m4 14c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1m2-4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1m1-5h-4V4h4v3Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harmonization Compendium Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Software libraries
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="Blue-Grey" data-md-color-accent="Blue-Grey"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../tools/libraries/" hreflang="pt" class="md-select__link">
+                    Brazilian Portuguese
+                  </a>
+                </li>
+              
+                <li class="md-select__item">
+                  <a href="./" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/brazil-data-cube/compendium-harmonization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    brazil-data-cube/compendium-harmonization
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Harmonization Compendium Documentation" class="md-nav__button md-logo" aria-label="Harmonization Compendium Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 2v2h1v14a4 4 0 0 0 4 4 4 4 0 0 0 4-4V4h1V2H7m4 14c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1m2-4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1m1-5h-4V4h4v3Z"/></svg>
+
+    </a>
+    Harmonization Compendium Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/brazil-data-cube/compendium-harmonization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    brazil-data-cube/compendium-harmonization
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Compendium Reference</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Compendium Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Compendium Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Software libraries
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Software libraries
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-code-libraries" class="md-nav__link">
+    Available code libraries
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libraries-in-the-processing-methodology" class="md-nav__link">
+    Libraries in the processing methodology
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libraries-specification" class="md-nav__link">
+    Libraries specification
+  </a>
+  
+    <nav class="md-nav" aria-label="Libraries specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-2-angle-generator-python-library-s2-angs" class="md-nav__link">
+    Sentinel-2 Angle Generator Python Library (s2-angs)
+  </a>
+  
+    <nav class="md-nav" aria-label="Sentinel-2 Angle Generator Python Library (s2-angs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-available" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-harmonization-python-library-sensor-harm" class="md-nav__link">
+    Sensor Harmonization Python Library (sensor-harm)
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor Harmonization Python Library (sensor-harm)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-available_1" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example_1" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#research-processing-python-library-research-processing" class="md-nav__link">
+    Research Processing Python Library (research-processing)
+  </a>
+  
+    <nav class="md-nav" aria-label="Research Processing Python Library (research-processing)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-execution-approach" class="md-nav__link">
+    Function Execution Approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Function Execution Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-communication-approach" class="md-nav__link">
+    Function communication approach
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations-available_2" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example_2" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing/" class="md-nav__link">
+        Processing scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utilitary/" class="md-nav__link">
+        Auxiliary scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment/" class="md-nav__link">
+        Computational environments
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../reproducible-research/">Data processing</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Data processing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reproducible-research/minimal-example/" class="md-nav__link">
+        Minimal example
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reproducible-research/replication-example/" class="md-nav__link">
+        Replication example
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-code-libraries" class="md-nav__link">
+    Available code libraries
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libraries-in-the-processing-methodology" class="md-nav__link">
+    Libraries in the processing methodology
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libraries-specification" class="md-nav__link">
+    Libraries specification
+  </a>
+  
+    <nav class="md-nav" aria-label="Libraries specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-2-angle-generator-python-library-s2-angs" class="md-nav__link">
+    Sentinel-2 Angle Generator Python Library (s2-angs)
+  </a>
+  
+    <nav class="md-nav" aria-label="Sentinel-2 Angle Generator Python Library (s2-angs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-available" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-harmonization-python-library-sensor-harm" class="md-nav__link">
+    Sensor Harmonization Python Library (sensor-harm)
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor Harmonization Python Library (sensor-harm)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-available_1" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example_1" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#research-processing-python-library-research-processing" class="md-nav__link">
+    Research Processing Python Library (research-processing)
+  </a>
+  
+    <nav class="md-nav" aria-label="Research Processing Python Library (research-processing)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-execution-approach" class="md-nav__link">
+    Function Execution Approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Function Execution Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-communication-approach" class="md-nav__link">
+    Function communication approach
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations-available_2" class="md-nav__link">
+    Operations available
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example_2" class="md-nav__link">
+    Usage example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/brazil-data-cube/compendium-harmonization/edit/master/docs/tools/libraries/index.en.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!--
+    This file is part of Brazil Data Cube compendium-harmonization.
+    Copyright (C) 2022 INPE.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
+-->
+
+<h1 id="software-libraries">Software Libraries<a class="headerlink" href="#software-libraries" title="Permanent link">&para;</a></h1>
+<p>Reproducibility allows us to retrace the path that was initially taken to obtain the results of scientific research. With this, other researchers and even our future selves can benefit and understand what we have done. The reproducibility also enables us to detect and correct possible errors in the results.</p>
+<p>Among the many actions that can be taken to achieve reproducibility is the ability to automate the steps already performed. This brings several benefits:</p>
+<ol>
+<li>Avoids possible "mistakes" by reading incorrect results that are no longer valid for the current run;</li>
+<li>It allows the verification of the entire processing flow (which also helps in the writing of the report/article);</li>
+<li>Decreased overhead of running the job.</li>
+</ol>
+<p>A few years ago, this feature was limited in research due to the use of software with graphical interfaces that ended up not allowing the automation of the work done through "buttons and clicks" on the screen.</p>
+<p>Nowadays, with the increase and dissemination of high-level languages for research development, such as <a href="https://www.r-project.org/">R</a> and <a href="https://www.python.org/">Python</a>, this has completely changed. We can automate tasks more efficiently. Also, from the moment a processing script is created, all the logic applied to the data is described clearly and directly.</p>
+<p>In this <abbr title="Research Compendium">RC</abbr>, several Python code libraries were created so that all steps could be modeled through scripts. Each library created has a unique responsibility, which helped us keep the work organized during its development. At the same time, this approach facilitates the reuse of the code created. Those who wish to reuse the work developed can import these libraries into their Python project.</p>
+<h2 id="available-code-libraries">Available code libraries<a class="headerlink" href="#available-code-libraries" title="Permanent link">&para;</a></h2>
+<p>To adopt this development approach, based on single responsibility libraries that could be reused, it was necessary to adopt some criteria that would help us keep everything organized and reusable. Also, our vision for creating multiple libraries for the composition of the scripts for processing the work is that these should be modeled in a way that they can be used together. Like blocks that can be put together to build a wall. </p>
+<p>Considering these characteristics, initially, we defined that in this <abbr title="Research Compendium">RC</abbr>, we would develop two types of libraries:</p>
+<dl>
+<dt><code>Base</code></dt>
+<dd>
+<p>Libraries that provide the base features and functionality for performing an action
+(e.g., Production of angle bands)</p>
+</dd>
+<dt><code>Application</code></dt>
+<dd>
+<p>Libraries that, through the union of <strong>Base</strong> libraries, provide functionalities that different methodologies and processing flows (e.g., Generation of harmonized products).</p>
+</dd>
+</dl>
+<p>Based on these definitions, for the production of this <abbr title="Research Compendium">RC</abbr> and the generation of its results, we developed two <strong>Base</strong> libraries:</p>
+<dl>
+<dt><a href="https://github.com/brazil-data-cube/s2-angs">s2-angs</a></dt>
+<dd>
+<p>Library create to provide functionality for generating angle bands from Sentinel-2/MSI data;</p>
+</dd>
+<dt><a href="https://github.com/brazil-data-cube/sensor-harm">sensor-harm</a></dt>
+<dd>
+<p>Library create to generate harmonized produts from Sentinel-2/MSI and Landsat-8/OLI data;</p>
+</dd>
+</dl>
+<p>These libraries are available and can be installed like any other Python language library and used in different projects. So, if you are interested, you can, for example, install the <code>sensor-harm</code> library in your Python project and utilize the functionality provided for generating harmonized products. For both libraries, the only restriction is to respect the input formats expected by the library functions. If followed correctly, you should have no problem using them.</p>
+<p>Based on these two libraries, we created an <strong>Application</strong> library:</p>
+<dl>
+<dt><a href="#">research-processing</a></dt>
+<dd>
+<p>Library created to provide functionality that allows the application of the data processing methodology used to generate the results of this <abbr title="Research Compendium">RC</abbr>. Part of its functionality is built upon the <code>s2-angs</code> and <code>sensor-harm</code> libraries.</p>
+</dd>
+</dl>
+<p>The relationship between these libraries is summarized in the Figure below.</p>
+<figure>
+<p><img alt="Libraries organization" src="/assets/tools/libraries/libraries-organization/libraries-organization.svg" width="1024" />
+  </p>
+<figcaption>Libraries organization</figcaption>
+</figure>
+<p>Details of the operation and functionality of each of these libraries are presented in the following sections.</p>
+<h2 id="libraries-in-the-processing-methodology">Libraries in the processing methodology<a class="headerlink" href="#libraries-in-the-processing-methodology" title="Permanent link">&para;</a></h2>
+<p>The figure below gives you an overview of where the libraries presented above are used in the processing methodology:</p>
+<figure>
+<p><img alt="Processing workflow with libraries" src="/assets/tools/libraries/experiment-diagram/experiment-diagram.svg" width="1024" />
+  </p>
+<figcaption>Processing workflow with libraries</figcaption>
+</figure>
+<h2 id="libraries-specification">Libraries specification<a class="headerlink" href="#libraries-specification" title="Permanent link">&para;</a></h2>
+<p>In this section, as a complement to the overview presented so far, the <code>features</code> and <code>usage example</code> of each of the aforementioned libraries are specified.</p>
+<h3 id="sentinel-2-angle-generator-python-library-s2-angs">Sentinel-2 Angle Generator Python Library (s2-angs)<a class="headerlink" href="#sentinel-2-angle-generator-python-library-s2-angs" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/brazil-data-cube/s2-angs"><img alt="s2-angs-badge-stars" src="https://img.shields.io/github/stars/brazil-data-cube/s2-angs?style=social" /></a>
+<a href="https://github.com/brazil-data-cube/s2-angs"><img alt="s2-angs-badge-forks" src="https://img.shields.io/github/forks/brazil-data-cube/s2-angs?style=social" /></a>
+<a href="https://github.com/brazil-data-cube/s2-angs"><img alt="s2-angs-badge-version" src="https://img.shields.io/github/v/release/brazil-data-cube/s2-angs?style=social" /></a></p>
+<p>The <a href="https://github.com/brazil-data-cube/s2-angs">s2-angs</a> library, as mentioned earlier, is responsible for generating angle bands for Sentinel-2 imagery. These bands contain per-pixel information for solar azimuthal (<abbr title="Solar Azimutal">SAA</abbr>), solar zenithal (<abbr title="Solar Zenital">SZA</abbr>), azimuthal sensor (<abbr title="Sensor Azimutal">VAA</abbr>), and zenithal sensor (<abbr title="Sensor Zenital">VZA</abbr>) angles. This information is extracted from the Sentinel-2 image metadata. Initially, this data is provided as a <code>23x23</code> (rows X columns) matrix, i.e., at a spatial resolution of about <code>5000</code> meters. However, this information needs to be at a spatial resolution equivalent to that of the spectral bands of the sensor (<code>10</code>, <code>20</code> or <code>60</code> meters) to take advantage of per-pixel corrections. Thus, the s2-angs library can estimate angles and save them as <code>.tif</code> files, either at their original spatial resolution or resampled to the spatial resolution of the sensor bands.</p>
+<p>So, we can list as main features of this library:</p>
+<ul>
+<li>Generation of angle bands ( <code>SAA</code>, <code>SZA</code>, <code>VAA</code> and <code>VZA</code> );</li>
+<li>Resampling the angle bands to the sensor band resolution.</li>
+</ul>
+<h4 id="operations-available">Operations available<a class="headerlink" href="#operations-available" title="Permanent link">&para;</a></h4>
+<p>The table below gives a summary of the operations that are available in the <a href="https://github.com/brazil-data-cube/s2-angs">s2-angs</a> library.</p>
+<div align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Function</strong></th>
+<th style="text-align: center;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>s2_angs.gen_s2_ang</code></td>
+<td style="text-align: center;">Function to generate the Sentinel-2 Angle bands</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="usage-example">Usage example<a class="headerlink" href="#usage-example" title="Permanent link">&para;</a></h4>
+<p>Using the <code>s2_angs</code> library, use the <code>gen_s2_ang</code> function to perform angle band generation. This function accepts as input <code>.zip</code>, <code>.SAFE directory</code> or <code>directory with Sentinel-2 images</code>. In the code block below is an example where a <code>.zip</code> file is used as input to the function:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">s2-angs example code</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">s2_angs</span>
+
+<span class="n">s2_angs</span><span class="o">.</span><span class="n">gen_s2_ang</span><span class="p">(</span>
+  <span class="s2">&quot;S2B_MSIL1C_20191223T131239_N0208_R138_T23KMR_20191223T135458.zip&quot;</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The above code will generate the angle bands from the image defined in the input. Examples of the results can be seen in the figures below:</p>
+<p><strong>Intermediary results (matrix 23x23)</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Solar Azimuth</label><label for="__tabbed_1_2">Solar Zenith</label><label for="__tabbed_1_3">View Azimuth</label><label for="__tabbed_1_4">View Zenith</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/Solar_azimuth_23.png" width="320&quot;" />
+  <figcaption>Solar Azimuth intermediary result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/Solar_zenith_23.png" width="320&quot;" />
+  <figcaption>Solar Zenith intermediary result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/View_azimuth_23.png" width="320&quot;" />
+  <figcaption>View Azimuth intermediary result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/View_zenith_23.png" width="320&quot;" />
+  <figcaption>View Zenith intermediary result</figcaption>
+</figure></p>
+</div>
+</div>
+</div>
+<p><strong>Resampled results</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Solar Azimuth</label><label for="__tabbed_2_2">Solar Zenith</label><label for="__tabbed_2_3">View Azimuth</label><label for="__tabbed_2_4">View Zenith</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/Solar_azimuth_resampled.png" width="320&quot;" />
+  <figcaption>Solar Azimuth resampled result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/Solar_zenith_resampled.png" width="320&quot;" />
+  <figcaption>Solar Zenith resampled result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/View_azimuth_resampled.png" width="320&quot;" />
+  <figcaption>View Azimuth resampled result</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/s2-angs/code-example-results/View_zenith_resampled.png" width="320&quot;" />
+  <figcaption>View Zenith resampled result</figcaption>
+</figure></p>
+</div>
+</div>
+</div>
+<p>To learn more about the library, please, see the <a href="https://github.com/brazil-data-cube/s2-angs">official s2-angs library repository</a> on GitHub.</p>
+<h2 id="sensor-harmonization-python-library-sensor-harm">Sensor Harmonization Python Library (sensor-harm)<a class="headerlink" href="#sensor-harmonization-python-library-sensor-harm" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/brazil-data-cube/sensor-harm"><img alt="s2-angs-badge-stars" src="https://img.shields.io/github/stars/brazil-data-cube/sensor-harm?style=social" /></a>
+<a href="https://github.com/brazil-data-cube/sensor-harm"><img alt="sensor-harm-badge-forks" src="https://img.shields.io/github/forks/brazil-data-cube/sensor-harm?style=social" /></a>
+<a href="https://github.com/brazil-data-cube/sensor-harm"><img alt="sensor-harm-badge-version" src="https://img.shields.io/github/v/release/brazil-data-cube/sensor-harm?style=social" /></a></p>
+<p>In this <abbr title="Research Compendium">RC</abbr>, part of the results consists of harmonized products, i.e., surface reflectance level products with correction for <code>Bi-Directional Reflectance Distribution Function</code> (BRDF) effects and spectral adjustments. For this purpose, the <a href="https://github.com/brazil-data-center/sensor-harm">sensor-harm</a> library was created. The BRDF correction is done using the <code>c-factor</code> method to generate Nadir BRDF-Adjusted Reflectance (NBAR) products in this library. In contrast, the spectral adjustment is made using <code>bandpass</code> adopting Landsat-8 images as the reference. Using this library, these methods can be applied to images from Landsat-4/TM, Landsat-5/TM, Landsat-7/ETM+, Landsat-8/OLI, and Sentinel-2/MSI sensor satellites. They can be harmonized between these different data. The library features two main functions, one for harmonizing images from sensors onboard the Landsat satellites and one for images from sensors onboard the Sentinel-2 satellites.</p>
+<h4 id="operations-available_1">Operations available<a class="headerlink" href="#operations-available_1" title="Permanent link">&para;</a></h4>
+<p>The table below summarizes the operations available in the <a href="https://github.com/brazil-data-cube/sensor-harm">sensor-harm</a> library.</p>
+<div align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Function</strong></th>
+<th style="text-align: center;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>sensor_harm.landsat.landsat_harmonize</code></td>
+<td style="text-align: center;">Function to harmonize Landsat data</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>sensor_harm.sentinel2.sentinel_harmonize</code></td>
+<td style="text-align: center;">Function to harmonize Sentinel-2 data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="usage-example_1">Usage example<a class="headerlink" href="#usage-example_1" title="Permanent link">&para;</a></h4>
+<p>To perform data harmonization, be it Landsat-4/TM, Landsat-5/TM, Landsat-7/ETM+, Landsat-8/OLI, or Sentinel-2, it is necessary to define the directory where the input data is stored, as well as the output directory. To exemplify the use of this function, the code block below is an example of how we can use the <code>sensor-harm</code> library for Sentinel-2 data harmonization:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">sensor-harm example code</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">sensor_harm.sentinel2</span> <span class="kn">import</span> <span class="n">sentinel_harmonize</span>
+
+<span class="n">sentinel2_entry</span> <span class="o">=</span> <span class="s1">&#39;/path/to/S2/SR/images/&#39;</span>
+<span class="n">target_dir</span> <span class="o">=</span> <span class="s1">&#39;/path/to/output/NBAR/&#39;</span>
+
+<span class="n">sentinel_harmonize</span><span class="p">(</span><span class="n">sentinel2_entry</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">apply_bandpass</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The above code will generate the angle bands from the image defined in the input. Examples of the results can be seen in the figures below:</p>
+<p><strong>Sentinel-2/MSI Harmonized Data</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:7"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><input id="__tabbed_3_7" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">NBAR Band 02 (10m)</label><label for="__tabbed_3_2">NBAR Band 03 (10m)</label><label for="__tabbed_3_3">NBAR Band 04 (10m)</label><label for="__tabbed_3_4">NBAR Band 08 (10m)</label><label for="__tabbed_3_5">NBAR Band 08A (20m)</label><label for="__tabbed_3_6">NBAR Band 11 (20m)</label><label for="__tabbed_3_7">NBAR Band 12 (20m)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B02_10m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B02) NBAR 10m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B03_10m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B03) NBAR 10m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B04_10m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B04) NBAR 10m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B08_10m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B08) NBAR 10m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B8A_20m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B8A) NBAR 20m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B11_20m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B11) NBAR 20m</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/sensor-harm/code-example-results/T22KGA_20210713T132241_B12_20m_NBAR.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image (B12) NBAR 20m</figcaption>
+</figure></p>
+</div>
+</div>
+</div>
+<p>To learn more about the library, please, see the <a href="https://github.com/brazil-data-cube/sensor-harm">official sensor-harm library repository</a> on GitHub.</p>
+<h2 id="research-processing-python-library-research-processing">Research Processing Python Library (research-processing)<a class="headerlink" href="#research-processing-python-library-research-processing" title="Permanent link">&para;</a></h2>
+<p>As presented in the previous sections, the processing methodology performed in this <abbr title="Research Compendium">RC</abbr> has several steps, which depend on different software tools. Consequently, the completion of the entire processing flow may require:</p>
+<ol>
+<li>installation of specific software dependencies for each processing step;</li>
+<li>Specific configurations in the software environment for each processing step.</li>
+</ol>
+<p>With these requirements, the execution and reproduction of the processing flow could be problematic for us, and those who wish to reproduce or even apply the work developed. To avoid these possible problems and facilitate the materialization of this <abbr title="Research Compendium">RC</abbr> processing methodology, we developed the <code>research-processing</code> library. In this library, all the methodology steps are modeled as Python functions that can be easily used to build any processing flow. Additionally, part of the operations that require environment-specific configurations is executed in <code>Docker Containers</code>, transparently to the users of the library. All in all, you have <code>research-processing</code>, functionalities for performing actions such as:</p>
+<p><strong>Preprocessing</strong></p>
+<ul>
+<li>Sentinel-2/MSI atmospheric correction (Sen2Cor and LaSRC);</li>
+<li>Angle band generation (Landsat-8/OLI and Sentinel-2/MSI);</li>
+<li>Generation of NBAR products (Sentinel-2/MSI and Landsat-8/OLI).</li>
+</ul>
+<p><strong>Data analysis</strong></p>
+<ul>
+<li>Routines for validating the products created in the processing flow.</li>
+</ul>
+<h3 id="function-execution-approach">Function Execution Approach<a class="headerlink" href="#function-execution-approach" title="Permanent link">&para;</a></h3>
+<p>As mentioned earlier, the <code>research-processing</code> features are modeled as reusable functions with play-friendly execution. To ensure that these characteristics could be guaranteed, we adopted the <code>execution model</code> concept. This concept determines where/how the function will be executed transparently to the user. Each of the functions implemented in the library has an <code>execution model</code>, allowing different technologies and approaches to be used as a basis to execute the function. Based on the needs of the <abbr title="Research Compendium">RC</abbr> functions, two `execution models' were used in the implementations, namely:</p>
+<dl>
+<dt><code>Local</code></dt>
+<dd>
+<p>Functions implemented with the <code>Local</code> execution model are simple Python functions. These functions do not have any particular execution format and are executed directly in the environment/interpreter that invokes them. Functions with this format depending on the surrounding environment, which requires all dependencies to be installed and properly configured.</p>
+</dd>
+<dt><code>Containerized</code></dt>
+<dd>
+<p>Unlike <code>Local</code> functions, <code>Containerized</code> functions do not depend on the surrounding environment. This is because functions implemented with this format, when executed, create a <code>Docker Container</code>, with the complete environment necessary for the execution of the operation associated with the function. The function is executed within the created environment.</p>
+</dd>
+</dl>
+<p>Both execution models are transparent to the user at runtime. So regardless of how the implementation was done, in the end, for the users, we have a call to a Python function. The difference lies in the demands that each type of function will make on the environment where it is being executed. As mentioned, for <code>Local</code> functions, you will need to install all the dependencies and settings to run the function. Meanwhile, <code>Containerized</code> functions will require Docker to be available in the user's environment.</p>
+<div class="admonition info">
+<p class="admonition-title">Containerized - User Permissions</p>
+<p>It is important to note that besides having Docker installed, it is also necessary for the user who is running it to have the appropriate permissions to use Docker. </p>
+</div>
+<p>The figure below is a general representation of each of these models used. Note that <code>Local</code> functions work with the Python interpreter, while <code>Containerized</code> functions create <code>Docker Containers</code> where execution will take place.</p>
+<figure>
+<p><img alt="Libraries organization" src="/assets/tools/libraries/research-processing/execution-model/execution-model-example.svg" width="1024" />
+  </p>
+<figcaption>Research Processing Execution Models</figcaption>
+</figure>
+<p>Based on these two modes of operation, the library implements and provides <code>processing</code> and <code>analysis</code> operations on the data. The <code>Containerized</code> mode of operation is used for processing operations, which use third-party tools like <strong>Sen2Cor</strong> and <strong>LaSRC</strong>. The <code>Local</code> mode of operation is used for validation operations, which uses only Python libraries as dependencies.</p>
+<h4 id="function-communication-approach">Function communication approach<a class="headerlink" href="#function-communication-approach" title="Permanent link">&para;</a></h4>
+<p>The <code>research-processing</code> library features can be used together to build a processing flow that allows the materialization of the experiment methodology followed in this <abbr title="Research Compendium">RC</abbr>. In this context, one point to consider is how the inputs and outputs of these functions are used together.</p>
+<p>In <code>research-processing</code>, the implemented operations are performed in a way that avoids data movement (Inputs and Outputs). To do this, the processing functions operate based on the <code>data path</code>. This gives the functions the path where the data is stored and where the results should be saved. This mode of operation allows better definitions regarding where the data will be loaded and saved, avoiding unnecessary movement and storage in places that can present problems with space limitation and inadequate performance. This mode of operation is represented in the figure below.</p>
+<figure>
+<p><img alt="Libraries organization" src="/assets/tools/libraries/research-processing/data-flow/data-flow.svg" width="1024" />
+  </p>
+<figcaption>Function communication model</figcaption>
+</figure>
+<p>Based on this mode of operation, functions are chained together. The outputs of one function, representing the path to where the data was saved, are used as input in other functions.</p>
+<div class="admonition info">
+<p class="admonition-title">Inputs as volumes</p>
+<p>For the <code>Containerized</code> functions, you should note that this data path information is used for creating <a href="https://docs.docker.com/storage/volumes/">Docker Bind Mount Volumes</a>. Thus, the auxiliary Containers process, created by the research-processing library, has access to the processed data.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Order of Operation</p>
+<p>With this input/output format of functions, it is assumed that the output of one function will be understood by the following function. Thus, the functions available in the <code>research-processing</code> library must be chained together in a strict order, in this case, the order described in the methodology.</p>
+<p>For more details on how this can be implemented, see the section <a href="/en/tools/processing/">Processing scripts</a>.</p>
+</div>
+<h3 id="operations-available_2">Operations available<a class="headerlink" href="#operations-available_2" title="Permanent link">&para;</a></h3>
+<p>To support the creation of the entire operation flow implemented in this <abbr title="Research Compendium">RC</abbr>, the <code>research-processing</code> library provides several auxiliary functions and operations, which are listed in the table below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Function</strong></th>
+<th style="text-align: center;"><strong>Description</strong></th>
+<th style="text-align: center;"><strong>Execution model</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>research_processing.surface_reflectance.sen2cor</code></td>
+<td style="text-align: center;">Sen2Cor Atmospheric Correction for Sentinel-2/MSI</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.surface_reflectance.lasrc</code></td>
+<td style="text-align: center;">LaSRC Atmospheric Correction for Sentinel-2/MSI</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.nbar.s2_sen2cor_nbar</code></td>
+<td style="text-align: center;">NBAR product generator for Sentinel-2/MSI surface reflectance data (Sen2Cor)</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.nbar.s2_lasrc_nbar</code></td>
+<td style="text-align: center;">NBAR product generator for Sentinel-2/MSI surface reflectance data (LaSRC)</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.nbar.lc8_nbar</code></td>
+<td style="text-align: center;">NBAR product generator for Landsat-8/OLI surface reflectance data</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.nbar.lc8_generate_angles</code></td>
+<td style="text-align: center;">Angle Generator for Landsat-8/OLI data</td>
+<td style="text-align: center;">Containerized</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>research_processing.validation.validation_routines</code></td>
+<td style="text-align: center;">Results Analysis (Module with multiple functions)</td>
+<td style="text-align: center;">Local</td>
+</tr>
+</tbody>
+</table>
+<p>Among these functions, some details need to be considered to fully understand the rationale behind each of the <code>execution models</code> chosen for the functions. In the subtopics below, these details are presented:</p>
+<p><strong>Sentinel-2/MSI atmospheric correction (Sen2Cor and LaSRC)</strong></p>
+<p>The processing flow requires that the images used have an atmospheric correction. For Landsat-8/OLI images, there is no need to correct since the products are already available ready for use, with the proper geometric and radiometric corrections performed. However, for Sentinel-2/MSI data, this is not true. Thus, during the development of the article, it was necessary to perform the atmospheric correction of these data. For this, we adopted the tools <a href="https://step.esa.int/main/snap-supported-plugins/sen2cor/">Sen2Cor</a> and <a href="https://ntrs.nasa.gov/api/citations/20190001670/downloads/20190001670.pdf">LaSRC</a>.</p>
+<p>These tools have their specific needs in the environment where they will be used, like dependencies and configurations. In the <code>research-processing</code> library, we created functions that operate these tools in an environment already configured and ready to use. This environment runs in a <code>Docker Container</code>.</p>
+<p>From the functions presented in the table above, the ones listed below are used to apply atmospheric correction to the data:</p>
+<ul>
+<li><code>research_processing.surface_reflectance.lasrc</code>: Function that applies Atmospheric Correction to Sentinel-2/MSI data using the LaSRC tool. All processing is performed inside a <code>Docker Container</code> transparently to the user;</li>
+<li><code>research_processing.surface_reflectance.sen2cor</code>: Function that applies Atmospheric Correction to Sentinel-2/MSI data using the Sen2Cor tool. All processing is done inside a <code>Docker Container</code> transparently to the user.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Understanding the Containers</p>
+<p>Creating a <code>Docker Container</code> depends on a <code>Docker Image</code> that defines the environment and its settings. This is no different in <code>research-processing</code>. For the creation of Atmospheric Correction <code>Docker Containers</code>, the following <code>Docker Images</code> are used:</p>
+<ul>
+<li>Atmospheric correction with LaSRC: <a href="/environment/#lasrc-201">LaSRC 2.0.1 Docker Image</a></li>
+<li>Atmospheric correction with Sen2Cor: <a href="/pt/tools/environment/#sen2cor-290">Sen2Cor 2.9.0 Docker Image</a></li>
+</ul>
+<p>These <code>Docker Images</code> were created to run in this <abbr title="Research Compendium">RC</abbr>. For more information, see the <a href="/en/tools/environment">Computational Environments</a> section.</p>
+</div>
+<p><strong>Angle band generation (Landsat-8/OLI and Sentinel-2/MSI)</strong></p>
+<p>To generate NBAR products, angle bands (e.g., <abbr title="Solar Azimutal">SAA</abbr>, <abbr title="Solar Zenital">SZA</abbr>, <abbr title="Sensor Azimutal">VAA</abbr>, and <abbr title="Sensor Zenital">VZA</abbr>) must be calculated. These bands are explicitly developed for each data/sensor being worked on. This requires the use of specialized tools for each sensor:</p>
+<ul>
+<li>
+<p>Landsat-8/OLI: The generation of angle bands for Landsat-8/OLI is done using the <a href="https://www.usgs.gov/media/files/landsat-8-angles-creation-tools-readme">Landsat 8 Angles Creation Tools</a> tool. This tool has its own dependencies and also requires specific settings in the environment where it will be run;</p>
+</li>
+<li>
+<p>Sentinel-2/MSI: The angles from Sentinel-2/MSI data are generated with the <a href="/en/tools/libraries/#sentinel-2-angle-generator-python-library-s2-angs">Sentinel-2 Angle Generator Python Library (s2-angs)</a> library, developed in this <abbr title="Research Compendium">RC</abbr>.</p>
+</li>
+</ul>
+<p>Considering these characteristics, you have the following function to perform these operations:</p>
+<p><code>research_processing.nbar.lc8_generate_angles</code>: A Function uses the <a href="https://www.usgs.gov/media/files/landsat-8-angles-creation-tools-readme">Landsat 8 Angles Creation Tools</a> tool to perform the calculation of angle bands for Landsat-8/OLI data. The processing performed by this function is done inside a <code>Docker Container</code>.</p>
+<p>In the above list of functions, there is no function specific to Sentinel-2/MSI. During the <code>research-processing</code> library implementation, we decided that the generation of angles for Sentinel-2/MSI data would be an integrated operation with the generation of NBAR products. Thus, the calculation of the angles required for the generation of NBAR products with Sentinel-2/MSI data, done with the s2-angs library, are part of the following functions:</p>
+<ul>
+<li><code>research_processing.nbar.s2_sen2cor_nbar</code></li>
+<li><code>research_processing.nbar.s2_lasrc_nbar</code></li>
+</ul>
+<p>The processing performed by both functions listed above is also done inside a <code>Docker Container</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Understanding the Containers</p>
+<p>Creating a <code>Docker Container</code> depends on a <code>Docker Image</code> that defines the environment and its settings. This is no different in <code>research-processing</code>. To create the <code>Docker Container</code> angle band generation, the following <code>Docker Image</code> is used:</p>
+<ul>
+<li>Angle band generation for Landsat-8/OLI data: <a href="/pt/tools/environment/#l8angs">L8Angs Docker Image</a></li>
+</ul>
+<p>The <code>L8Angs Docker Image</code> was created to run in this <abbr title="Research Compendium">RC</abbr>. For more information, see the <a href="/en/tools/environment">Computational Environments</a> section.</p>
+</div>
+<p><strong>NBAR products generation (Sentinel-2/MSI and Landsat-8/OLI)</strong></p>
+<p>The basis for generating NBAR products in this <abbr title="Research Compendium">RC</abbr>, as presented in the previous sections, is the <code>sensor-harm</code> library. This library allows the generation of NBAR products for Sentinel-2/MSI and Landsat-8/OLI data. As a way to facilitate the use of the <code>sensor-harm</code> library and to avoid users having to do specific installations and configurations, in the <code>research-processing</code> library, the implementation of the following functions was performed:</p>
+<ul>
+<li><code>research_processing.nbar.lc8_nbar</code>: A function to generate NBAR products for Landsat-8/OLI data;</li>
+<li><code>research_processing.nbar.s2_lasrc_nbar</code>: A function to generate NBAR products for Sentinel-2/MSI data with the atmospheric correction made with the LaSRC tool;</li>
+<li><code>research_processing.nbar.s2_sen2cor_nbar</code>: A function to generate NBAR products for Sentinel-2/MSI data with the atmospheric correction made with the Sen2Cor tool;</li>
+</ul>
+<p>These functions are implemented with the <code>execution model</code> Containerized. Thus, when the user executes these functions, a <code>Docker Container</code> with the appropriate dependencies is created to perform the function.</p>
+<div class="admonition info">
+<p class="admonition-title">Understanding the Containers</p>
+<p>Creating a <code>Docker Container</code> depends on a <code>Docker Image</code> that defines the environment and its settings. This is no different in <code>research-processing</code>. To create the NBAR product generation <code>Docker Container</code> (all functions), the following <code>Docker Image</code> is used:</p>
+<ul>
+<li>NBAR product generation (Sentinel-2/MSI e Landsat-8/OLI): <a href="/pt/tools/environment/#nbar">NBAR Docker Image</a></li>
+</ul>
+<p>The <code>NBAR Docker Image</code> was created to run in this <abbr title="Research Compendium">RC</abbr>. For more information, see the <a href="/en/tools/environment">Computational Environments</a> section.</p>
+</div>
+<p><strong>Routines for validating the products created in the processing flow</strong></p>
+<p>There is the corrections validation module to evaluate the products generated with the processing flow. This module (<code>research_processing.validation.validation_routines</code>), is responsible for all the comparisons and calculations used to evaluate the results generated in this <abbr title="Research Compendium">RC</abbr>. It is implemented with the Local <code>execution model</code> to make debugging more straightforward. Thus, the user, who uses the functions of this module, must configure the environment where the execution will be performed. In short, one only has to install the <code>research-processing</code> library's dependencies. Then the environment is ready to execute these functions.</p>
+<h3 id="usage-example_2">Usage example<a class="headerlink" href="#usage-example_2" title="Permanent link">&para;</a></h3>
+<p>To exemplify how the `research-processing' library is used, below is how the library performs atmospheric correction of Sentinel-2/MSI images, using the <a href="https://step.esa.int/main/snap-supported-plugins/sen2cor/">Sen2Cor</a> tool.</p>
+<p><strong>Atmospheric correction Sen2Cor</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Sen2Cor atmosphere correction example with research-processign library</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">research_processing.surface_reflectance</span> <span class="kn">import</span> <span class="n">sen2cor</span>
+
+<span class="c1"># sen2cor(</span>
+<span class="c1">#  input_dir  = &quot;&lt;path to directory where .safe is&gt;&quot;, </span>
+<span class="c1">#  output_dir = &quot;&lt;path where result will be saved&gt;&quot; , </span>
+<span class="c1">#  scene_ids  = [&quot;&lt;scene ids of `input_dir` that will be processed&gt;&quot;]</span>
+<span class="c1">#)</span>
+<span class="c1"># For example:</span>
+<span class="n">sen2cor</span><span class="p">(</span>
+  <span class="n">input_dir</span>  <span class="o">=</span> <span class="s2">&quot;/data/input&quot;</span><span class="p">,</span> 
+  <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;/data/output&quot;</span> <span class="p">,</span> 
+  <span class="n">scene_ids</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;S2B_MSIL1C_20171119T133209_N0206_R081_T22JBM_20171120T175608.SAFE&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The above code will generate images with atmospheric correction. Examples of results can be seen in the figures below:</p>
+<p><strong>Atmospheric Corrected Images with Sen2Cor</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">10m resolution</label><label for="__tabbed_4_2">20m resolution</label><label for="__tabbed_4_3">60m resolution</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/research-processing/code-example-results/T22KGA_20210723T132241_TCI_10m.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image with Atmospheric Correction (10m resolution)</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/research-processing/code-example-results/T22KGA_20210723T132241_TCI_20m.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image with Atmospheric Correction (20m resolution)</figcaption>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<p><figure markdown>
+  <img alt="Processing workflow with libraries" src="/assets/tools/libraries/research-processing/code-example-results/T22KGA_20210723T132241_TCI_60m.png" width="512&quot;" />
+  <figcaption>Sentinel-2/MSI Image with Atmospheric Correction (60m resolution)</figcaption>
+</figure></p>
+</div>
+</div>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../processing/" class="md-footer__link md-footer__link--next" aria-label="Next: Processing scripts" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Processing scripts
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/brazil-data-cube/compendium-harmonization" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "navigation.indexes", "navigation.sections", "search.share", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../../assets/static/js/tablesort.js"></script>
+      
+    
+    
+  </body>
+</html>
