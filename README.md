@@ -1,6 +1,6 @@
 <!--
     This file is part of Brazil Data Cube compendium-harmonization.
-    Copyright (C) 2022 INPE.
+    Copyright (C) 2023 INPE.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
 This is the official `Research Compendium` (RC) documentation, with all the materials (Codes, data, and computing environments) needed for the reproduction, replication, and evaluation of the results presented in the paper:
 
-> Marujo *et al* (2022). `A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images`. This Paper is not published yet.
+> Marujo, R. F. B. *et al* (2023)., Carlos, F. M., Costa, R. W., Arcanjo, J. S., Fronza, J. G., Soares, A. R., Queiroz, G. R., Ferreira, K. R. (2023) `A reproducible and replicable approach for harmonizing Landsat-8 and Sentinel-2 images`. Frontiers in Remote Sensing v.4. doi: 10.3389/frsen.2023.1254242
 
 #### Research Compendium Content
 
